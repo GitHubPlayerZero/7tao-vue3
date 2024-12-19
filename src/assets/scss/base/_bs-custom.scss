@@ -1,0 +1,69 @@
+/* bs-custom：客製化的 Bootstrap */
+
+// 產出的 utility 不要加上 !important
+$enable-important-utilities: false !default;
+
+// RWD 斷點
+$container-max-widths: (
+  xs: 375px,  // 手機 (設計稿尺寸)
+  // sm: 576px,
+  md: 720px,  // 平板
+  // lg: 960px,
+  // xl: 1140px,
+  xl: 1320px, // 桌機 (設計稿尺寸)
+  // xxl: 1320px
+) !default;
+
+// 字型
+$font-family-sans-serif:
+  "Noto Sans TC",
+  system-ui,
+  -apple-system,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  "Noto Sans",
+  "Liberation Sans",
+  Arial,
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji" !default;
+
+// 背景色
+$body-bg: #f3f1e5 !default;
+
+// 顏色
+$primary: #030303 !default;
+$secondary: #fbff22 !default;
+// $success: #198754 !default;
+// $info: #0dcaf0 !default;
+// $warning: #ffc107 !default;
+// $danger: #dc3545 !default;
+// $light: #f8f9fa !default;
+// $dark: #212529 !default;
+
+// 主題色
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "notice": #C96464,
+  // "success": $success,
+  // "info": $info,
+  // "warning": $warning,
+  // "danger": $danger,
+  // "light": $light,
+  // "dark": $dark,
+) !default;
+
+@use "bootstrap" with (
+  // @use "../../../node_modules/bootstrap/scss/bootstrap.scss" with ( // for Sass compiler
+  $enable-important-utilities: $enable-important-utilities,
+  $container-max-widths: $container-max-widths,
+  $font-family-sans-serif: $font-family-sans-serif,
+  $body-bg: $body-bg,
+  $primary: $primary,
+  $secondary: $secondary,
+  $theme-colors: $theme-colors,
+);

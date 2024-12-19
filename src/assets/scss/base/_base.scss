@@ -1,0 +1,13 @@
+/* base：此專案所需要的全站樣式 */
+
+// Debug 模式
+$isDebug: false;
+
+@if ($isDebug) {
+	*, *::before, *::after {
+		outline: 1px dashed blue;
+	}
+	div, ul, main, section, article {
+		outline-style: solid;
+	}
+}
