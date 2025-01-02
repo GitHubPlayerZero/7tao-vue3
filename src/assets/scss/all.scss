@@ -1,11 +1,10 @@
-@use './base/bs-custom';
-@use './base/base';
+// Base
+@use "./base/bs-custom";
+@use "./base/base";
 
 // Components
-
-
-// Pages
-
+@use "./components/button";
+@use "./components/title";
 
 // Utils
-@use './utils/text';
+@use "./utils/text";

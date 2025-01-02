@@ -1,0 +1,10 @@
+/* shape：形狀相關 */
+
+@mixin circle($size, $color: null) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  @if ($color) {
+    background-color: $color;
+  }
+}

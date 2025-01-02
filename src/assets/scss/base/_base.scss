@@ -2,7 +2,7 @@
 
 // Debug 模式
 $isDebug: false;
-
+// prettier-ignore
 @if ($isDebug) {
 	*, *::before, *::after {
 		outline: 1px dashed blue;
@@ -10,4 +10,22 @@ $isDebug: false;
 	div, ul, main, section, article {
 		outline-style: solid;
 	}
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
 }

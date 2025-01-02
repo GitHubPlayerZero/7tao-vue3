@@ -1,0 +1,37 @@
+/* title：標題 */
+
+// @use "bootstrap/scss/mixins/breakpoints";
+@use "../../../../node_modules/bootstrap/scss/mixins/breakpoints.scss"; // TODO for Sass compiler
+@use "../base/variables";
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  line-height: 1;
+  height: 60px;
+  padding: 0 12px;
+  border: 2px solid var(--bs-primary);
+
+  .title-english {
+    font-size: 24px;
+  }
+  .title-chinese {
+    font-weight: bold;
+  }
+
+  // Pad 以上
+  @include breakpoints.media-breakpoint-up(variables.$pad, variables.$grid-breakpoints) {
+    height: 122px;
+    padding: 0 32px;
+    border-width: 3px;
+
+    .title-english {
+      font-size: 64px;
+    }
+    .title-chinese {
+      font-size: 32px;
+    }
+  }
+}

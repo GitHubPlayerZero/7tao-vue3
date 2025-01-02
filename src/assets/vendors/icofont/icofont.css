@@ -33,9 +33,34 @@ url("./fonts/icofont.woff") format("woff");
   -webkit-font-smoothing: antialiased;
 }
 
+.icofont-rounded-double-right:before
+{
+  content: "\ea98";
+}
+
 .icofont-ui-file:before
 {
   content: "\ec57";
+}
+
+.icofont-ui-user:before
+{
+  content: "\ec8e";
+}
+
+.icofont-search-1:before
+{
+  content: "\ed11";
+}
+
+.icofont-phone:before
+{
+  content: "\efbb";
+}
+
+.icofont-facebook:before
+{
+  content: "\ed37";
 }
 
 .icofont-ui-email:before
@@ -53,24 +78,9 @@ url("./fonts/icofont.woff") format("woff");
   content: "\ea5d";
 }
 
-.icofont-ui-user:before
+.icofont-verification-check:before
 {
-  content: "\ec8e";
-}
-
-.icofont-search-1:before
-{
-  content: "\ed11";
-}
-
-.icofont-facebook:before
-{
-  content: "\ed37";
-}
-
-.icofont-phone:before
-{
-  content: "\efbb";
+  content: "\f021";
 }
 
 .icofont-check-circled:before
@@ -78,9 +88,19 @@ url("./fonts/icofont.woff") format("woff");
   content: "\eed7";
 }
 
-.icofont-verification-check:before
+.icofont-copyright:before
 {
-  content: "\f021";
+  content: "\eef3";
+}
+
+.icofont-rounded-double-right:before
+{
+  content: "\ea98";
+}
+
+.icofont-star-alt-1:before
+{
+  content: "\effe";
 }
 
 [class^="icofont-"].icofont-duotone,

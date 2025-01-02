@@ -1,3 +1,5 @@
+import "@/assets/scss/all.scss";
+
 // Bootstrap
 import 'bootstrap';
 

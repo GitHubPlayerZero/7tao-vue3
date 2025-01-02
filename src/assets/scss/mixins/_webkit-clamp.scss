@@ -1,0 +1,8 @@
+/* webkit-clamp：以 webkit 方式實作內容省略效果 */
+
+@mixin webkit-clamp($line-num) {
+  display: -webkit-box;
+  -webkit-line-clamp: $line-num;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
