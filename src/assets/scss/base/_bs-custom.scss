@@ -4,12 +4,10 @@
 @use "./variables-utilities";
 
 // @use "bootstrap" with (
-@use "../../../../node_modules/bootstrap/scss/bootstrap.scss" with (  // TODO for Sass compiler
+  // TODO for Sass compiler
+@use "../../../../node_modules/bootstrap/scss/bootstrap.scss" with (
   $grid-breakpoints: variables.$grid-breakpoints,
   $container-max-widths: variables.$container-max-widths,
-  // $border-radius: variables.$border-radius,
-  // $border-radius-sm: variables.$border-radius-sm,
-  // $border-radius-lg: variables.$border-radius-lg,
   $font-family-sans-serif: variables.$font-family-sans-serif,
   $primary: variables.$primary,
   $secondary: variables.$secondary,
@@ -19,5 +17,5 @@
   $font-sizes: variables.$font-sizes,
   $spacer: variables.$spacer,
   $spacers: variables.$spacers,
-  $utilities: variables-utilities.$utilities,
+  $utilities: variables-utilities.$utilities
 );

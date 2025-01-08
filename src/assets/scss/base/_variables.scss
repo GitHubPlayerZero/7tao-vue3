@@ -1,7 +1,9 @@
+// TODO 整理
+
 // RWD 斷點
-$phone: 'xs';
-$pad: 'md';
-$desktop: 'xl';
+$phone: "xs";
+$pad: "md";
+$desktop: "xl";
 
 // prettier-ignore
 $grid-breakpoints: (
@@ -17,11 +19,6 @@ $container-max-widths: (
   $pad: 720px,  // 平板
   $desktop: 1320px  // 桌機 (設計稿尺寸)
 ) !default;
-
-// border 預設為直角
-// $border-radius: 0 !default;
-// $border-radius-sm: 0 !default;
-// $border-radius-lg: 0 !default;
 
 // 字型
 $font-family-sans-serif:
@@ -74,8 +71,10 @@ $body-bg: #f3f1e5 !default;
 // 以 1px 為一個單位，名稱直接與單位數對應
 $font-sizes: (
   14: 14px,
+  15: 15px,
   16: 16px,
   18: 18px,
+  19: 19px,
   20: 20px,
   24: 24px,
   32: 32px,
@@ -104,4 +103,5 @@ $spacers: (
   14: $spacer * 14,
   15: $spacer * 15,
   2px: 2px,
+  25px: 25px,
 ) !default;

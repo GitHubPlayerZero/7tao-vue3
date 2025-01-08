@@ -46,8 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use "bootstrap/scss/mixins/breakpoints";
-@use "@/assets/scss/base/variables";
+@use "@/assets/scss/mixins/rwd";
 @use "@/assets/scss/mixins/webkit-clamp";
 @use "@/assets/scss/mixins/shape";
 
@@ -58,10 +57,8 @@ export default {
   padding-bottom: 8px;
   margin-bottom: 16px;
 
-  // Pad 以上
-  @include breakpoints.media-breakpoint-up(variables.$pad, variables.$grid-breakpoints) {
+  @include rwd.pad-up {
     font-size: 48px;
-    margin-bottom: 12px;
     margin-bottom: 12px;
   }
 }
@@ -72,8 +69,7 @@ export default {
   height: 210px;
   margin-bottom: 8px;
 
-  // Pad 以上
-  @include breakpoints.media-breakpoint-up(variables.$pad, variables.$grid-breakpoints) {
+  @include rwd.pad-up {
     height: 255px;
     margin-bottom: 12px;
   }
@@ -85,8 +81,7 @@ export default {
   font-weight: bold;
   margin-bottom: 8px;
 
-  // Pad 以上
-  @include breakpoints.media-breakpoint-up(variables.$pad, variables.$grid-breakpoints) {
+  @include rwd.pad-up {
     font-size: 24px;
     margin-bottom: 12px;
   }
@@ -102,7 +97,6 @@ export default {
 
 .card-footer {
   font-weight: bold;
-  line-height: 1;
 
   display: flex;
   justify-content: space-between;
@@ -112,8 +106,7 @@ export default {
   border-color: var(--bs-primary);
   border-width: 2px 0;
 
-  // Pad 以上
-  @include breakpoints.media-breakpoint-up(variables.$pad, variables.$grid-breakpoints) {
+  @include rwd.pad-up {
     height: 48px;
   }
 }

@@ -1,0 +1,19 @@
+/* rwd：RWD 效果 */
+
+// @use "bootstrap/scss/mixins/breakpoints";
+@use "../../../../node_modules/bootstrap/scss/mixins/breakpoints.scss"; // TODO for Sass compiler
+@use "../base/variables";
+
+// 平板以上
+@mixin pad-up {
+  @include breakpoints.media-breakpoint-up(variables.$pad, variables.$grid-breakpoints) {
+    @content;
+  }
+}
+
+// 桌機以上
+@mixin desktop-up {
+  @include breakpoints.media-breakpoint-up(variables.$desktop, variables.$grid-breakpoints) {
+    @content;
+  }
+}

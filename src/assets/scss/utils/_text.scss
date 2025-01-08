@@ -1,12 +1,14 @@
 /* text：有關文字的設定 */
 
+@use "../mixins/font";
+
 // 字型
 .font-yeseva-one {
-  font-family: "Yeseva One", serif;
+  @include font.yeseva-one;
 }
 .font-noto-serif-tc {
-  font-family: "Noto Serif TC", serif;
+  @include font.noto-serif-tc;
 }
 .font-noto-sans-tc {
-  font-family: "Noto Sans TC", serif;
+  @include font.noto-sans-tc;
 }

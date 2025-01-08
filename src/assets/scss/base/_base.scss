@@ -1,5 +1,7 @@
 /* base：此專案所需要的全站樣式 */
 
+@use "../mixins/font";
+
 // Debug 模式
 $isDebug: false;
 // prettier-ignore
@@ -25,7 +27,27 @@ ol {
 }
 
 a {
-  color: inherit;
   cursor: pointer;
+  color: inherit;
   text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+p {
+  margin-bottom: 0;
+}
+
+textarea {
+  // 去除底部多餘空白
+  vertical-align: middle;
+}
+
+input,
+textarea,
+select,
+button {
+  @include font.noto-sans-tc;
 }
