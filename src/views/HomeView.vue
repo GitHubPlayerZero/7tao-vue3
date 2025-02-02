@@ -1,24 +1,23 @@
 <template>
-  <h1>首頁</h1>
+  <div class="container">
+    <BannerSlide />
+  </div>
 </template>
 
 <script>
+import BannerSlide from "@/components/BannerSlide.vue";
+
 export default {
   data() {
-    return {
-    };
+    return {};
   },
-  methods: {
-  },
-  computed: {
-  },
-  watch: {
-  },
+  methods: {},
+  computed: {},
+  watch: {},
   components: {
+    BannerSlide,
   },
 };
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
