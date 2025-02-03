@@ -1,11 +1,13 @@
 <template>
   <div class="container">
     <BannerSlide />
+    <KeyLinkArea />
   </div>
 </template>
 
 <script>
 import BannerSlide from "@/components/BannerSlide.vue";
+import KeyLinkArea from "@/components/home/KeyLinkArea.vue";
 
 export default {
   data() {
@@ -16,6 +18,7 @@ export default {
   watch: {},
   components: {
     BannerSlide,
+    KeyLinkArea,
   },
 };
 </script>

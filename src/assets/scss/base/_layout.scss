@@ -1,0 +1,11 @@
+/* layout：此專案所需要的排版規格 */
+
+@use "../mixins/rwd";
+
+// 覆蓋 Bootstrap 設定
+.row {
+  // 此設計稿手機的 gutter 為 8px，而 container 左右的留白仍需維持 12px，因此覆寫 .row 的 gutter 設定。
+  @include rwd.pad-down {
+    --bs-gutter-x: 8px;
+  }
+}

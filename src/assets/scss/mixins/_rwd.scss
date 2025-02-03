@@ -17,3 +17,29 @@
     @content;
   }
 }
+
+// 平板以下
+@mixin pad-down {
+  // 設定 max 斷點
+  $max: map-get(variables.$grid-breakpoints, variables.$pad);
+  @if ($max != null) {
+    $max: $max - 1px;
+  }
+
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+// 桌機以下
+@mixin desktop-down {
+  // 設定 max 斷點
+  $max: map-get(variables.$grid-breakpoints, variables.$desktop);
+  @if ($max) {
+    $max: $max - 1px;
+  }
+
+  @media (max-width: $max) {
+    @content;
+  }
+}

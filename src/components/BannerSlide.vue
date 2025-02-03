@@ -2,7 +2,7 @@
   <div
     v-for="item in banners"
     :key="item.id"
-    class="banner-slide position-relative"
+    class="banner-slide position-relative mb-8 mb-md-12"
     :style="{ backgroundImage: `url(${getImageUrl(item.img)})` }"
   >
     <div class="banner-slide-day">{{ item.day }}</div>

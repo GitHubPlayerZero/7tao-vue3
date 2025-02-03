@@ -24,6 +24,7 @@ $utilities: (
     ),
   // 覆寫 line-height（values）
   "line-height": (
+      responsive: true,
       property: line-height,
       class: lh,
       values: (
