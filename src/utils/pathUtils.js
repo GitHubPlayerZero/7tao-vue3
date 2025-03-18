@@ -1,7 +1,7 @@
 /**
- * 路徑處理器。
+ * 路徑處理工具
  */
-export class PathProcesser {
+export class PathUtils {
   /**
    * 銜接兩個路徑。
    * @param {string} startPath - 起始路徑，必須有值。

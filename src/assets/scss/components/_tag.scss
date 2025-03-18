@@ -1,0 +1,50 @@
+/* tag：標籤相關元件 */
+
+@use "../mixins/rwd";
+@use "../mixins/font";
+
+@mixin tag {
+  height: 28px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include font.noto-serif-tc;
+  color: var(--bs-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+
+  border-style: solid;
+  border-color: black;
+  border-width: 1px 1px 1px 4px;
+
+  background-color: transparent;
+  padding: 0 15px 0 12px;
+
+  @include rwd.pad-up {
+    height: 31px;
+    font-size: 16px;
+    padding: 0 23px 0 20px;
+  }
+}
+
+@mixin tag-hover {
+  &:hover {
+    border-left-color: var(--bs-secondary);
+    background-color: black;
+    color: white;
+  }
+}
+
+// 純裝飾標籤
+.tag {
+  @include tag;
+}
+
+// 有 hover 效果的標籤按鈕
+.tag-btn {
+  @include tag;
+  @include tag-hover;
+}

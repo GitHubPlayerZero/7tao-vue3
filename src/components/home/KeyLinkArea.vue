@@ -1,36 +1,13 @@
 <template>
   <!-- 重點活動連結 -->
   <div class="row row-cols-3 row-cols-xl-6 row-gap-2 row-gap-md-6 mb-8 mb-md-12">
-    <div>
-      <a href="#" class="key-link" @click.prevent>
-        <img src="@/assets/images/cate01.svg" alt="演出" class="key-link-img" />
-        <span>演出</span>
+    <div v-for="link in links" :key="link.title">
+      <a :href="getTagId(link.title)" class="key-link" @click.prevent>
+        <img :src="getImageUrl(link.img)" :alt="link.title" class="key-link-img" />
+        <span>{{ link.title }}</span>
       </a>
     </div>
-    <div>
-      <a href="#" class="key-link" @click.prevent>
-        <img src="@/assets/images/cate02.svg" alt="演出" class="key-link-img" />
-        <span>聯誼</span>
-      </a>
-    </div>
-    <div>
-      <a href="#" class="key-link" @click.prevent>
-        <img src="@/assets/images/cate03.svg" alt="演出" class="key-link-img" />
-        <span>展覽</span>
-      </a>
-    </div>
-    <div>
-      <a href="#" class="key-link" @click.prevent>
-        <img src="@/assets/images/cate04.svg" alt="演出" class="key-link-img" />
-        <span>美食</span>
-      </a>
-    </div>
-    <div>
-      <a href="#" class="key-link" @click.prevent>
-        <img src="@/assets/images/cate05.svg" alt="演出" class="key-link-img" />
-        <span>戶外</span>
-      </a>
-    </div>
+    <!-- 探索更多 -->
     <div>
       <a href="#" class="key-link" @click.prevent>
         <span class="fs-24 fs-md-48 lh-1d333 lh-md-1d25">探索<br />更多</span>
@@ -40,14 +17,64 @@
 </template>
 
 <script>
+import { ImageUtils } from "@/utils";
+import { TagApi } from "@/api";
+
 export default {
+  props: ["tags"],
+
   data() {
-    return {};
+    console.log(`## [KeyLinkArea - data]`);
+    // console.log(`[data] tags ==>`, this.tags);
+
+    return {
+      // 連結按鈕
+      links: [
+        { title: "演出", img: "cate01.svg" },
+        { title: "聯誼", img: "cate02.svg" },
+        { title: "展覽", img: "cate03.svg" },
+        { title: "美食", img: "cate04.svg" },
+        { title: "戶外", img: "cate05.svg" },
+      ],
+    };
   },
-  methods: {},
-  computed: {},
-  watch: {},
-  components: {},
+  // data end
+
+  methods: {
+    // 取得圖片完整 URL
+    getImageUrl: (relativePathName) => ImageUtils.getBaseUrl(relativePathName),
+
+    // 以 tag 名稱取得 tag ID
+    getTagId(tagName) {
+      let tag = TagApi.searchByName(this.tags, tagName);
+      if (tag) {
+        return tag.id;
+      } else {
+        return "";
+      }
+    },
+  },
+  // methods end
+
+  // computed: {},
+  // watch: {},
+  // components: {},
+
+  // TODO debug 測試
+  beforeCreate() {
+    console.log(`## [KeyLinkArea - beforeCreate]`);
+  },
+  created() {
+    console.log(`## [KeyLinkArea - created]`);
+  },
+  beforeMount() {
+    console.log(`## [KeyLinkArea - beforeMount]`);
+  },
+  mounted() {
+    console.log(`## [KeyLinkArea - mounted]`);
+    // console.log(`[KeyLinkArea - mounted] this.tag ==>`, this.tag);
+  },
+  // mounted end
 };
 </script>
 

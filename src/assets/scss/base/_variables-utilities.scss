@@ -2,14 +2,14 @@
 
 // TODO 整理
 $utilities: (
-  // 覆寫 font-size（RWD、values）
+  // 覆寫 font-size (RWD, values)
   "font-size": (
       responsive: true,
       property: font-size,
       class: fs,
       values: variables.$font-sizes,
     ),
-  // 覆寫 border-width（RWD）
+  // 覆寫 border-width (RWD)
   "border-width": (
       responsive: true,
       property: border-width,
@@ -22,22 +22,46 @@ $utilities: (
         5: 5px,
       ),
     ),
-  // 覆寫 line-height（values）
+  // 覆寫 line-height (values)
   "line-height": (
       responsive: true,
-      property: line-height,
       class: lh,
+      property: line-height,
       values: (
         1: 1,
         1d155: 1.155,
         1d25: 1.25,
         1d333: 1.333,
         1d437: 1.437,
+        1d438: 1.438,
+        1d444: 1.444,
         1d448: 1.448,
+        1d45: 1.45,
         1d5: 1.5,
       ),
     ),
-  // 覆寫 height（RWD、values）
+  // 覆寫 text-align (values)
+  "text-align": (
+      responsive: true,
+      class: text,
+      property: text-align,
+      values: (
+        start: left,
+        end: right,
+        center: center,
+        justify: justify,
+      ),
+    ),
+  "white-space": (
+    property: white-space,
+    values: (
+      nowrap: nowrap,
+      pre: pre,
+      pre-wrap: pre-wrap,
+      pre-line: pre-line,
+    ),
+  ),
+  // 覆寫 height (RWD, values)
   // "height": (
   //     responsive: true,
   //     property: height,

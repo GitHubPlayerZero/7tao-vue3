@@ -1,25 +1,22 @@
 <template>
-  <!-- 大標題 -->
-  <div class="card-title">19 MAY 2023</div>
+  <!-- 活動日期 -->
+  <div class="event-date">{{ DateService.formatAsDateAbbrMonthYear(event.date) }}</div>
 
   <!-- 活動圖片 -->
-  <img src="@/assets/images/event/01.jpg" alt="邪典電影派對——房間" class="card-image" />
+  <img :src="event.img" :alt="event.title" class="event-image" />
 
-  <!-- 小標題 -->
-  <h3 class="card-subtitle font-noto-serif-tc">邪典電影派對——房間</h3>
+  <!-- 活動標題 -->
+  <h3 class="event-title font-noto-serif-tc">{{ event.title }}</h3>
 
   <!-- 活動內容 -->
-  <p class="card-content font-noto-sans-tc">
-    你有聽說過「大災難家」裡面的主角 Tommy Wiseau
-    製作的「史上最爛的電影」——房間嗎？在美國甚至演變成一種邪教、一種派對的形式，在電影播放的時候對著螢幕丟湯匙都成了必備活動。這個習俗源於電影中多次出現毫無解釋的湯匙照片，讓觀眾哭笑不得。除此之外，粉絲還會模仿台詞、製造互動，甚至在關鍵場景時集體歡呼或吐槽。儘管《房間》的劇情漏洞百出，表演拙劣，但它的荒謬恰恰成為其吸引力的一部分，甚至每年吸引成千上萬人參加特殊放映場次。對某些人來說，它不僅僅是一部電影，更是一場文化現象。如果你想體驗一場充滿荒唐和歡樂的電影之夜，《房間》絕對值得一看！
-  </p>
+  <p class="event-desc font-noto-sans-tc">{{ event.desc }}</p>
 
   <!-- 結尾資訊 -->
-  <div class="card-footer">
-    <!-- 分類 -->
+  <div class="event-footer">
+    <!-- 主分類 -->
     <a href="#" class="hover-underline d-flex align-items-center" @click.prevent>
       <i class="icofont-star-alt-1 fs-24 me-1"></i>
-      <span class="hover-effect">社群活動</span>
+      <span class="hover-effect">{{ tagIdMap[EventApi.getMainTagId(event)] }}</span>
     </a>
     <!-- 開賣 -->
     <a
@@ -27,22 +24,17 @@
       class="hover-show-before d-flex align-items-center font-noto-sans-tc"
       @click.prevent
     >
-      <span class="hover-effect me-1">開賣中</span>
+      <span class="hover-effect me-1">{{ event.isOnSale ? "開賣中" : "檢視活動" }}</span>
       <i class="icofont-rounded-double-right"></i>
     </a>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {};
-  },
-  methods: {},
-  computed: {},
-  watch: {},
-  components: {},
-};
+<script setup>
+import { EventApi } from "@/api";
+import { DateService } from "@/service";
+
+const { event, tagIdMap } = defineProps(["event", "tagIdMap"]);
 </script>
 
 <style lang="scss" scoped>
@@ -50,7 +42,7 @@ export default {
 @use "@/assets/scss/mixins/webkit-clamp";
 @use "@/assets/scss/mixins/shape";
 
-.card-title {
+.event-date {
   font-size: 32px;
   line-height: 1.155;
   border-bottom: 3px solid var(--bs-primary);
@@ -63,7 +55,7 @@ export default {
   }
 }
 
-.card-image {
+.event-image {
   object-fit: cover;
   width: 100%;
   height: 210px;
@@ -75,7 +67,7 @@ export default {
   }
 }
 
-.card-subtitle {
+.event-title {
   font-size: 18px;
   line-height: 1.437;
   font-weight: bold;
@@ -87,7 +79,7 @@ export default {
   }
 }
 
-.card-content {
+.event-desc {
   text-align: justify;
   margin-bottom: 16px;
 
@@ -95,7 +87,7 @@ export default {
   @include webkit-clamp.webkit-clamp(3);
 }
 
-.card-footer {
+.event-footer {
   font-weight: bold;
 
   display: flex;

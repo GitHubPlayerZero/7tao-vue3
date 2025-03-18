@@ -65,7 +65,7 @@
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router";
-import CollapseMenu from "./components/CollapseMenu.vue";
+import CollapseMenu from "./components/global/CollapseMenu.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -91,6 +91,7 @@ import CollapseMenu from "./components/CollapseMenu.vue";
   background-color: var(--bs-body-bg);
   position: absolute;
   width: 100%;
+  z-index: 1;
 }
 
 // 搜尋功能
