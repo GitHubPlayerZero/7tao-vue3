@@ -9,8 +9,14 @@ import vueDevTools from "vite-plugin-vue-devtools";
 export default defineConfig({
   base: "/7tao-vue3/", // 專案 repo 路徑
   plugins: [viteEslint(), vue(), vueDevTools()],
+
   css: {
     devSourcemap: true,
+  },
+
+  build: {
+    // 產出 JS 的 source map
+    sourcemap: true,
   },
 
   resolve: {

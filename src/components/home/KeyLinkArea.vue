@@ -42,7 +42,7 @@ export default {
 
   methods: {
     // 取得圖片完整 URL
-    getImageUrl: (relativePathName) => ImageUtils.getBaseUrl(relativePathName),
+    getImageUrl: (relativePathName) => ImageUtils.getImagePath(relativePathName),
 
     // 以 tag 名稱取得 tag ID
     getTagId(tagName) {
