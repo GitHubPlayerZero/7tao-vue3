@@ -1,5 +1,5 @@
 import { Api } from "./api";
-import { EventApi } from "./eventApi";
 import { TagApi } from "./tagApi";
+import { EventApi } from "./eventApi";
 
-export { Api, EventApi, TagApi };
+export { Api, TagApi, EventApi };

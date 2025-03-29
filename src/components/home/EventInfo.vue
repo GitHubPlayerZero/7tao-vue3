@@ -8,7 +8,7 @@
 
     <ul class="row row-gap-6 row-gap-md-12">
       <li class="col-md-6 col-xl-4" v-for="event in recentEvents" :key="event.id">
-        <EventCard :tagIdMap="tagIdMap" :event="event" />
+        <EventCard :event="event" />
       </li>
     </ul>
   </article>
@@ -34,8 +34,8 @@
 
         <!-- 標籤 -->
         <ul class="d-flex flex-wrap gap-2 mb-3 mb-md-8">
-          <li v-for="tag in onlineEvent.otherTags" :key="tag">
-            <span class="tag">{{ tag }}</span>
+          <li v-for="tag in onlineEvent.subTags" :key="tag">
+            <span class="tag">{{ tag.name }}</span>
           </li>
         </ul>
 
@@ -45,28 +45,37 @@
         </p>
 
         <!-- 按鈕 -->
-        <button
-          type="button"
+        <router-link
+          :to="{ path: `/event/${onlineEvent.id}` }"
           class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4 py-xl-2 fs-md-20 lh-md-1d45"
         >
           <span class="me-1">查看活動詳情</span>
           <i class="icofont-rounded-double-right"></i>
-        </button>
+        </router-link>
       </div>
+      <!-- col end -->
     </div>
+    <!-- row end -->
   </article>
 </template>
 
 <script>
-import { EventApi, TagApi } from "@/api";
+// eslint-disable-next-line no-unused-vars
+import { TagModel } from "@/service/tag";
+// eslint-disable-next-line no-unused-vars
+import { EventTagRecord, EventTagModel } from "@/service/event";
 import EventCard from "@/components/global/EventCard.vue";
 
 export default {
-  inject: ["tags", "events"],
+  inject: ["tagModel", "eventTagModel"],
 
+  /**
+   * @returns {{myTagModel: TagModel, myEventTagModel: EventTagModel, recentEvents: EventTagRecord[], onlineEvent: EventTagRecord}}
+   */
   data() {
     return {
-      tagIdMap: null, // tag ID 對照表
+      myTagModel: this.tagModel,
+      myEventTagModel: this.eventTagModel,
       recentEvents: null, // 近期活動資料集
       onlineEvent: null, // 線上活動
     };
@@ -79,57 +88,39 @@ export default {
   },
 
   created() {
-    console.log(`## [EventInfo - created]`);
-    console.log(`this.events ===>`, this.events);
-    console.log(`this.tags ===>`, this.tags);
-
-    // 設定 tag ID 對照表
-    this.tagIdMap = TagApi.getIdMap(this.tags);
-
     const recentEventLimit = 6; // "近期活動" 的數量上限
-    const onlineTagId = TagApi.searchByName(this.tags, "線上活動")?.id; // "線上活動" 的 tag ID
+    const onlineTagId = this.myTagModel.getIdByName("線上活動"); // "線上活動" 的 tag ID
 
     const recentEvents = []; // 近期活動
-    let onlineEvent = {}; // 線上活動
+    let onlineEvent; // 線上活動
 
-    for (const item of this.events) {
-      // console.log(`item ==>`, item);
-      const mainTagId = EventApi.getMainTagId(item); // 活動主要分類 tag ID
-
+    for (const item of this.myEventTagModel.datas) {
       // 線上活動
-      if (mainTagId === onlineTagId) {
+      if (item.mainTag.id === onlineTagId) {
         // 若線上活動尚未有資料則寫入
-        if (!onlineEvent.id) {
-          // console.log(`寫入線上活動...`);
-          onlineEvent = { ...item };
-
-          // 設定其它分類標籤資訊
-          const otherTags = [];
-          EventApi.getOtherTagId(item).forEach((item) => {
-            otherTags.push(this.tagIdMap[item]);
-          });
-          onlineEvent.otherTags = otherTags;
+        if (!onlineEvent) {
+          onlineEvent = item;
         }
       }
       // 其它活動
       else {
         // 若近期活動尚未額滿則寫入
         if (recentEvents.length < recentEventLimit) {
-          // console.log(`寫入近期活動...`);
           recentEvents.push(item);
         }
       }
 
       // 當資料找齊即中斷迴圈
-      if (onlineEvent.id && recentEvents.length >= recentEventLimit) {
+      if (onlineEvent && recentEvents.length >= recentEventLimit) {
         break;
       }
     }
 
     this.recentEvents = recentEvents;
     this.onlineEvent = onlineEvent;
-    console.log(`onlineEvent ==>`, this.onlineEvent);
-    console.log(`recentEvents ==>`, this.recentEvents);
+    // TODO delete
+    // console.log(`onlineEvent ==>`, this.onlineEvent);
+    // console.log(`recentEvents ==>`, this.recentEvents);
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <!-- 活動日期 -->
-  <div class="event-date">{{ DateService.formatAsDateAbbrMonthYear(event.date) }}</div>
+  <div class="event-date">{{ event.abbrDate }}</div>
 
   <!-- 活動圖片 -->
   <img :src="event.img" :alt="event.title" class="event-image" />
@@ -13,28 +13,35 @@
 
   <!-- 結尾資訊 -->
   <div class="event-footer">
-    <!-- 主分類 -->
-    <a href="#" class="hover-underline d-flex align-items-center" @click.prevent>
-      <i class="icofont-star-alt-1 fs-24 me-1"></i>
-      <span class="hover-effect">{{ tagIdMap[EventApi.getMainTagId(event)] }}</span>
-    </a>
-    <!-- 開賣 -->
+    <!-- 主分類標籤 -->
     <a
       href="#"
+      class="hover-underline d-flex align-items-center"
+      @click.prevent="clickEventTag(event.mainTag.id)"
+    >
+      <i class="icofont-star-alt-1 fs-24 me-1"></i>
+      <span class="hover-effect">{{ event.mainTag.name }}</span>
+    </a>
+    <!-- 開賣 -->
+    <router-link
+      :to="{ path: `/event/${event.id}` }"
       class="hover-show-before d-flex align-items-center font-noto-sans-tc"
-      @click.prevent
     >
       <span class="hover-effect me-1">{{ event.isOnSale ? "開賣中" : "檢視活動" }}</span>
       <i class="icofont-rounded-double-right"></i>
-    </a>
+    </router-link>
   </div>
 </template>
 
 <script setup>
-import { EventApi } from "@/api";
-import { DateService } from "@/service";
+import { inject } from "vue";
+import { EventTagRecord } from "@/service/event";
 
-const { event, tagIdMap } = defineProps(["event", "tagIdMap"]);
+defineProps({
+  event: EventTagRecord,
+});
+
+const clickEventTag = inject("clickEventTag");
 </script>
 
 <style lang="scss" scoped>
