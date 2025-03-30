@@ -108,19 +108,13 @@ export default {
   beforeCreate() {
     console.log(`## [HomeView - beforeCreate]`);
 
-    // 取得標籤
-    TagService.prepareTagModel()
-      .then((tagModel) => {
-        console.log(`tagModel =====>`, tagModel);
-        this.tagModel = tagModel;
-
-        // 取得活動
-        return EventService.prepareEventTagModel(tagModel);
-      })
-      .then((eventTagModel) => {
-        console.log(`eventTagModel ========>`, eventTagModel);
-        this.eventTagModel = eventTagModel;
-      });
+    // 取得標籤、活動
+    Promise.all([TagService.prepareTagModel(), EventService.fetchEvents()]).then((resList) => {
+      this.tagModel = resList[0];
+      console.log(`tagModel =====>`, this.tagModel);
+      this.eventTagModel = new EventTagModel(resList[1], this.tagModel);
+      console.log(`eventTagModel ========>`, this.eventTagModel);
+    });
   },
 
   // TODO debug 測試

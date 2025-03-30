@@ -24,7 +24,6 @@ export default {
    * @returns {{banners: BannerRecord[]}}
    */
   data() {
-    console.log(`## [BannerSlide - beforeCreate]`);
     return {
       banners: [],
     };
