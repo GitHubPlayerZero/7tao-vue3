@@ -1,0 +1,2 @@
+import{_ as s,c as a,a as t,t as n,o as r}from"./index-DxPRQA8M.js";const c={data(){return{id:this.$route.params.id}},methods:{},computed:{},watch:{},components:{},beforeCreate(){}},i={class:"container"};function d(p,e,l,u,o,_){return r(),a("div",i,[e[0]||(e[0]=t("h2",null,"活動資訊頁",-1)),t("p",null,"id: "+n(o.id),1)])}const f=s(c,[["render",d]]);export{f as default};
+//# sourceMappingURL=EventDetailView-BRt_4jqf.js.map
