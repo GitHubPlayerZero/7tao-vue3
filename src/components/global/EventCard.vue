@@ -14,11 +14,7 @@
   <!-- 結尾資訊 -->
   <div class="event-footer">
     <!-- 主分類標籤 -->
-    <a
-      href="#"
-      class="hover-underline d-flex align-items-center"
-      @click.prevent="clickEventTag(event.mainTag.id)"
-    >
+    <a href="#" :class="eventTagClasses" @click.prevent="clickEventTag(event.mainTag.id)">
       <i class="icofont-star-alt-1 fs-24 me-1"></i>
       <span class="hover-effect">{{ event.mainTag.name }}</span>
     </a>
@@ -41,7 +37,26 @@ defineProps({
   event: EventTagRecord,
 });
 
-const clickEventTag = inject("clickEventTag");
+/**
+ * 處理活動卡標籤動作。
+ */
+// 標籤點擊方法
+let clickEventTag = inject("clickEventTag", null);
+// 標籤樣式 class
+const eventTagClasses = ["d-flex", "align-items-center"];
+
+// 有標籤點擊方法
+if (clickEventTag) {
+  // 加上其它 hover 效果
+  eventTagClasses.push("hover-underline");
+}
+// 否則
+else {
+  // 使 hover 失效
+  eventTagClasses.push("cursor-auto");
+  // 使點擊無作用
+  clickEventTag = () => {};
+}
 </script>
 
 <style lang="scss" scoped>

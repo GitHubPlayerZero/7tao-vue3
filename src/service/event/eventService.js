@@ -1,6 +1,8 @@
 import { EventApi } from "@/api";
 import { BannerModel } from "./bannerModel";
 import { EventTagModel } from "./eventTagModel";
+// eslint-disable-next-line no-unused-vars
+import { EventTagRecord } from "./eventTagRecord";
 import { TagModel } from "../tag";
 
 /**
@@ -76,5 +78,27 @@ export class EventService {
       eventTagModel = new EventTagModel(res, tagModel);
     });
     return eventTagModel;
+  }
+
+  /**
+   * 以 Tag ID 篩選出活動。
+   * @param {EventTagRecord[]} events 活動資料集合。
+   * @param {number[]} tagIds 用來篩選的 Tag ID 集合。
+   * @returns {EventTagRecord[]} 篩選後的活動。
+   */
+  static filterByTagIds(events, tagIds) {
+    // 沒有篩選的 Tag ID 則直接回傳所有資料
+    if (!tagIds || tagIds.length <= 0) {
+      return events;
+    }
+
+    return events.filter((event) => {
+      for (const id of event.tags) {
+        if (tagIds.includes(id)) {
+          return true;
+        }
+      }
+      return false;
+    });
   }
 }

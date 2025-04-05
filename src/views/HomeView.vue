@@ -34,10 +34,11 @@ import { TagService, TagModel } from "@/service/tag";
 import { EventService, EventTagModel, EventTagRecord } from "@/service/event";
 import BannerSlide from "@/components/home/BannerSlide.vue";
 import EventInfo from "@/components/home/EventInfo.vue";
+import { useEventTag } from "@/composables";
 
 export default {
   /**
-   * @return {{tagModel: TagModel, eventTagModel: EventTagModel, events: EventTagRecord[]}}
+   * @return {{tagModel: TagModel, eventTagModel: EventTagModel}}
    */
   data() {
     console.log(`## [HomeView - data]`);
@@ -95,7 +96,7 @@ export default {
 
       this.$router.push({
         path: "/events",
-        query: { tagId },
+        state: { tagId },
       });
     },
   },
@@ -109,26 +110,24 @@ export default {
     console.log(`## [HomeView - beforeCreate]`);
 
     // 取得標籤、活動
-    Promise.all([TagService.prepareTagModel(), EventService.fetchEvents()]).then((resList) => {
-      this.tagModel = resList[0];
+    useEventTag().then((res) => {
+      this.tagModel = res.tagModel;
       console.log(`tagModel =====>`, this.tagModel);
-      this.eventTagModel = new EventTagModel(resList[1], this.tagModel);
+      this.eventTagModel = res.eventTagModel;
       console.log(`eventTagModel ========>`, this.eventTagModel);
     });
   },
 
   // TODO debug 測試
-  async created() {
+  created() {
     console.log(`## [HomeView - created]`);
   },
   beforeMount() {
     console.log(`## [HomeView - beforeMount]`);
   },
-
   mounted() {
     console.log(`## [HomeView - mounted]`);
   },
-  // mounted end
 };
 </script>
 
