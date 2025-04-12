@@ -61,6 +61,21 @@ $utilities: (
       pre-line: pre-line,
     ),
   ),
+  "cursor": (
+    property: cursor,
+    values: (
+      none: none,
+      default: default,
+      auto: auto,
+      cntext-menu: cntext-menu,
+      help: help,
+      pointer: pointer,
+      progress: progress,
+      wait: wait,
+      text: text,
+      not-allowed: not-allowed,
+    ),
+  ),
   // 覆寫 height (RWD, values)
   // "height": (
   //     responsive: true,

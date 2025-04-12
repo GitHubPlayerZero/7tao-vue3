@@ -53,6 +53,26 @@ export class DateUtils {
   }
 
   /**
+   * 取得月份縮寫。
+   * @param {number} month 月份，例如 1 月傳入 1，12 月傳入 12。
+   * @returns {string} 月份縮寫。
+   */
+  static getMonthAbbrByMonth(month) {
+    return DateStyles.monthAbbr[month - 1];
+  }
+
+  /**
+   * 取得月份縮寫。
+   * @param {Date|string|number} date 日期，會經過轉換，所以可以是 Date 物件、日期字串、timestamp。
+   * @returns {string} 月份縮寫。
+   * @throws 若不是正常的日期格式則拋出錯誤訊息。
+   */
+  static getMonthAbbrByDate(date) {
+    date = this.convertToDate(date);
+    return DateStyles.monthAbbr[date.getMonth()];
+  }
+
+  /**
    * 日期加減天數。
    * @param {Date|string|number} date 日期，會經過轉換，所以可以是 Date 物件、日期字串、timestamp。
    * @param {number} [dayNum = 0] 要加減的天數，若為「減」須傳入「負數」。可選，預設為 0。
@@ -81,7 +101,7 @@ export class DateUtils {
       .replace("[DD]", this.#fill(date.getDate()))
       .replace("[M]", date.getMonth() + 1)
       .replace("[D]", date.getDate())
-      .replace("[AbbrM]", DateStyles.monthAbbr[date.getMonth()]);
+      .replace("[AbbrM]", this.getMonthAbbrByDate(date));
   }
 
   /**

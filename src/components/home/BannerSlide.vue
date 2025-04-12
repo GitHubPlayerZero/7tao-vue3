@@ -1,54 +1,43 @@
 <template>
-  <div
-    v-for="item in banners"
-    :key="item.id"
+  <router-link
+    v-for="event in banners"
+    :key="event.id"
     class="banner-slide position-relative mb-8 mb-md-12"
-    :style="{ backgroundImage: `url(${item.img})` }"
+    :style="{ backgroundImage: `url(${event.img})` }"
+    :to="{ path: `/event/${event.id}` }"
   >
-    <div class="banner-slide-date">{{ formatDate(item.date) }}</div>
+    <div class="banner-slide-date">{{ event.abbrDate }}</div>
     <div class="position-absolute bottom-0 w-100 mb-6">
-      <p class="banner-slide-title">{{ item.title }}</p>
-      <p class="banner-slide-desc d-none d-md-block">{{ item.bannerDesc }}</p>
+      <p class="banner-slide-title">{{ event.title }}</p>
+      <p class="banner-slide-desc d-none d-md-block">{{ event.bannerDesc }}</p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
-import { EventApi } from "@/api";
-import { DateService } from "@/service";
+// eslint-disable-next-line no-unused-vars
+import { EventService, BannerRecord } from "@/services/data/event";
 
+// TODO 做成 swiper
 export default {
+  /**
+   * @returns {{banners: BannerRecord[]}}
+   */
   data() {
-    console.log(`## [BannerSlide - beforeCreate]`);
     return {
-      // TODO 做成 swiper
       banners: [],
     };
   },
 
-  methods: {
-    // 格式化日期標題
-    formatDate: (dateStr) => {
-      return DateService.formatAsDateAbbrMonthYear(dateStr);
-    },
-  },
+  methods: {},
 
   async beforeCreate() {
     console.log(`## [BannerSlide - beforeCreate]`);
 
     // 取得 banner 資料
-    // EventApi
-    //   .fetchBanners()
-    //   .then((res) => {
-    //     console.log(`[BannerSlide] res ==>`, res);
-    //     this.banners = res.data;
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
-    EventApi.fetchBanners().then((res) => {
-      this.banners = res;
-      console.log(`banners ==>`, this.banners);
+    EventService.prepareBannerModel().then((bannerModel) => {
+      this.banners = bannerModel.datas;
+      // console.log(`banners ==>`, this.banners);
     });
   },
 
@@ -61,7 +50,6 @@ export default {
   },
   mounted() {
     console.log(`## [BannerSlide - mounted]`);
-    // console.log(`[BannerSlide - mounted] this.tag ==>`, this.tag);
   },
 };
 </script>
@@ -71,6 +59,7 @@ export default {
 @use "@/assets/scss/mixins/font";
 
 .banner-slide {
+  display: block;
   height: 350px;
   background-size: cover;
   background-position: center;

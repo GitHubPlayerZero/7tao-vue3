@@ -43,8 +43,20 @@
   @include tag;
 }
 
-// 有 hover 效果的標籤按鈕
+// 可點擊的標籤按鈕
 .tag-btn {
   @include tag;
   @include tag-hover;
+}
+
+// 被選取的標籤按鈕
+.tag-btn-selected {
+  @include tag;
+  border-color: var(--bs-primary);
+  background-color: var(--bs-primary);
+  color: white;
+
+  &:hover {
+    color: var(--bs-secondary);
+  }
 }

@@ -3,6 +3,31 @@
  */
 export class TypeUtils {
   /**
+   * 是否為物件？嚴格要求為物件，陣列不會被視為物件。
+   * @param {*} val 要判斷的值。
+   * @returns {boolean} 物件回傳 true，否則回傳 false。
+   */
+  static isStrictObject(val) {
+    // prettier-ignore
+    try {
+      return Object.getPrototypeOf(val) === Object.prototype;
+    }
+    // eslint-disable-next-line no-unused-vars
+    catch (error) {
+      return false;
+    }
+  }
+
+  /**
+   * 是否為事件？
+   * @param {*} val 要判斷的值。
+   * @returns {boolean} 事件回傳 true，否則回傳 false。
+   */
+  static isEvent(val) {
+    return val instanceof Event;
+  }
+
+  /**
    * 是否為原始型別字串？
    * @param {*} val 要判斷的值。
    * @returns {boolean} 原始型別字串回傳 true，否則回傳 false。
@@ -108,6 +133,6 @@ export class TypeUtils {
     if (this.isLooseNumber(val)) {
       return Number(val);
     }
-    throw Error(`${val} 為不正確的數字格式！`);
+    throw TypeError(`${val} 為不正確的數字格式！`);
   }
 }
