@@ -1,5 +1,32 @@
-import { TypeUtils } from "@/utils";
 import { computed, ref } from "vue";
+import { TypeUtils } from "@/helpers";
+
+/** @type {number} 預設的每頁筆數。 */
+const defaultPageSize = 10;
+
+/** @type {number} 預設的頁碼。 */
+const defaultCurrentPage = 1;
+
+/**
+ * 分頁工具的參數模型。
+ */
+export class PaginationParam {
+  /** @type {Array} 資料集。 */ datas;
+  /** @type {number} 每頁筆數。 */ pageSize;
+  /** @type {number} 本頁頁碼。 */ currentPage;
+
+  /**
+   * 建立分頁工具所需要的參數。
+   * @param {Array} datas 資料集。
+   * @param {number} [pageSize] 每頁筆數，預設 10 筆。
+   * @param {number} [currentPage] 本頁頁碼，預設為第 1 頁。
+   */
+  constructor(datas, pageSize = defaultPageSize, currentPage = defaultCurrentPage) {
+    this.datas = datas;
+    this.pageSize = pageSize;
+    this.currentPage = currentPage;
+  }
+}
 
 /**
  * 定義 usePagination 回傳內容。
@@ -13,41 +40,46 @@ import { computed, ref } from "vue";
  * @property {() => void} goToNextPage 往下一頁。
  * @property {() => void} goToPrevPage 往前一頁。
  */
-
 /**
  * 依據傳入的資料建立分頁功能。
- * @param {Array} datas 資料集。
- * @param {number} [pageSize] 每頁筆數，預設 10 筆。
+ * @param {PaginationParam} params 參數集合。
  * @returns {Pagination} 分頁相關資訊與方法。
- * @throws 若 datas、pageSize 有問題會拋出錯誤。
+ * @throws 若 datas、pageSize、currentPage 有問題會拋出錯誤。
  */
-export function usePagination(datas, pageSize = 10) {
+export function usePagination(params) {
+  /** @type {Array} 資料集。 */
+  const datas = params.datas;
+
   // 檢核 datas
   if (!(datas instanceof Array)) {
     throw Error("[datas] 必須使用陣列！");
   }
 
   // 檢核 pageSize 並確保為數值
-  pageSize = TypeUtils.converToNumber(pageSize);
+  /** @type {number} 每頁筆數。 */
+  let pageSize;
+  try {
+    pageSize = TypeUtils.converToNumber(params.pageSize);
+  } catch (error) {
+    throw new Error(`[pageSize] 不正確！`, { cause: error });
+  }
 
-  /**
-   * @type {number} 總筆數。
-   */
+  // 檢核 currentPage 並確保為數值
+  /** @type {import('vue').Ref<number>} 本頁頁碼。 */
+  let currentPage;
+  try {
+    currentPage = ref(TypeUtils.converToNumber(params.currentPage));
+  } catch (error) {
+    throw new Error(`[currentPage] 不正確！`, { cause: error });
+  }
+
+  /** @type {number} 總筆數。 */
   const totalSize = datas.length;
 
-  /**
-   * @type {number} 總頁數。
-   */
+  /** @type {number} 總頁數。 */
   let totalPages = Math.ceil(totalSize / pageSize);
 
-  /**
-   * @type {import('vue').Ref<number>} 本頁頁碼，初始預設為 1（第 1 頁）。
-   */
-  let currentPage = ref(1);
-
-  /**
-   * @type {import('vue').ComputedRef<Array>} 本頁資料，對應本頁頁碼的資料。
-   */
+  /** @type {import('vue').ComputedRef<Array>} 本頁資料，對應本頁頁碼的資料。 */
   const currentDatas = computed(() => {
     const startIndex = (currentPage.value - 1) * pageSize;
     const endIndex = currentPage.value * pageSize;
@@ -72,9 +104,7 @@ export function usePagination(datas, pageSize = 10) {
     currentPage.value = pageNo;
   }
 
-  /**
-   * 往下一頁。
-   */
+  /** 往下一頁。 */
   function goToNextPage() {
     const nextPage = currentPage.value + 1;
     if (nextPage <= totalPages) {
@@ -82,9 +112,7 @@ export function usePagination(datas, pageSize = 10) {
     }
   }
 
-  /**
-   * 往前一頁。
-   */
+  /** 往前一頁。 */
   function goToPrevPage() {
     const prevPage = currentPage.value - 1;
     if (prevPage >= 1) {

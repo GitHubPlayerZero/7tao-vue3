@@ -8,14 +8,6 @@ import { TagRecord } from "./tagRecord";
  */
 export class TagService {
   /**
-   * 代表沒有 tag。
-   * @type {-1}
-   */
-  static get none() {
-    return -1;
-  }
-
-  /**
    * 取得所有 Tag 資料。
    * 對應於 {@link TagApi.fetchTags} 的處理。
    * @returns {Object[]} 由後端取回的資料，預設 undefined。

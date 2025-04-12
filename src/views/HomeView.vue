@@ -27,14 +27,15 @@
 
 <script>
 import { computed } from "vue";
-import { ImageUtils, TypeUtils } from "@/utils";
+import { ImageUtils } from "@/helpers";
 // eslint-disable-next-line no-unused-vars
-import { TagService, TagModel } from "@/service/tag";
+import { TagService, TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
-import { EventService, EventTagModel, EventTagRecord } from "@/service/event";
+import { EventService, EventTagModel, EventTagRecord } from "@/services/data/event";
+import { EventListHistState } from "@/services/features";
+import { useEventTag } from "@/composables";
 import BannerSlide from "@/components/home/BannerSlide.vue";
 import EventInfo from "@/components/home/EventInfo.vue";
-import { useEventTag } from "@/composables";
 
 export default {
   /**
@@ -90,13 +91,9 @@ export default {
      * @param {string} tagId tag ID。
      */
     goToEventList(tagId) {
-      if (!tagId || TypeUtils.isEvent(tagId)) {
-        tagId = TagService.none;
-      }
-
       this.$router.push({
         path: "/events",
-        state: { tagId },
+        state: EventListHistState.createTagData(tagId),
       });
     },
   },

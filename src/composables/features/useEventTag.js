@@ -1,7 +1,7 @@
 import { ref } from "vue";
-import { EventService, EventTagModel } from "@/service/event";
+import { EventService, EventTagModel } from "@/services/data/event";
 // eslint-disable-next-line no-unused-vars
-import { TagService, TagModel } from "@/service/tag";
+import { TagService, TagModel } from "@/services/data/tag";
 
 /**
  * 使用 Tag、Event 資料。Event 會整合 Tag 資料。

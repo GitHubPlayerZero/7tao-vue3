@@ -1,4 +1,7 @@
-import { useEventTag } from "./useEventTag";
-import { usePagination } from "./usePagination";
+// shared
+import { usePagination, PaginationParam } from "./usePagination";
+export { usePagination, PaginationParam };
 
-export { useEventTag, usePagination };
+// features
+import { useEventTag } from "./features/useEventTag";
+export { useEventTag };

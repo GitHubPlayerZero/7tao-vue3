@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import homeView from "../views/HomeView.vue";
-import { SysConstants } from "@/utils";
+import { SysConstants } from "@/helpers";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

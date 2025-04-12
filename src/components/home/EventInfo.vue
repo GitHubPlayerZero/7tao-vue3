@@ -61,9 +61,9 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { TagModel } from "@/service/tag";
+import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
-import { EventTagRecord, EventTagModel } from "@/service/event";
+import { EventTagRecord, EventTagModel } from "@/services/data/event";
 import EventCard from "@/components/global/EventCard.vue";
 
 export default {

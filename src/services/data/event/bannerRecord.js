@@ -1,7 +1,7 @@
 import { Record } from "../record";
 // eslint-disable-next-line no-unused-vars
-import { DateStyles } from "@/utils";
-import { DateService } from "../dateService";
+import { DateStyles } from "@/helpers";
+import { DateService } from "../../dateService";
 
 /**
  * Banner 單筆資料。

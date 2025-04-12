@@ -133,6 +133,6 @@ export class TypeUtils {
     if (this.isLooseNumber(val)) {
       return Number(val);
     }
-    throw Error(`${val} 為不正確的數字格式！`);
+    throw TypeError(`${val} 為不正確的數字格式！`);
   }
 }

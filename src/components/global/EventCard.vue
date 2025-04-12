@@ -31,7 +31,7 @@
 
 <script setup>
 import { inject } from "vue";
-import { EventTagRecord } from "@/service/event";
+import { EventTagRecord } from "@/services/data/event";
 
 defineProps({
   event: EventTagRecord,

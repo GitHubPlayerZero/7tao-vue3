@@ -16,7 +16,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { EventService, BannerRecord } from "@/service/event";
+import { EventService, BannerRecord } from "@/services/data/event";
 
 // TODO 做成 swiper
 export default {
