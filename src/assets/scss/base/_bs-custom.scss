@@ -3,9 +3,7 @@
 @use "./variables";
 @use "./variables-utilities";
 
-// @use "bootstrap" with (
-  // TODO for Sass compiler
-@use "../../../../node_modules/bootstrap/scss/bootstrap.scss" with (
+@use "../bootstrap/f-bootstrap" with (
   $grid-breakpoints: variables.$grid-breakpoints,
   $container-max-widths: variables.$container-max-widths,
   $font-family-sans-serif: variables.$font-family-sans-serif,

@@ -4,7 +4,7 @@
     :key="event.id"
     class="banner-slide position-relative mb-8 mb-md-12"
     :style="{ backgroundImage: `url(${event.img})` }"
-    :to="{ path: `/event/${event.id}` }"
+    :to="{ path: `/events/${event.id}` }"
   >
     <div class="banner-slide-date">{{ event.abbrDate }}</div>
     <div class="position-absolute bottom-0 w-100 mb-6">
@@ -16,12 +16,12 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { EventService, BannerRecord } from "@/services/data/event";
+import { EventService, EventRecord, EventModel } from "@/services/data/event";
 
 // TODO 做成 swiper
 export default {
   /**
-   * @returns {{banners: BannerRecord[]}}
+   * @returns {{banners: EventRecord[]}}
    */
   data() {
     return {
@@ -35,8 +35,8 @@ export default {
     console.log(`## [BannerSlide - beforeCreate]`);
 
     // 取得 banner 資料
-    EventService.prepareBannerModel().then((bannerModel) => {
-      this.banners = bannerModel.datas;
+    EventService.fetchBanners().then((res) => {
+      this.banners = new EventModel(res).datas;
       // console.log(`banners ==>`, this.banners);
     });
   },

@@ -45,7 +45,7 @@ const router = createRouter({
     },
     // 活動資訊頁
     {
-      path: "/event/:id",
+      path: "/events/:id",
       name: "eventDetail",
       component: () => import("@/views/EventDetailView.vue"),
     },

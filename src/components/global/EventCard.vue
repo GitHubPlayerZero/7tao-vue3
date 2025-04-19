@@ -20,7 +20,7 @@
     </a>
     <!-- 開賣 -->
     <router-link
-      :to="{ path: `/event/${event.id}` }"
+      :to="{ path: `/events/${event.id}` }"
       class="hover-show-before d-flex align-items-center font-noto-sans-tc"
     >
       <span class="hover-effect me-1">{{ event.isOnSale ? "開賣中" : "檢視活動" }}</span>

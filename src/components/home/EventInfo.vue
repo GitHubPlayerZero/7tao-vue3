@@ -46,7 +46,7 @@
 
         <!-- 按鈕 -->
         <router-link
-          :to="{ path: `/event/${onlineEvent.id}` }"
+          :to="{ path: `/events/${onlineEvent.id}` }"
           class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4 py-xl-2 fs-md-20 lh-md-1d45"
         >
           <span class="me-1">查看活動詳情</span>

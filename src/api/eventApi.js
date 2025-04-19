@@ -18,6 +18,15 @@ export class EventApi extends Api {
   }
 
   /**
+   * 取得單一活動資訊。
+   * @param {number} id 活動 ID。
+   * @returns {Promise} 執行 axios 回傳的 Promise。
+   */
+  static fetchEventInfo(id) {
+    return this._axios.get(`${this.url}/${id}`);
+  }
+
+  /**
    * 取得 banner 活動，預設以日期由近至遠排序。
    * @returns {Promise} 執行 axios 回傳的 Promise。
    */

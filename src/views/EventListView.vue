@@ -57,8 +57,6 @@
 </template>
 
 <script>
-/** @import {Pagination} from "@/composables/usePagination.js" */
-
 // eslint-disable-next-line no-unused-vars
 import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
@@ -219,11 +217,9 @@ export default {
       // console.log(res.tagModel);
       // console.log(res.eventTagModel);
       // console.log(`this.tagModel =====>`, this.tagModel);
-      // console.log(`this.eventTagModel =====>`, this.eventTagModel);
+      console.log(`this.eventTagModel =====>`, this.eventTagModel);
     });
   },
   // created end
 };
 </script>
-
-<style lang="scss" scoped></style>
