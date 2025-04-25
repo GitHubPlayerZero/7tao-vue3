@@ -1,2 +1,0 @@
-import{_ as s,a,b as t,t as n,o as r}from"./index-C84kNxfd.js";const i={data(){return{id:this.$route.params.id}},methods:{},computed:{},watch:{},components:{},beforeCreate(){}},c={class:"container"};function d(p,e,l,u,o,_){return r(),a("div",c,[e[0]||(e[0]=t("h2",null,"活動資訊頁",-1)),t("p",null,"id: "+n(o.id),1)])}const f=s(i,[["render",d]]);export{f as default};
-//# sourceMappingURL=EventDetailView-C_-CkA2n.js.map
