@@ -48,7 +48,7 @@ export class DateUtils {
     }
     // 錯誤
     else {
-      throw Error(`${val} 為不正確的日期格式！`);
+      throw TypeError(`${val} 為不正確的日期格式！`);
     }
   }
 

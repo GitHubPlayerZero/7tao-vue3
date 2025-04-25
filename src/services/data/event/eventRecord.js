@@ -7,6 +7,8 @@ import { DateService } from "@/services/dateService";
 export class EventRecord extends Record {
   static #props = [
     "date",
+    "sTime",
+    "eTime",
     "title",
     "subTitle",
     "opening",
@@ -29,6 +31,18 @@ export class EventRecord extends Record {
    * @type {string}
    */
   abbrDate;
+
+  /**
+   * 開始時間。
+   * @type {string}
+   */
+  sTime;
+
+  /**
+   * 結束時間。
+   * @type {string}
+   */
+  eTime;
 
   /**
    * 標題。

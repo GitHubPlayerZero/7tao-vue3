@@ -1,7 +1,7 @@
 import { DateStyles, DateUtils } from "@/helpers";
 
 /**
- * 日期處理
+ * 日期相關處理
  */
 export class DateService {
   /**

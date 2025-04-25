@@ -76,7 +76,8 @@ const router = createRouter({
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
-      redirect: "/",
+      // redirect: "/", // 導回首頁
+      component: () => import("@/views/NotFoundView.vue"), // 使用客製的頁面
     },
   ],
 });

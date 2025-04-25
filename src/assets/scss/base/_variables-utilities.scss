@@ -29,15 +29,34 @@ $utilities: (
       property: line-height,
       values: (
         1: 1,
+        1d125: 1.125,
+        1d136: 1.136,
+        1d146: 1.146,
         1d155: 1.155,
         1d25: 1.25,
         1d333: 1.333,
+        1d433: 1.433,
         1d437: 1.437,
         1d438: 1.438,
         1d444: 1.444,
         1d448: 1.448,
         1d45: 1.45,
         1d5: 1.5,
+      ),
+    ),
+  // 覆寫 height (RWD, values)
+  "height": (
+      responsive: true,
+      property: height,
+      class: h,
+      values: (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%,
+        auto: auto,
+        78px: 78px,
+        119px: 119px,
       ),
     ),
   // 覆寫 text-align (values)
@@ -76,20 +95,21 @@ $utilities: (
       not-allowed: not-allowed,
     ),
   ),
-  // 覆寫 height (RWD, values)
-  // "height": (
-  //     responsive: true,
-  //     property: height,
-  //     class: h,
-  //     values: (
-  //       25: 25%,
-  //       50: 50%,
-  //       75: 75%,
-  //       100: 100%,
-  //       auto: auto,
-  //       39px: 39px,
-  //       48px: 48px,
-  //       255px: 255px,
-  //     ),
-   //   )
+  "aspect-ratio": (
+    responsive: true,
+    class: ratio,
+    property: aspect-ratio,
+    values: (
+      1d817: 1.817,
+      1d869: 1.869,
+    ),
+  ),
+  "letter-spacing": (
+    responsive: true,
+    class: letter-spacing,
+    property: letter-spacing,
+    values: (
+      5: 0.05em,
+    ),
+  )
 ) !default;

@@ -22,7 +22,7 @@ export class EventApi extends Api {
    * @param {number} id 活動 ID。
    * @returns {Promise} 執行 axios 回傳的 Promise。
    */
-  static fetchEventInfo(id) {
+  static fetchEvent(id) {
     return this._axios.get(`${this.url}/${id}`);
   }
 

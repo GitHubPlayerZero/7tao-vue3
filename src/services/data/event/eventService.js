@@ -33,13 +33,13 @@ export class EventService {
 
   /**
    * 取得單一活動資訊。
-   * 對應於 {@link EventApi.fetchEventInfo} 的處理。
+   * 對應於 {@link EventApi.fetchEvent} 的處理。
    * @param {number} id 活動 ID。
    * @returns {Promise<Object>} 由後端取回的資料，預設空物件。
    */
-  static async fetchEventInfo(id) {
+  static async fetchEvent(id) {
     let result;
-    await EventApi.fetchEventInfo(id)
+    await EventApi.fetchEvent(id)
       .then((res) => {
         result = res.data;
       })
