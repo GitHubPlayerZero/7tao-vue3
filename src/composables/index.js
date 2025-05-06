@@ -3,5 +3,5 @@ import { usePagination, PaginationParam } from "./usePagination";
 export { usePagination, PaginationParam };
 
 // features
-import { useEventTag } from "./features/useEventTag";
+import { useEventTag } from "./data/useEventTag";
 export { useEventTag };

@@ -57,8 +57,7 @@
 </template>
 
 <script>
-/** @import {Pagination} from "@/composables/usePagination.js" */
-
+import { FullLoadingHelper } from "@/helpers";
 // eslint-disable-next-line no-unused-vars
 import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
@@ -69,6 +68,9 @@ import EventCard from "@/components/global/EventCard.vue";
 
 // 預設一頁筆數
 const defaultPageSize = 12;
+
+// loading 工具
+const loading = new FullLoadingHelper();
 
 export default {
   /**
@@ -208,22 +210,25 @@ export default {
   created() {
     // console.log(`[EventListView] created........`, this);
     // console.log(`history.state ======>`, history.state);
+    loading.open();
 
     // 取得標籤、活動
-    useEventTag().then((res) => {
-      this.tagModel = res.tagModel;
-      this.eventTagModel = res.eventTagModel;
+    useEventTag()
+      .then((res) => {
+        this.tagModel = res.tagModel;
+        this.eventTagModel = res.eventTagModel;
 
-      // TODO DELETE
-      // console.log(`res ========>`, res);
-      // console.log(res.tagModel);
-      // console.log(res.eventTagModel);
-      // console.log(`this.tagModel =====>`, this.tagModel);
-      // console.log(`this.eventTagModel =====>`, this.eventTagModel);
-    });
+        // TODO DELETE
+        // console.log(`res ========>`, res);
+        // console.log(res.tagModel);
+        // console.log(res.eventTagModel);
+        // console.log(`this.tagModel =====>`, this.tagModel);
+        console.log(`this.eventTagModel =====>`, this.eventTagModel);
+      })
+      .finally(() => {
+        loading.close();
+      });
   },
   // created end
 };
 </script>
-
-<style lang="scss" scoped></style>

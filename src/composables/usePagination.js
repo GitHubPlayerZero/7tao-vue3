@@ -1,19 +1,39 @@
 import { computed, ref } from "vue";
 import { TypeUtils } from "@/helpers";
 
-/** @type {number} 預設的每頁筆數。 */
+/**
+ * 預設的每頁筆數。
+ * @type {number}
+ */
 const defaultPageSize = 10;
 
-/** @type {number} 預設的頁碼。 */
+/**
+ * 預設的頁碼。
+ * @type {number}
+ */
 const defaultCurrentPage = 1;
 
 /**
  * 分頁工具的參數模型。
  */
 export class PaginationParam {
-  /** @type {Array} 資料集。 */ datas;
-  /** @type {number} 每頁筆數。 */ pageSize;
-  /** @type {number} 本頁頁碼。 */ currentPage;
+  /**
+   * 資料集。
+   * @type {Array}
+   */
+  datas;
+
+  /**
+   * 每頁筆數。
+   * @type {number}
+   */
+  pageSize;
+
+  /**
+   * 本頁頁碼。
+   * @type {number}
+   */
+  currentPage;
 
   /**
    * 建立分頁工具所需要的參數。
@@ -28,18 +48,7 @@ export class PaginationParam {
   }
 }
 
-/**
- * 定義 usePagination 回傳內容。
- * @typedef {Object} Pagination
- * @property {import('vue').ComputedRef<Array>} currentDatas 本頁資料，對應本頁頁碼的資料。
- * @property {import('vue').Ref<number>} currentPage 本頁頁碼。
- * @property {number} totalPages 總頁數。
- * @property {number} totalSize 總筆數。
- * @property {number} pageSize 每頁筆數。
- * @property {(pageNo: number) => void} changePage 切換頁面。
- * @property {() => void} goToNextPage 往下一頁。
- * @property {() => void} goToPrevPage 往前一頁。
- */
+
 /**
  * 依據傳入的資料建立分頁功能。
  * @param {PaginationParam} params 參數集合。
@@ -47,7 +56,10 @@ export class PaginationParam {
  * @throws 若 datas、pageSize、currentPage 有問題會拋出錯誤。
  */
 export function usePagination(params) {
-  /** @type {Array} 資料集。 */
+  /**
+   * 資料集。
+   * @type {Array}
+   */
   const datas = params.datas;
 
   // 檢核 datas
@@ -55,31 +67,48 @@ export function usePagination(params) {
     throw Error("[datas] 必須使用陣列！");
   }
 
-  // 檢核 pageSize 並確保為數值
-  /** @type {number} 每頁筆數。 */
+  /**
+   * 每頁筆數。
+   * @type {number}
+   */
   let pageSize;
+
+  // 檢核 pageSize 並確保為數值
   try {
     pageSize = TypeUtils.converToNumber(params.pageSize);
   } catch (error) {
     throw new Error(`[pageSize] 不正確！`, { cause: error });
   }
 
-  // 檢核 currentPage 並確保為數值
-  /** @type {import('vue').Ref<number>} 本頁頁碼。 */
+  /**
+   * 本頁頁碼。
+   * @type {import('vue').Ref<number>}
+   */
   let currentPage;
+
+  // 檢核 currentPage 並確保為數值
   try {
     currentPage = ref(TypeUtils.converToNumber(params.currentPage));
   } catch (error) {
     throw new Error(`[currentPage] 不正確！`, { cause: error });
   }
 
-  /** @type {number} 總筆數。 */
+  /**
+   * 總筆數。
+   * @type {number}
+   */
   const totalSize = datas.length;
 
-  /** @type {number} 總頁數。 */
+  /**
+   * 總頁數。
+   * @type {number}
+   */
   let totalPages = Math.ceil(totalSize / pageSize);
 
-  /** @type {import('vue').ComputedRef<Array>} 本頁資料，對應本頁頁碼的資料。 */
+  /**
+   * 本頁資料，對應本頁頁碼的資料。
+   * @type {import('vue').ComputedRef<Array>}
+   */
   const currentDatas = computed(() => {
     const startIndex = (currentPage.value - 1) * pageSize;
     const endIndex = currentPage.value * pageSize;

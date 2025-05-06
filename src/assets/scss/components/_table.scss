@@ -1,0 +1,36 @@
+/* table：表格相關元件 */
+
+@use "../mixins/font";
+@use "../mixins/rwd";
+
+.table {
+  tr {
+    // 內容垂直置中
+    vertical-align: middle;
+  }
+
+  th,
+  td {
+    // 第一個、最後一個欄位完全靠邊
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  th {
+    // 標題欄底線
+    border: none;
+    border-bottom: 2px solid var(--bs-primary);
+    @include rwd.pad-up {
+      border-width: 3px;
+    }
+  }
+
+  td {
+    // 一般欄位字型
+    @include font.noto-sans-tc;
+  }
+}

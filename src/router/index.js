@@ -45,7 +45,7 @@ const router = createRouter({
     },
     // 活動資訊頁
     {
-      path: "/event/:id",
+      path: "/events/:id",
       name: "eventDetail",
       component: () => import("@/views/EventDetailView.vue"),
     },
@@ -76,7 +76,8 @@ const router = createRouter({
     {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
-      redirect: "/",
+      // redirect: "/", // 導回首頁
+      component: () => import("@/views/NotFoundView.vue"), // 使用客製的頁面
     },
   ],
 });

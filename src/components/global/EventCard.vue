@@ -3,7 +3,7 @@
   <div class="event-date">{{ event.abbrDate }}</div>
 
   <!-- 活動圖片 -->
-  <img :src="event.img" :alt="event.title" class="event-image" />
+  <img :src="event.img" :alt="event.title" class="event-image" loading="lazy" />
 
   <!-- 活動標題 -->
   <h3 class="event-title font-noto-serif-tc">{{ event.title }}</h3>
@@ -20,7 +20,7 @@
     </a>
     <!-- 開賣 -->
     <router-link
-      :to="{ path: `/event/${event.id}` }"
+      :to="{ path: `/events/${event.id}` }"
       class="hover-show-before d-flex align-items-center font-noto-sans-tc"
     >
       <span class="hover-effect me-1">{{ event.isOnSale ? "開賣中" : "檢視活動" }}</span>

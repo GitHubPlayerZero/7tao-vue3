@@ -1,7 +1,6 @@
 /* rwd：RWD 效果 */
 
-// @use "bootstrap/scss/mixins/breakpoints";
-@use "../../../../node_modules/bootstrap/scss/mixins/breakpoints.scss"; // TODO for Sass compiler
+@use "../bootstrap/f-breakpoints" as breakpoints;
 @use "../base/variables";
 
 // 平板以上

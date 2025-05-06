@@ -1,5 +1,4 @@
 import { TagApi } from "@/api";
-import { TagModel } from "./tagModel";
 // eslint-disable-next-line no-unused-vars
 import { TagRecord } from "./tagRecord";
 
@@ -10,7 +9,7 @@ export class TagService {
   /**
    * 取得所有 Tag 資料。
    * 對應於 {@link TagApi.fetchTags} 的處理。
-   * @returns {Object[]} 由後端取回的資料，預設 undefined。
+   * @returns {Promise<Object[]>} 由後端取回的資料，預設空陣列。
    */
   static async fetchTags() {
     let result;
@@ -21,19 +20,7 @@ export class TagService {
       .catch((error) => {
         console.error(error);
       });
-    return result;
-  }
-
-  /**
-   * 準備 Tag 資料模型。
-   * @returns {Promise<TagModel>} Tag 資料模型。
-   */
-  static async prepareTagModel() {
-    let tagModel;
-    await this.fetchTags().then((res) => {
-      tagModel = new TagModel(res);
-    });
-    return tagModel;
+    return result || [];
   }
 
   /**

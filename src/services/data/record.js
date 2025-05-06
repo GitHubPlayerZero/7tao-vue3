@@ -1,3 +1,5 @@
+import { TypeUtils } from "@/helpers";
+
 /**
  * 單筆資料基礎內容
  */
@@ -23,12 +25,12 @@ export class Record {
    * 以 class 屬性名稱查找資料的同名屬性，
    * 若資料屬性的內容為 null 或 undefined，則會使用 class 屬性預設值；
    * 否則會設定為資料的屬性內容。
-   * @param {Object} data 資料。
+   * @param {Object<string, *>} data 資料。
    * @param {string[]} props class 屬性名稱。
    * @protected
    */
   _assignData(data, props) {
-    if (data && props) {
+    if (TypeUtils.isObjectWithKeys(data) && TypeUtils.isArrayWithItems(props)) {
       props.forEach((key) => {
         this[key] = data[key] ?? this[key];
       });

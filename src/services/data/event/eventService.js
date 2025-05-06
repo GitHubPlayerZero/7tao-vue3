@@ -1,9 +1,7 @@
 import { EventApi } from "@/api";
-import { BannerModel } from "./bannerModel";
-import { EventTagModel } from "./eventTagModel";
 // eslint-disable-next-line no-unused-vars
 import { EventTagRecord } from "./eventTagRecord";
-import { TagModel } from "../tag";
+import { TypeUtils } from "@/helpers";
 
 /**
  * Event 資料相關邏輯
@@ -19,7 +17,7 @@ export class EventService {
   /**
    * 取得所有未過期活動，預設以日期由近至遠排序。
    * 對應於 {@link EventApi.fetchEvents} 的處理。
-   * @returns {Array} 由後端取回的資料，預設 undefined。
+   * @returns {Promise<Object[]>} 由後端取回的資料，預設空陣列。
    */
   static async fetchEvents() {
     let result;
@@ -30,13 +28,31 @@ export class EventService {
       .catch((error) => {
         console.error(error);
       });
-    return result;
+    return result || [];
+  }
+
+  /**
+   * 取得單一活動資訊。
+   * 對應於 {@link EventApi.fetchEvent} 的處理。
+   * @param {number} id 活動 ID。
+   * @returns {Promise<Object>} 由後端取回的資料，預設空物件。
+   */
+  static async fetchEvent(id) {
+    let result;
+    await EventApi.fetchEvent(id)
+      .then((res) => {
+        result = res.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    return result || {};
   }
 
   /**
    * 取得 Banner 活動，預設以日期由近至遠排序。
    * 對應於 {@link EventApi.fetchBanners} 的處理。
-   * @returns {Array} 由後端取回的資料，預設 undefined。
+   * @returns {Promise<Object[]>} 由後端取回的資料，預設空陣列。
    */
   static async fetchBanners() {
     let result;
@@ -47,37 +63,7 @@ export class EventService {
       .catch((error) => {
         console.error(error);
       });
-    return result;
-  }
-
-  /**
-   * 準備 Banner 資料模型。
-   * @returns {Promise<BannerModel>} Banner 資料模型。
-   */
-  static async prepareBannerModel() {
-    let bannerModel;
-    await this.fetchBanners().then((res) => {
-      bannerModel = new BannerModel(res);
-    });
-    return bannerModel;
-  }
-
-  /**
-   *  準備 Event 資料模型，會整合 Tag 資料。
-   * @param {TagModel} tagModel TagModel。
-   * @returns {Promise<EventTagModel>} Event 資料模型。
-   */
-  static async prepareEventTagModel(tagModel) {
-    // 檢核 tagModel
-    if (!TagModel.isMe(tagModel)) {
-      throw Error("[tagModel] 不正確！");
-    }
-
-    let eventTagModel;
-    await this.fetchEvents().then((res) => {
-      eventTagModel = new EventTagModel(res, tagModel);
-    });
-    return eventTagModel;
+    return result || [];
   }
 
   /**
@@ -87,11 +73,17 @@ export class EventService {
    * @returns {EventTagRecord[]} 篩選後的活動。
    */
   static filterByTagIds(events, tagIds) {
-    // 沒有篩選的 Tag ID 則直接回傳所有資料
-    if (!tagIds || tagIds.length <= 0) {
+    // 檢核 events：不是有資料的陣列，直接回傳空陣列
+    if (!TypeUtils.isArrayWithItems(events)) {
+      return [];
+    }
+
+    // 檢核 tagIds：不是有資料的陣列，直接回傳所有資料
+    if (!TypeUtils.isArrayWithItems(tagIds)) {
       return events;
     }
 
+    // 依據標籤進行活動篩選
     return events.filter((event) => {
       for (const id of event.tags) {
         if (tagIds.includes(id)) {

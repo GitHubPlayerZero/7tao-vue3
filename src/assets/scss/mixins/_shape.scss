@@ -1,5 +1,6 @@
 /* shape：形狀相關 */
 
+// 圓
 @mixin circle($size, $color: null) {
   width: $size;
   height: $size;
@@ -7,4 +8,12 @@
   @if ($color) {
     background-color: $color;
   }
+}
+
+// 斜線
+@mixin slash($width: 0, $height: 0, $deg: 0, $color: black) {
+  width: $width;
+  height: $height;
+  transform: rotate(#{$deg}deg);
+  background-color: $color;
 }

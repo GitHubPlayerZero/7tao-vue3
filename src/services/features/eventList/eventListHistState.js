@@ -4,8 +4,17 @@ import { TypeUtils, HistoryStateHelper } from "@/helpers";
  * 處理 Event list 頁面的 history state 相關事宜。
  */
 export class EventListHistState {
-  /** @type {string} 標籤資料在 history state 中的名稱。 */ static #tagStateName = "tags";
-  /** @type {string} 頁碼資料在 history state 中的名稱。 */ static #pageStateName = "page";
+  /**
+   * 標籤資料在 history state 中的名稱。
+   * @type {string}
+   */
+  static #tagStateName = "tags";
+
+  /**
+   * 頁碼資料在 history state 中的名稱。
+   * @type {string}
+   */
+  static #pageStateName = "page";
 
   /**
    * 創建使用於 history state 的標籤資料。

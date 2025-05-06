@@ -41,7 +41,7 @@ export class TagModel extends Model {
   /**
    * 以 ID 取得 Tag 名稱。
    * @param {number} id Tag 的 ID。
-   * @returns {string} Tag 的名稱。
+   * @returns {string | undefined} Tag 的名稱。
    */
   getNameById(id) {
     return this._idMap[id]?.name;
@@ -50,16 +50,16 @@ export class TagModel extends Model {
   /**
    * 以名稱找到對應的 Tag ID，會先使用完全比對，若查無資料再使用模糊比對。
    * @param {string} name 要比對名稱的字串。
-   * @returns {number} 第一個找到的 Tag ID。
+   * @returns {number | undefined} 第一個找到的 Tag ID。
    */
   getIdByName(name) {
     return TagService.searchByName(this._datas, name)?.id;
   }
 
   /**
-   * 建立 Tag 資料物件。
+   * 建立標籤物件。
    * @param {number} id Tag ID。
-   * @returns {{id: number, name: string}} Tag 資料物件。
+   * @returns {TagObj} 標籤物件。
    */
   createTagObj(id) {
     return {

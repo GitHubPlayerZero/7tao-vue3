@@ -1,4 +1,5 @@
 <template>
+  <!-- Header -->
   <header class="py-3 py-md-6 border-2 border-md-3 border-bottom border-primary">
     <div class="container">
       <nav class="navbar">
@@ -48,14 +49,16 @@
   </header>
 
   <!-- 手機折疊選單內容 -->
-  <div class="collapse navbar-collapse" id="collapseMenu">
+  <div class="collapse navbar-collapse d-md-none" id="collapseMenu" @click.stop>
     <div class="container">
       <CollapseMenu />
     </div>
   </div>
 
+  <!-- 內容 -->
   <RouterView />
 
+  <!-- Footer -->
   <footer class="py-6 py-md-8 border-top border-3 border-primary">
     <p class="fs-14 fs-md-16 lh-1d448 font-noto-sans-tc text-center">
       © 7TAO七逃. All Rights Reserved
@@ -64,8 +67,34 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import CollapseMenu from "./components/global/CollapseMenu.vue";
+
+onMounted(() => {
+  // 元素 - 折疊選單
+  const elemMenu = document.querySelector("#collapseMenu");
+
+  // 顯示折疊選單的 class 名稱
+  const classShow = "show";
+
+  /**
+   * 關閉折疊選單。
+   */
+  function closeMenu() {
+    const menuClasses = elemMenu.classList;
+    if (menuClasses.contains(classShow)) {
+      menuClasses.remove(classShow);
+    }
+  }
+
+  // 以下動作均會觸發關閉折疊選單
+  ["click", "keydown", "scroll"].forEach((eventItem) => {
+    document.addEventListener(eventItem, closeMenu);
+  });
+  // 改變視窗大小時關閉折疊選單
+  window.addEventListener("resize", closeMenu);
+});
 </script>
 
 <style lang="scss" scoped>

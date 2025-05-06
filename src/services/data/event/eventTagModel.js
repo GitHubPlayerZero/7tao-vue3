@@ -1,5 +1,6 @@
 import { Model } from "../model";
 import { EventTagRecord } from "./eventTagRecord";
+// eslint-disable-next-line no-unused-vars
 import { TagModel } from "../tag";
 import { EventService } from "./eventService";
 
@@ -20,20 +21,9 @@ export class EventTagModel extends Model {
    * @param {Object[]} events Event 資料集。
    * @param {TagModel} tagModel Tag 資料模型。
    */
-  constructor(events, tagModel) {
+  constructor(events = [], tagModel) {
     super();
 
-    // 檢核 events
-    if (!Array.isArray(events)) {
-      throw Error("[events] 不正確！");
-    }
-
-    // 檢核 tagModel
-    if (!TagModel.isMe(tagModel)) {
-      throw Error("[tagModel] 不正確！");
-    }
-
-    // 整理資料
     events.forEach((item) => {
       // 轉換資料
       const eventTagRecord = new EventTagRecord(item, tagModel);
