@@ -48,6 +48,15 @@ export class TypeUtils {
   }
 
   /**
+   * 是否為 HTML 元素？
+   * @param {*} val 要判斷的值。
+   * @returns {boolean} 為 HTML 元素回傳 true，否則回傳 false。
+   */
+  static isHtmlElement(val) {
+    return val instanceof HTMLElement;
+  }
+
+  /**
    * 是否為字串？
    * 包含原始型別及物件型別。
    * @param {*} val 要判斷的值。

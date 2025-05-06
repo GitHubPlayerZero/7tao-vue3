@@ -118,9 +118,6 @@ export default {
 
     this.recentEvents = recentEvents;
     this.onlineEvent = onlineEvent;
-    // TODO delete
-    // console.log(`onlineEvent ==>`, this.onlineEvent);
-    // console.log(`recentEvents ==>`, this.recentEvents);
   },
 };
 </script>

@@ -20,6 +20,8 @@ import { EventService, EventRecord, EventModel } from "@/services/data/event";
 
 // TODO 做成 swiper
 export default {
+  inject: ["loading"],
+
   /**
    * @returns {{banners: EventRecord[]}}
    */
@@ -31,19 +33,27 @@ export default {
 
   methods: {},
 
-  async beforeCreate() {
-    console.log(`## [BannerSlide - beforeCreate]`);
+  created() {
+    console.log(`## [BannerSlide - created]`);
+
+    console.log(`[Banner] open loading...`);
+    this.loading.open();
 
     // 取得 banner 資料
-    EventService.fetchBanners().then((res) => {
-      this.banners = new EventModel(res).datas;
-      // console.log(`banners ==>`, this.banners);
-    });
+    EventService.fetchBanners()
+      .then((res) => {
+        this.banners = new EventModel(res).datas;
+        console.log(`banners ==>`, this.banners);
+      })
+      .finally(() => {
+        console.log(`[Banner] close loading...`);
+        this.loading.close();
+      });
   },
 
   // TODO debug 測試
-  created() {
-    console.log(`## [BannerSlide - created]`);
+  beforeCreate() {
+    console.log(`## [BannerSlide - beforeCreate]`);
   },
   beforeMount() {
     console.log(`## [BannerSlide - beforeMount]`);

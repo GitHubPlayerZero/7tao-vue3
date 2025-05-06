@@ -27,15 +27,18 @@
 
 <script>
 import { computed } from "vue";
-import { ImageUtils } from "@/helpers";
+import { FullLoadingHelper, ImageUtils } from "@/helpers";
 // eslint-disable-next-line no-unused-vars
-import { TagService, TagModel } from "@/services/data/tag";
+import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
-import { EventService, EventTagModel, EventTagRecord } from "@/services/data/event";
+import { EventTagModel } from "@/services/data/event";
 import { EventListHistState } from "@/services/features";
 import { useEventTag } from "@/composables";
 import BannerSlide from "@/components/home/BannerSlide.vue";
 import EventInfo from "@/components/home/EventInfo.vue";
+
+// loading 工具
+const loading = new FullLoadingHelper();
 
 export default {
   /**
@@ -43,6 +46,7 @@ export default {
    */
   data() {
     console.log(`## [HomeView - data]`);
+
     return {
       tagModel: null, // 標籤資料模型
       eventTagModel: null, // 活動資料模型
@@ -66,6 +70,7 @@ export default {
       tagModel: computed(() => this.tagModel),
       eventTagModel: computed(() => this.eventTagModel),
       clickEventTag: this.goToEventList,
+      loading,
     };
   },
 
@@ -97,6 +102,7 @@ export default {
       });
     },
   },
+  // methods end
 
   components: {
     BannerSlide,
@@ -105,14 +111,20 @@ export default {
 
   beforeCreate() {
     console.log(`## [HomeView - beforeCreate]`);
+    loading.open();
 
     // 取得標籤、活動
-    useEventTag().then((res) => {
-      this.tagModel = res.tagModel;
-      console.log(`tagModel =====>`, this.tagModel);
-      this.eventTagModel = res.eventTagModel;
-      console.log(`eventTagModel ========>`, this.eventTagModel);
-    });
+    useEventTag()
+      .then((res) => {
+        this.tagModel = res.tagModel;
+        console.log(`tagModel =====>`, this.tagModel);
+        this.eventTagModel = res.eventTagModel;
+        console.log(`eventTagModel ========>`, this.eventTagModel);
+      })
+      .finally(() => {
+        console.log(`[Home] close loading....`);
+        loading.close();
+      });
   },
 
   // TODO debug 測試

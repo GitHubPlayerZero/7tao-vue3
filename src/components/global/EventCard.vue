@@ -3,7 +3,7 @@
   <div class="event-date">{{ event.abbrDate }}</div>
 
   <!-- 活動圖片 -->
-  <img :src="event.img" :alt="event.title" class="event-image" />
+  <img :src="event.img" :alt="event.title" class="event-image" loading="lazy" />
 
   <!-- 活動標題 -->
   <h3 class="event-title font-noto-serif-tc">{{ event.title }}</h3>

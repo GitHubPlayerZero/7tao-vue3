@@ -76,16 +76,19 @@
   </div>
 
   <!-- 沒有活動資料 -->
-  <SimpleMsg message="查無活動資料！" v-else />
+  <SimpleMsg :message="message" v-else />
 </template>
 
 <script>
-import { DateUtils } from "@/helpers";
+import { DateUtils, FullLoadingHelper } from "@/helpers";
 import { CommonService } from "@/services";
 import { EventService, EventTagRecord } from "@/services/data/event";
 import { TagModel, TagService } from "@/services/data/tag";
 import TicketInfo from "@/components/eventDetail/TicketInfo.vue";
 import SimpleMsg from "@/components/global/SimpleMsg.vue";
+
+// loading 工具
+const loading = new FullLoadingHelper();
 
 export default {
   /**
@@ -94,6 +97,7 @@ export default {
   data() {
     return {
       event: {}, // 活動資料
+      message: "",
     };
   },
 
@@ -135,13 +139,21 @@ export default {
   },
 
   beforeCreate() {
+    loading.open();
+
     // 取得活動資訊
-    Promise.all([TagService.fetchTags(), EventService.fetchEvent(this.$route.params.id)]).then(
-      (resList) => {
+    Promise.all([TagService.fetchTags(), EventService.fetchEvent(this.$route.params.id)])
+      .then((resList) => {
         const tagModel = new TagModel(resList[0]);
         this.event = new EventTagRecord(resList[1], tagModel);
-      }
-    );
+
+        if (!this.event.id) {
+          this.message = "查無活動資料！";
+        }
+      })
+      .finally(() => {
+        loading.close();
+      });
   },
 };
 </script>
