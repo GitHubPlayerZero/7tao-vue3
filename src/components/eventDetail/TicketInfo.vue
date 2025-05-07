@@ -1,5 +1,4 @@
 <template>
-  <!-- {{ event }} -->
   <article>
     <!-- 標題 -->
     <h2 class="title mb-2 mb-md-0">
@@ -19,9 +18,13 @@
       </thead>
       <tbody>
         <tr v-for="ticket in tickets" :key="ticket.id">
+          <!-- 活動日期 -->
           <td>{{ event.date }}</td>
+          <!-- 票種 -->
           <td class="td-type">{{ ticket.type }}</td>
-          <td>{{ ticket.price }}</td>
+          <!-- 票價 -->
+          <td class="td-price">${{ ticket.price }}</td>
+          <!-- 購票 -->
           <td class="td-purchase">
             <button
               type="button"
@@ -39,28 +42,37 @@
 
 <script>
 import { EventTagRecord } from "@/services/data/event";
+// eslint-disable-next-line no-unused-vars
+import { TicketRecord, TicketModel, TicketService } from "@/services/data/ticket";
 
 export default {
   props: {
     event: EventTagRecord,
   },
 
-  data() {
-    console.log(`[TicketInfo data] event ======>`, this.event);
+  inject: ["loading"],
 
+  /**
+   * @returns {{ tickets: TicketRecord[] }}
+   */
+  data() {
     return {
-      // TODO 暫時寫死測試，之後要改成依據 event id 撈相關票券資訊
-      tickets: [
-        { id: 1, type: "普通票", price: "$600" },
-        { id: 2, type: "改頭換面票（含大改造）", price: "$3600" },
-        { id: 3, type: "必勝票（含戀愛小抄）", price: "$8000" },
-      ],
+      tickets: [],
     };
   },
-  methods: {},
-  computed: {},
-  watch: {},
-  components: {},
+
+  created() {
+    this.loading.open();
+
+    // 取得票券資訊
+    TicketService.fetchEventTickets(this.event.id)
+      .then((res) => {
+        this.tickets = new TicketModel(res).datas;
+      })
+      .finally(() => {
+        this.loading.close();
+      });
+  },
 };
 </script>
 
@@ -136,6 +148,11 @@ export default {
     @include rwd.pad-down {
       padding-right: 0; // 移除右邊留白以增加字數容量
     }
+  }
+
+  // 內容 - 票價
+  .td-price {
+    text-align: right; // 靠右
   }
 
   // 內容 - 購票

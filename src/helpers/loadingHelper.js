@@ -71,12 +71,11 @@ export class FullLoadingHelper extends LoadingBase {
    * 檢查 loading 並控制其開關。
    */
   #checkLoading() {
-    // TODO delete console.log
-    console.log(`[FullLoading checkLoading]...............`, this.#isOpened, this.#loadingCnt);
+    // console.log(`[FullLoading checkLoading].............`, this.#isOpened, this.#loadingCnt);
 
     // 開啟
     if (!this.#isOpened && this.#loadingCnt === 1) {
-      console.log(`[FullLoading checkLoading] open!`);
+      // console.log(`[FullLoading checkLoading] open!`);
 
       // loading 期間屏蔽鍵盤動作
       this.#appKeyboard.disable();
@@ -92,7 +91,7 @@ export class FullLoadingHelper extends LoadingBase {
     }
     // 關閉
     else if (this.#isOpened && this.#loadingCnt <= 0) {
-      console.log(`[FullLoading checkLoading] close!`);
+      // console.log(`[FullLoading checkLoading] close!`);
       this.#appKeyboard.enable(); // 取消鍵盤屏蔽
       this.#loader.hide();
       this.#isOpened = false;

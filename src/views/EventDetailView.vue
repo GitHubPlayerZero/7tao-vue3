@@ -101,6 +101,10 @@ export default {
     };
   },
 
+  provide() {
+    return { loading };
+  },
+
   methods: {
     /**
      * 取得活動說明段落。
