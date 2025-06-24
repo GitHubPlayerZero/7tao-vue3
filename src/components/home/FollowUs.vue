@@ -1,0 +1,126 @@
+<template>
+  <article class="container mb-12 mb-md-15">
+    <div class="d-flex flex-column flex-xl-row row-gap-6">
+      <!-- #FOLLOW US -->
+      <section class="w-xl-50 border border-2 border-primary border-end-xl-0">
+        <h2
+          class="fs-24 fs-md-32 fw-bold font-noto-serif-tc py-4 px-3 px-md-8 border-bottom border-2 border-primary"
+        >
+          #FOLLOW US
+        </h2>
+
+        <div class="py-4 py-md-8 px-3 px-md-8 text-black font-noto-sans-tc">
+          <p class="mb-4 mb-md-8">
+            想第一時間獲得新奇有趣的活動資訊？<br />
+            追蹤我們的社群吧！<br />
+            也歡迎你聯繫我們，提供好玩有趣的活動企劃。
+          </p>
+
+          <!-- 聯繫資訊 -->
+          <ul>
+            <li class="contact-info">
+              <a href="mailto:7tao.event@gmail.com" class="contact-info-link" @click.prevent>
+                <i class="icofont-ui-email"></i>
+                <span>7tao.event@gmail.com</span>
+              </a>
+            </li>
+            <li class="contact-info">
+              <a href="tel:+886-9123123123" class="contact-info-link" @click.prevent>
+                <i class="icofont-phone"></i>
+                <span>09123123123</span>
+              </a>
+            </li>
+            <li class="contact-info">
+              <a href="#" class="contact-info-link" @click.prevent>
+                <i class="icofont-facebook"></i>
+                <span>7TAO七逃</span>
+              </a>
+            </li>
+          </ul>
+          <!-- 聯繫資訊 end -->
+        </div>
+      </section>
+      <!-- #FOLLOW US end -->
+
+      <!-- #SUBSCRIBE US -->
+      <section class="w-xl-50 border border-2 border-primary d-flex flex-column">
+        <h2
+          class="fs-24 fs-md-32 fw-bold font-noto-serif-tc py-4 ps-3 ps-md-8 border-bottom border-2 border-primary"
+        >
+          #SUBSCRIBE US
+        </h2>
+
+        <form class="flex-grow-1 d-flex flex-column justify-content-between" @submit.prevent>
+          <div class="py-4 px-3 p-md-8">
+            <p class="mb-4 mb-md-8">
+              訂閱電子報送折價券！<br />
+              定期精選文章資訊及最新優惠資訊，<br />
+              還不通通給我訂閱起來？
+            </p>
+            <input
+              type="email"
+              class="subscribe-input form-control"
+              placeholder="輸入Email"
+              required
+            />
+          </div>
+
+          <button
+            class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4"
+          >
+            <span class="me-1">確認訂閱</span>
+            <i class="icofont-rounded-double-right"></i>
+          </button>
+        </form>
+      </section>
+      <!-- #SUBSCRIBE US end -->
+    </div>
+  </article>
+</template>
+
+<script>
+// TODO
+// 1. 加上 VeeValidate 驗證
+// 2. 寫入訂閱資料
+export default {
+  data() {
+    return {};
+  },
+  methods: {},
+  computed: {},
+  watch: {},
+  components: {},
+};
+</script>
+
+<style lang="scss" scoped>
+/* 聯繫資訊 */
+.contact-info {
+  &:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+// 聯繫資訊 - 連結
+.contact-info-link {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+  // icon
+  i {
+    background-color: var(--bs-primary);
+    color: white;
+    padding: 8px;
+    margin-right: 16px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.subscribe-input {
+  padding: 14px 20px;
+}
+</style>

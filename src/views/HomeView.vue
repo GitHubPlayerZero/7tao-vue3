@@ -23,6 +23,22 @@
     <!-- 活動資訊 -->
     <EventInfo v-if="tagModel && eventTagModel" />
   </div>
+
+  <!-- 活動集錦 -->
+  <Albums />
+
+  <!-- 關注我們 -->
+  <FollowUs />
+
+  <!-- slogan -->
+  <div class="py-12 py-md-15 border-top border-primary border-3">
+    <div class="container">
+      <p class="fs-18 fs-md-32 mb-3 mb-md-4 fw-bold text-center">
+        此刻打盹，你將做夢；此刻學習，你將圓夢
+      </p>
+      <p class="fs-14 fs-md-18 fw-bold text-center">——我也不知道誰說的</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,6 +52,8 @@ import { EventListHistState } from "@/services/features";
 import { useEventTag } from "@/composables";
 import BannerSlide from "@/components/home/BannerSlide.vue";
 import EventInfo from "@/components/home/EventInfo.vue";
+import Albums from "@/components/home/albums/Albums.vue";
+import FollowUs from "@/components/home/FollowUs.vue";
 
 // loading 工具
 const loading = new FullLoadingHelper();
@@ -107,6 +125,8 @@ export default {
   components: {
     BannerSlide,
     EventInfo,
+    Albums,
+    FollowUs,
   },
 
   beforeCreate() {
