@@ -50,28 +50,39 @@
           #SUBSCRIBE US
         </h2>
 
-        <form class="flex-grow-1 d-flex flex-column justify-content-between" @submit.prevent>
-          <div class="py-4 px-3 p-md-8">
-            <p class="mb-4 mb-md-8">
-              訂閱電子報送折價券！<br />
-              定期精選文章資訊及最新優惠資訊，<br />
-              還不通通給我訂閱起來？
-            </p>
-            <input
-              type="email"
-              class="subscribe-input form-control"
-              placeholder="輸入Email"
-              required
-            />
-          </div>
-
-          <button
-            class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4"
+        <div ref="formSubscription" class="vl-parent">
+          <VeeForm
+            v-slot="{ errors }"
+            class="flex-grow-1 d-flex flex-column justify-content-between"
+            @submit="subscribe"
           >
-            <span class="me-1">確認訂閱</span>
-            <i class="icofont-rounded-double-right"></i>
-          </button>
-        </form>
+            <div class="py-4 px-3 p-md-8">
+              <p class="mb-4 mb-md-8">
+                訂閱電子報送折價券！<br />
+                定期精選文章資訊及最新優惠資訊，<br />
+                還不通通給我訂閱起來？
+              </p>
+              <!-- TODO 拿掉測試 value -->
+              <VeeField
+                type="email"
+                name="email"
+                :class="['subscribe-input', 'form-control', errors.email ? 'is-invalid' : '']"
+                placeholder="輸入Email"
+                rules="required|email"
+                label="Email"
+                value="test@7tao.com"
+              />
+              <VeeErrorMessage name="email" class="invalid-feedback" />
+            </div>
+
+            <button
+              class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4"
+            >
+              <span class="me-1">確認訂閱</span>
+              <i class="icofont-rounded-double-right"></i>
+            </button>
+          </VeeForm>
+        </div>
       </section>
       <!-- #SUBSCRIBE US end -->
     </div>
@@ -79,17 +90,49 @@
 </template>
 
 <script>
-// TODO
-// 1. 加上 VeeValidate 驗證
-// 2. 寫入訂閱資料
+import { AreaLoadingHelper } from "@/helpers";
+import { SubscriptionService } from "@/services/data/subscription";
+
+/**
+ * 訂閱表單區域 loading
+ * @type {AreaLoadingHelper}
+ */
+let subscriptionLoading;
+
 export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    /**
+     * 訂閱。
+     * @param {Object} form VeeValidate 彙整的表單資料（會被自動傳入）。
+     */
+    // TODO
+    // 1. sweet alert
+    subscribe(form) {
+      subscriptionLoading.open();
+
+      SubscriptionService.subscribe(form)
+        .then((res) => {
+          console.log(res);
+          alert(res ? "訂閱成功！" : "訂閱失敗！");
+        })
+        .finally(() => {
+          subscriptionLoading.close();
+        });
+    },
+  },
   computed: {},
   watch: {},
   components: {},
+
+  mounted() {
+    // TODO delete log
+    console.log(this.$refs);
+    console.dir(this.$refs.formSubscription);
+    subscriptionLoading = new AreaLoadingHelper(this.$refs.formSubscription);
+  },
 };
 </script>
 
@@ -120,6 +163,7 @@ export default {
   }
 }
 
+/* 訂閱 */
 .subscribe-input {
   padding: 14px 20px;
 }

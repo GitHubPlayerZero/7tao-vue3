@@ -1,9 +1,18 @@
 /* form：表單及表單控件元素 */
 
+@use "../mixins/font";
+
 // 覆蓋 Bootstrap 設定
-.form-control, .form-select {
+.form-control,
+.form-select {
   line-height: 1.448;
   border: 2px solid var(--bs-primary);
   border-radius: 0;
   padding: 0;
+}
+
+// 表單檢核錯誤訊息
+.invalid-feedback {
+  font-size: 16px;
+  @include font.noto-sans-tc;
 }

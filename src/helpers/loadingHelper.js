@@ -1,7 +1,8 @@
 import { useLoading } from "vue-loading-overlay";
+import { TypeUtils } from "./typeUtils";
 import { KeyboardDisableHelper } from "./event/keyboardHelper";
 
-/** loading 基本建置。 */
+/** loading 基本建置 */
 class LoadingBase {
   /**
    * 基本設定選項。
@@ -37,7 +38,7 @@ class LoadingBase {
 }
 // LoadingBase end
 
-/** 全屏 loading。 */
+/** 全屏 loading */
 export class FullLoadingHelper extends LoadingBase {
   /**
    * app 區域的禁用鍵盤的工具。
@@ -71,12 +72,8 @@ export class FullLoadingHelper extends LoadingBase {
    * 檢查 loading 並控制其開關。
    */
   #checkLoading() {
-    // console.log(`[FullLoading checkLoading].............`, this.#isOpened, this.#loadingCnt);
-
     // 開啟
     if (!this.#isOpened && this.#loadingCnt === 1) {
-      // console.log(`[FullLoading checkLoading] open!`);
-
       // loading 期間屏蔽鍵盤動作
       this.#appKeyboard.disable();
 
@@ -91,7 +88,6 @@ export class FullLoadingHelper extends LoadingBase {
     }
     // 關閉
     else if (this.#isOpened && this.#loadingCnt <= 0) {
-      // console.log(`[FullLoading checkLoading] close!`);
       this.#appKeyboard.enable(); // 取消鍵盤屏蔽
       this.#loader.hide();
       this.#isOpened = false;
@@ -112,5 +108,85 @@ export class FullLoadingHelper extends LoadingBase {
   close() {
     this.#loadingCnt--;
     this.#checkLoading();
+  }
+}
+
+/** 區域 loading */
+export class AreaLoadingHelper extends LoadingBase {
+  /**
+   * vue-loading-overlay 開啟的 loader 物件。
+   * @type {import('vue-loading-overlay').ActiveLoader}
+   */
+  #loader;
+
+  /**
+   * container 元素。
+   * @type {HTMLElement}
+   */
+  #containerElmt;
+
+  /**
+   * container 元素的 tabindex。
+   * loading 期間會設為 0 以優先被 tab 選取，進而保護內容不會被選取（搭配禁用鍵盤），loading 結束後會還原設定。
+   * @type {number}
+   */
+  #containerTabindex;
+
+  /**
+   * container 區域的禁用鍵盤的工具。
+   * @type {KeyboardDisableHelper}
+   */
+  #containerKeyboard;
+
+  /**
+   * 以 vue-loading-overlay 為基礎，開啟區域性 loading。
+   * 允許傳入另外的設定選項，可以覆蓋基本設定重複的項目。
+   * @param {HTMLElement} element 開啟區域 loading 的元素。
+   * @param {LoadingOptions} [options = {}] 設定選項（vue-loading-overlay 的選項），可選。
+   */
+  constructor(element, options = {}) {
+    // 基本檢核，不通過則拋出異常
+    if (!TypeUtils.isHtmlElement(element)) {
+      throw TypeError("[element] 必須為 DOM 元素！");
+    }
+
+    // 建立 loading 物件，會強制 container 為傳入的元素，以確保開啟區域性的 loading
+    super({ ...options, container: element });
+
+    // 初始化設定
+    this.#containerElmt = element;
+    this.#containerTabindex = element.getAttribute("tabindex");
+    this.#containerKeyboard = new KeyboardDisableHelper(element);
+  }
+
+  /**
+   * 開啟 loading。
+   */
+  open() {
+    // 避免重複開啟
+    if (this.#loader) {
+      return;
+    }
+
+    // 阻止 container 區域的內容被選取
+    this.#containerElmt.setAttribute("tabindex", "0");
+    this.#containerElmt.focus();
+    this.#containerKeyboard.disable();
+
+    // 開啟 loading
+    this.#loader = this._$loading.show();
+  }
+
+  /**
+   * 關閉 loading。
+   */
+  close() {
+    // 取消 container 區域的保護
+    this.#containerElmt.setAttribute("tabindex", this.#containerTabindex);
+    this.#containerKeyboard.enable();
+
+    // 關閉 loading
+    this.#loader.hide();
+    this.#loader = undefined;
   }
 }
