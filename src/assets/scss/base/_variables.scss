@@ -44,7 +44,7 @@ $secondary: #fbff22 !default;
 // $success: #198754 !default;
 // $info: #0dcaf0 !default;
 // $warning: #ffc107 !default;
-// $danger: #dc3545 !default;
+$danger: #dc3545 !default;
 // $light: #f8f9fa !default;
 // $dark: #212529 !default;
 
@@ -56,7 +56,7 @@ $theme-colors: (
   // "success": $success,
   // "info": $info,
   // "warning": $warning,
-  // "danger": $danger,
+  "danger": $danger,
   // "light": $light,
    //  "dark": $dark,
 ) !default;

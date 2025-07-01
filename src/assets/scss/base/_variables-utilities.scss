@@ -22,6 +22,44 @@ $utilities: (
         5: 5px,
       ),
     ),
+  // 覆寫 border-top (RWD)
+  "border-top": (
+      responsive: true,
+      property: border-top,
+      values: (
+        null: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color),
+        0: 0,
+      ),
+    ),
+  // 覆寫 border-right (RWD)
+  "border-end": (
+      responsive: true,
+      property: border-right,
+      class: border-end,
+      values: (
+        null: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color),
+        0: 0,
+      ),
+    ),
+  // 覆寫 border-bottom (RWD)
+  "border-bottom": (
+      responsive: true,
+      property: border-bottom,
+      values: (
+        null: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color),
+        0: 0,
+      ),
+    ),
+  // 覆寫 border-left (RWD)
+  "border-start": (
+      responsive: true,
+      property: border-left,
+      class: border-start,
+      values: (
+        null: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color),
+        0: 0,
+      ),
+    ),
   // 覆寫 line-height (values)
   "line-height": (
       responsive: true,
@@ -42,6 +80,19 @@ $utilities: (
         1d448: 1.448,
         1d45: 1.45,
         1d5: 1.5,
+      ),
+    ),
+  // 覆寫 width (RWD)
+  "width": (
+      responsive: true,
+      property: width,
+      class: w,
+      values: (
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%,
+        auto: auto,
       ),
     ),
   // 覆寫 height (RWD, values)
@@ -100,6 +151,7 @@ $utilities: (
     class: ratio,
     property: aspect-ratio,
     values: (
+      1: 1,
       1d817: 1.817,
       1d869: 1.869,
     ),
@@ -110,6 +162,15 @@ $utilities: (
     property: letter-spacing,
     values: (
       5: 0.05em,
+      10: 0.1em,
+    ),
+  ),
+  "rotate": (
+    class: rotate,
+    property: transform,
+    values: (
+      2: rotate(2deg),
+      n2: rotate(-2deg),
     ),
   )
 ) !default;

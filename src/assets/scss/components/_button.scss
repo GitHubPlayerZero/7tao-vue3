@@ -7,7 +7,7 @@
 .btn {
   @include font.noto-sans-tc;
   font-weight: bold;
-  border-width: 0;
+  border: 0;
   border-radius: 0;
   padding: 0;
 }
@@ -15,12 +15,6 @@
 // 主要按鈕
 .btn-primary,
 .btn-outline-primary {
-  border: 1px solid var(--bs-primary);
-
-  @include rwd.pad-up {
-    border-width: 2px;
-  }
-
   &:hover {
     color: var(--bs-secondary);
   }
@@ -29,5 +23,13 @@
     color: #ebeae3;
     background-color: #9a9a9a;
     opacity: 1;
+  }
+}
+
+.btn-outline-primary {
+  border: 1px solid var(--bs-primary);
+  
+  @include rwd.pad-up {
+    border-width: 2px;
   }
 }

@@ -1,0 +1,9 @@
+/* alert：訊息元件相關樣式 */
+
+@use "../mixins/font";
+
+// 覆寫 SweetAlert2 預設樣式
+.swal2-popup {
+  @include font.noto-sans-tc;
+  color: var(--bs-primary);
+}
