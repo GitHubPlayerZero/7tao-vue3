@@ -9,6 +9,7 @@ import { HistoryStateHelper } from "./HistoryStateHelper";
 import { FullLoadingHelper } from "./loadingHelper";
 import { AreaLoadingHelper } from "./loadingHelper";
 import { VeeValidateHelper } from "./veeValidateHelper";
+import { AlertOptions, BaseAlert, ConfirmAlert, TimerAlert } from "./sweetAlertHelper";
 
 // event
 import { KeyboardDisableHelper } from "./event/keyboardHelper";
@@ -26,4 +27,8 @@ export {
   AreaLoadingHelper,
   VeeValidateHelper,
   KeyboardDisableHelper,
+  AlertOptions,
+  BaseAlert,
+  ConfirmAlert,
+  TimerAlert,
 };

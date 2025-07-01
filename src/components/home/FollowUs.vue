@@ -62,7 +62,6 @@
                 定期精選文章資訊及最新優惠資訊，<br />
                 還不通通給我訂閱起來？
               </p>
-              <!-- TODO 拿掉測試 value -->
               <VeeField
                 type="email"
                 name="email"
@@ -70,7 +69,6 @@
                 placeholder="輸入Email"
                 rules="required|email"
                 label="Email"
-                value="test@7tao.com"
               />
               <VeeErrorMessage name="email" class="invalid-feedback" />
             </div>
@@ -90,14 +88,14 @@
 </template>
 
 <script>
-import { AreaLoadingHelper } from "@/helpers";
+import { AreaLoadingHelper, TimerAlert, ConfirmAlert } from "@/helpers";
 import { SubscriptionService } from "@/services/data/subscription";
 
 /**
  * 訂閱表單區域 loading
  * @type {AreaLoadingHelper}
  */
-let subscriptionLoading;
+let loadingSubscription;
 
 export default {
   data() {
@@ -108,18 +106,20 @@ export default {
      * 訂閱。
      * @param {Object} form VeeValidate 彙整的表單資料（會被自動傳入）。
      */
-    // TODO
-    // 1. sweet alert
     subscribe(form) {
-      subscriptionLoading.open();
+      loadingSubscription.open();
 
       SubscriptionService.subscribe(form)
+        // eslint-disable-next-line no-unused-vars
         .then((res) => {
-          console.log(res);
-          alert(res ? "訂閱成功！" : "訂閱失敗！");
+          TimerAlert.alertSuccess("訂閱成功");
+        })
+        .catch((error) => {
+          console.error(error);
+          ConfirmAlert.alertErrorDetail("訂閱失敗", error.message);
         })
         .finally(() => {
-          subscriptionLoading.close();
+          loadingSubscription.close();
         });
     },
   },
@@ -128,10 +128,7 @@ export default {
   components: {},
 
   mounted() {
-    // TODO delete log
-    console.log(this.$refs);
-    console.dir(this.$refs.formSubscription);
-    subscriptionLoading = new AreaLoadingHelper(this.$refs.formSubscription);
+    loadingSubscription = new AreaLoadingHelper(this.$refs.formSubscription);
   },
 };
 </script>
