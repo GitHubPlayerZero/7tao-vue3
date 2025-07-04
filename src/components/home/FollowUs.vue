@@ -50,13 +50,13 @@
           #SUBSCRIBE US
         </h2>
 
-        <div ref="formSubscription" class="vl-parent">
+        <div ref="formSubscription" class="vl-parent h-100">
           <VeeForm
             v-slot="{ errors }"
-            class="flex-grow-1 d-flex flex-column justify-content-between"
+            class="h-100 d-flex flex-column justify-content-between"
             @submit="subscribe"
           >
-            <div class="py-4 px-3 p-md-8">
+            <div class="py-4 px-3 p-md-8 pb-xl-0">
               <p class="mb-4 mb-md-8">
                 訂閱電子報送折價券！<br />
                 定期精選文章資訊及最新優惠資訊，<br />

@@ -10,8 +10,8 @@
     <!-- Albums -->
     <div class="container my-12 my-md-15">
       <ul class="row justify-content-center justify-content-md-start row-gap-11">
-        <li v-for="(i, index) in 4" :key="i" class="col-10 col-md-6 col-xl-3">
-          <AlbumCard :index="index" :album="testData" />
+        <li v-for="(album, index) in albums" :key="album.id" class="col-10 col-md-6 col-xl-3">
+          <AlbumCard :album="album" :index="index" />
         </li>
       </ul>
     </div>
@@ -22,24 +22,32 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import { AlbumRecord } from "@/services/data/album";
+import { useAlbums } from "@/composables/data/useAlbums";
 import ScrollingText from "@/components/home/albums/ScrollingText.vue";
 import AlbumCard from "@/components/home/albums/AlbumCard.vue";
 
 // TODO 做成輪播
 export default {
+  /**
+   * @typedef {Object} AlbumsData
+   * @property {AlbumRecord[]} albums 相簿資料。
+   */
+  /** @returns {AlbumsData} */
   data() {
     return {
-      // TODO 測試資料，之後應改為打 API 取回資料
-      testData: {
-        label: "社群活動",
-        title: "無聲派對-閉閉嘴dancing",
-        img: "https://i.imgur.com/h8x1kMD.jpeg",
-      },
+      albums: [], // 相簿資料
     };
   },
-  methods: {},
-  computed: {},
-  watch: {},
+
+  created() {
+    // 取得相簿資料
+    useAlbums().then(({ albums }) => {
+      this.albums = albums;
+    });
+  },
+
   components: {
     ScrollingText,
     AlbumCard,

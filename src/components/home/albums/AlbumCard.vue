@@ -5,7 +5,7 @@
   >
     <div class="card-label fw-bold bg-white position-absolute py-2 px-4">{{ album.label }}</div>
     <img
-      :src="album.img"
+      :src="album.coverPhoto"
       :alt="album.title"
       class="mb-3 mb-md-4 ratio-1 object-fit-cover"
       loading="lazy"
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { AlbumRecord } from '@/services/data/album';
+
 export default {
   props: {
     /** 卡片 index，用來換算卡片樣式 */
@@ -23,7 +25,7 @@ export default {
       default: 0,
     },
     /* 相簿資料 */
-    album: Object,
+    album: AlbumRecord,
   },
 
   /**
