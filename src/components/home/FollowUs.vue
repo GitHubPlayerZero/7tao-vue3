@@ -1,5 +1,5 @@
 <template>
-  <article class="container mb-12 mb-md-15">
+  <div class="container mb-12 mb-md-15">
     <div class="d-flex flex-column flex-xl-row row-gap-6">
       <!-- #FOLLOW US -->
       <section class="w-xl-50 border border-2 border-primary border-end-xl-0">
@@ -50,13 +50,13 @@
           #SUBSCRIBE US
         </h2>
 
-        <div ref="formSubscription" class="vl-parent">
+        <div ref="formSubscription" class="vl-parent h-100">
           <VeeForm
             v-slot="{ errors }"
-            class="flex-grow-1 d-flex flex-column justify-content-between"
+            class="h-100 d-flex flex-column justify-content-between"
             @submit="subscribe"
           >
-            <div class="py-4 px-3 p-md-8">
+            <div class="py-4 px-3 p-md-8 pb-xl-0">
               <p class="mb-4 mb-md-8">
                 訂閱電子報送折價券！<br />
                 定期精選文章資訊及最新優惠資訊，<br />
@@ -84,7 +84,7 @@
       </section>
       <!-- #SUBSCRIBE US end -->
     </div>
-  </article>
+  </div>
 </template>
 
 <script>
@@ -92,10 +92,16 @@ import { AreaLoadingHelper, TimerAlert, ConfirmAlert } from "@/helpers";
 import { SubscriptionService } from "@/services/data/subscription";
 
 /**
- * 訂閱表單區域 loading
- * @type {AreaLoadingHelper}
+ * @typedef {object} SubscriptionForm
+ * @property {string} email 使用者輸入的 Email
  */
-let loadingSubscription;
+
+ // TODO 或許寫一個 hook，讓其在 beforeUnmount 時自動清除
+/**
+ * 訂閱表單區域 loading
+ * @type {AreaLoadingHelper|null}
+ */
+let loadingSubscription = null;
 
 export default {
   data() {
@@ -104,14 +110,13 @@ export default {
   methods: {
     /**
      * 訂閱。
-     * @param {Object} form VeeValidate 彙整的表單資料（會被自動傳入）。
+     * @param {SubscriptionForm} form VeeValidate 彙整的表單資料（會被自動傳入）。
      */
     subscribe(form) {
       loadingSubscription.open();
 
       SubscriptionService.subscribe(form)
-        // eslint-disable-next-line no-unused-vars
-        .then((res) => {
+        .then(() => {
           TimerAlert.alertSuccess("訂閱成功");
         })
         .catch((error) => {
@@ -123,17 +128,21 @@ export default {
         });
     },
   },
-  computed: {},
-  watch: {},
-  components: {},
 
   mounted() {
     loadingSubscription = new AreaLoadingHelper(this.$refs.formSubscription);
+  },
+
+  beforeUnmount() {
+    // 清除物件參考，避免潛在記憶體洩漏
+    loadingSubscription = null;
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@use "@/assets/scss/mixins/style";
+
 /* 聯繫資訊 */
 .contact-info {
   &:not(:last-child) {
@@ -155,8 +164,11 @@ export default {
     margin-right: 16px;
   }
 
-  &:hover {
-    text-decoration: underline;
+  // 滑鼠懸停時的樣式
+  @include style.only-pointer {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

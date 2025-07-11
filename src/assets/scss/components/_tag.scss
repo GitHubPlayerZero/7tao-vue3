@@ -2,6 +2,7 @@
 
 @use "../mixins/rwd";
 @use "../mixins/font";
+@use "../mixins/style";
 
 @mixin tag {
   height: 28px;
@@ -31,10 +32,13 @@
 }
 
 @mixin tag-hover {
-  &:hover {
-    border-left-color: var(--bs-secondary);
-    background-color: black;
-    color: white;
+  // 滑鼠懸停時的樣式
+  @include style.only-pointer {
+    &:hover {
+      border-left-color: var(--bs-secondary);
+      background-color: black;
+      color: white;
+    }
   }
 }
 
@@ -56,7 +60,10 @@
   background-color: var(--bs-primary);
   color: white;
 
-  &:hover {
-    color: var(--bs-secondary);
+  // 滑鼠懸停時的樣式
+  @include style.only-pointer {
+    &:hover {
+      color: var(--bs-secondary);
+    }
   }
 }

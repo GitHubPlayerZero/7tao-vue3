@@ -30,6 +30,7 @@
 </template>
 
 <script setup>
+// TODO 待檢查優化
 import { inject } from "vue";
 import { EventTagRecord } from "@/services/data/event";
 

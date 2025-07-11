@@ -14,11 +14,7 @@ $isDebug: false;
 	}
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
+/* 去除原生預設樣式 */
 ul,
 ol {
   padding-left: 0;
@@ -26,16 +22,16 @@ ol {
   margin-bottom: 0;
 }
 
-a {
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 0;
   font-weight: normal;
 }
+
 p {
   margin-bottom: 0;
 }
@@ -45,9 +41,36 @@ textarea {
   vertical-align: middle;
 }
 
+/* 設定預設樣式 */
+// 表單控件
 input,
 textarea,
 select,
 button {
+  // 預設字型
   @include font.noto-sans-tc;
+}
+
+// 連結及按鈕
+a,
+button,
+input[type="button"],
+input[type="submit"] {
+  // 預設 active 樣式
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// 連結
+a {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+// 圖片
+img {
+  max-width: 100%;
+  height: auto;
 }

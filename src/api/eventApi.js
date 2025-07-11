@@ -33,4 +33,12 @@ export class EventApi extends Api {
   static fetchBanners() {
     return this._axios.get(`${this.url}?isBanner=true&_sort=date`);
   }
+
+  /**
+   * 取得活動相簿，預設以日期由近至遠排序。
+   * @returns {Promise} 執行 axios 回傳的 Promise。
+   */
+  static fetchAlbums() {
+    return this._axios.get(`${this.url}?albumPhotos_ne&_sort=date&_order=desc`);
+  }
 }

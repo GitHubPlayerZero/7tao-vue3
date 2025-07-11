@@ -41,6 +41,7 @@
 </template>
 
 <script>
+// TODO 待檢查優化
 import { EventTagRecord } from "@/services/data/event";
 // eslint-disable-next-line no-unused-vars
 import { TicketRecord, TicketModel, TicketService } from "@/services/data/ticket";

@@ -80,6 +80,7 @@
 </template>
 
 <script>
+// TODO 待檢查優化
 import { DateUtils, FullLoadingHelper } from "@/helpers";
 import { CommonService } from "@/services";
 import { EventService, EventTagRecord } from "@/services/data/event";
