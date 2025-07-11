@@ -2,6 +2,7 @@
 
 @use "../mixins/rwd";
 @use "../mixins/font";
+@use "../mixins/style";
 
 // 覆寫 Bootstrap 按鈕預設樣式
 .btn {
@@ -12,11 +13,30 @@
   padding: 0;
 }
 
-// 主要按鈕
-.btn-primary,
+// 清除 Bootstrap 主要按鈕 hover 狀態
+.btn-primary {
+  &:hover {
+    color: white;
+    background-color: var(--bs-primary);
+  }
+}
 .btn-outline-primary {
   &:hover {
-    color: var(--bs-secondary);
+    color: var(--bs-primary);
+    background-color: transparent;
+    border-color: var(--bs-primary);
+  }
+}
+
+.btn-primary,
+.btn-outline-primary {
+  // 滑鼠懸停時的樣式
+  @include style.only-pointer {
+    &:hover {
+      color: var(--bs-secondary);
+      background-color: var(--bs-btn-hover-bg);
+      border-color: var(--bs-btn-hover-border-color);
+    }
   }
 
   &:disabled {
@@ -28,7 +48,7 @@
 
 .btn-outline-primary {
   border: 1px solid var(--bs-primary);
-  
+
   @include rwd.pad-up {
     border-width: 2px;
   }

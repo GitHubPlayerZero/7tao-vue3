@@ -5,6 +5,7 @@
 </template>
 
 <script setup>
+// TODO 待檢查優化
 const props = defineProps({
   message: String,
 });

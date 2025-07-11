@@ -1,0 +1,17 @@
+/* swiper：Swiper 相關樣式 */
+
+@use "../mixins/style";
+
+// 覆寫導航按鈕的樣式
+.swiper-button-prev,
+.swiper-button-next {
+  font-weight: 900;
+  padding: 30px 20px;
+
+  // 滑鼠懸停時的樣式
+  @include style.only-pointer {
+    &:hover {
+      background-color: var(--bs-gray-200);
+    }
+  }
+}
