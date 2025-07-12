@@ -29,7 +29,7 @@
             <button
               type="button"
               class="px-3 px-md-6 py-2 btn btn-outline-primary font-noto-serif-tc"
-              @click.prevent
+              @click.prevent="purchase(ticket)"
             >
               <span class="d-none d-md-inline">立即</span>購票
             </button>
@@ -41,14 +41,20 @@
 </template>
 
 <script>
-// TODO 待檢查優化
+import { ConfirmAlert } from "@/helpers";
 import { EventTagRecord } from "@/services/data/event";
 // eslint-disable-next-line no-unused-vars
 import { TicketRecord, TicketModel, TicketService } from "@/services/data/ticket";
 
 export default {
+  /**
+   * @property {EventTagRecord} event 活動資料。
+   */
   props: {
-    event: EventTagRecord,
+    event: {
+      type: EventTagRecord,
+      required: true,
+    },
   },
 
   inject: ["loading"],
@@ -73,6 +79,20 @@ export default {
       .finally(() => {
         this.loading.close();
       });
+  },
+
+  methods: {
+    /**
+     * 購買票券。
+     * @param {TicketRecord} ticket 被點擊的票券資料。
+     */
+    // eslint-disable-next-line no-unused-vars
+    purchase(ticket) {
+      // console.log(`ticket ===>`, ticket);
+      // console.log(`event ===>`, this.event);
+      // TODO 購票功能
+      ConfirmAlert.alertWarningDetail("施工中...", "購票功能尚未開放，敬請期待！");
+    },
   },
 };
 </script>
