@@ -33,12 +33,10 @@
 
 @mixin tag-hover {
   // 滑鼠懸停時的樣式
-  @include style.only-pointer {
-    &:hover {
-      border-left-color: var(--bs-secondary);
-      background-color: black;
-      color: white;
-    }
+  @include style.only-pointer-hover {
+    border-left-color: var(--bs-secondary);
+    background-color: black;
+    color: white;
   }
 }
 
@@ -61,9 +59,7 @@
   color: white;
 
   // 滑鼠懸停時的樣式
-  @include style.only-pointer {
-    &:hover {
-      color: var(--bs-secondary);
-    }
+  @include style.only-pointer-hover {
+    color: var(--bs-secondary);
   }
 }

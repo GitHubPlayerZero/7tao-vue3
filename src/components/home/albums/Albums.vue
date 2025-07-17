@@ -12,6 +12,9 @@
       <Swiper
         :modules="swiperModules"
         :navigation="true"
+        :pagination="{
+          type: 'fraction',
+        }"
         :spaceBetween="24"
         :slidesPerView="slidesPerView"
         :loop="loop"
@@ -31,6 +34,8 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useLoadingStore } from "@/stores";
 // eslint-disable-next-line no-unused-vars
 import { AlbumRecord } from "@/services/data/album";
 import { useAlbums } from "@/composables/data/useAlbums";
@@ -41,35 +46,35 @@ import AlbumCard from "@/components/home/albums/AlbumCard.vue";
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 // Import required modules
-import { Navigation, Autoplay } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
+/**
+ * @typedef {object} AlbumsData
+ * @property {Array} swiperModules Swiper 模組
+ * @property {number} slidesPerView 每次顯示的幻燈片數量
+ * @property {AlbumRecord[]} albums 相簿資料
+ */
 export default {
-  /**
-   * @typedef {object} AlbumsData
-   * @property {AlbumRecord[]} albums 相簿資料
-   * @property {Array} swiperModules Swiper 模組
-   * @property {number} slidesPerView 每次顯示的幻燈片數量
-   */
-
   /** @returns { AlbumsData } */
   data() {
     return {
-      albums: [], // 相簿資料
-      swiperModules: [Navigation, Autoplay], // Swiper 模組
+      swiperModules: [Navigation, Pagination, Autoplay], // Swiper 模組
       slidesPerView: 1, // 每次顯示的幻燈片數量
+      albums: [], // 相簿資料
     };
   },
 
   async created() {
+    this.openLoading();
+
     // 取得相簿資料
     const { albums } = await useAlbums();
     this.albums = albums;
 
     // 初始化 Swiper 設定
     this.updateSwiperByWidth();
+
+    this.closeLoading();
   },
 
   mounted() {
@@ -83,6 +88,12 @@ export default {
   },
 
   methods: {
+    /** loading 功能 */
+    ...mapActions(useLoadingStore, {
+      openLoading: "open",
+      closeLoading: "close",
+    }),
+
     /**
      * 根據螢幕寬度設定 Swiper。
      */

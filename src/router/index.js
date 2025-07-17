@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import homeView from "../views/HomeView.vue";
+import { useLoadingStore } from "@/stores";
 import { SysConstants } from "@/helpers";
+import homeView from "../views/HomeView.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -80,6 +81,12 @@ const router = createRouter({
       component: () => import("@/views/NotFoundView.vue"), // 使用客製的頁面
     },
   ],
+});
+
+// eslint-disable-next-line no-unused-vars
+router.beforeEach((to, from) => {
+  // 在進入頁面之前將 loading reset，以避免前一頁沒有正常關閉而造成問題
+  useLoadingStore().reset();
 });
 
 export default router;

@@ -81,15 +81,14 @@
 
 <script>
 // TODO 待檢查優化
-import { DateUtils, FullLoadingHelper } from "@/helpers";
+import { mapActions } from "pinia";
+import { useLoadingStore } from "@/stores";
+import { DateUtils } from "@/helpers";
 import { CommonService } from "@/services";
 import { EventService, EventTagRecord } from "@/services/data/event";
 import { TagModel, TagService } from "@/services/data/tag";
 import TicketInfo from "@/components/eventDetail/TicketInfo.vue";
 import SimpleMsg from "@/components/global/SimpleMsg.vue";
-
-// loading 工具
-const loading = new FullLoadingHelper();
 
 export default {
   /**
@@ -102,11 +101,13 @@ export default {
     };
   },
 
-  provide() {
-    return { loading };
-  },
-
   methods: {
+    /** loading 功能 */
+    ...mapActions(useLoadingStore, {
+      openLoading: "open",
+      closeLoading: "close",
+    }),
+
     /**
      * 取得活動說明段落。
      * @param {string} desc 完整活動說明。
@@ -143,8 +144,8 @@ export default {
     SimpleMsg,
   },
 
-  beforeCreate() {
-    loading.open();
+  created() {
+    this.openLoading();
 
     // 取得活動資訊
     Promise.all([TagService.fetchTags(), EventService.fetchEvent(this.$route.params.id)])
@@ -157,7 +158,7 @@ export default {
         }
       })
       .finally(() => {
-        loading.close();
+        this.closeLoading();
       });
   },
 };
