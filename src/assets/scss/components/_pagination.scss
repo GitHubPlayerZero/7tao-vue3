@@ -1,6 +1,7 @@
 /* pagination：分頁 */
 
 @use "../mixins/font";
+@use "../mixins/style";
 
 // 覆蓋 Bootstrap 設定
 .pagination {
@@ -39,7 +40,8 @@
 
     border: 1px solid var(--bs-primary);
 
-    &:hover {
+    // 滑鼠懸停時的樣式
+    @include style.only-pointer-hover {
       background-color: var(--bs-primary);
       color: var(--bs-secondary);
     }

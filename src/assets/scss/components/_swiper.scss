@@ -9,9 +9,7 @@
   padding: 30px 20px;
 
   // 滑鼠懸停時的樣式
-  @include style.only-pointer {
-    &:hover {
-      background-color: var(--bs-gray-200);
-    }
+  @include style.only-pointer-hover {
+    background-color: var(--bs-gray-200);
   }
 }

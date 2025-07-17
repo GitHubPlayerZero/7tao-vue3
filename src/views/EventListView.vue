@@ -58,7 +58,8 @@
 
 <script>
 // TODO 待檢查優化
-import { FullLoadingHelper } from "@/helpers";
+import { mapActions } from "pinia";
+import { useLoadingStore } from "@/stores";
 // eslint-disable-next-line no-unused-vars
 import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
@@ -67,15 +68,9 @@ import { EventListHistState } from "@/services/features";
 import { useEventTag, usePagination, PaginationParam } from "@/composables";
 import EventCard from "@/components/global/EventCard.vue";
 
-// 預設一頁筆數
-const defaultPageSize = 12;
-
-// loading 工具
-const loading = new FullLoadingHelper();
-
 export default {
   /**
-   * @returns {{selectedTagIds: number[], tagModel: TagModel, eventTagModel: EventTagModel, pagination: Pagination}}
+   * @returns {{selectedTagIds: number[], tagModel: TagModel, eventTagModel: EventTagModel, pagination: Pagination, pageSize: number}}
    */
   data() {
     return {
@@ -83,10 +78,17 @@ export default {
       tagModel: null, // 標籤資料模型
       eventTagModel: null, // 活動資料模型
       pagination: null, // 分頁工具
+      pageSize: 12, // 預設一頁筆數
     };
   },
 
   methods: {
+    /** loading 功能 */
+    ...mapActions(useLoadingStore, {
+      openLoading: "open",
+      closeLoading: "close",
+    }),
+
     /**
      * 按下 Tag 按鈕要處理的動作。
      * @param tagId {number} Tag ID。
@@ -181,7 +183,7 @@ export default {
       const pageNo = EventListHistState.getPageData();
       // console.log(`[watch filteredEvents] pageNo ====> ${pageNo}`);
 
-      const param = new PaginationParam(n, defaultPageSize, pageNo);
+      const param = new PaginationParam(n, this.pageSize, pageNo);
       this.pagination = usePagination(param);
       // console.log(`[watch filteredEvents] this.pagination =====>`, this.pagination);
     },
@@ -211,7 +213,7 @@ export default {
   created() {
     // console.log(`[EventListView] created........`, this);
     // console.log(`history.state ======>`, history.state);
-    loading.open();
+    this.openLoading();
 
     // 取得標籤、活動
     useEventTag()
@@ -227,7 +229,7 @@ export default {
         console.log(`this.eventTagModel =====>`, this.eventTagModel);
       })
       .finally(() => {
-        loading.close();
+        this.closeLoading();
       });
   },
   // created end

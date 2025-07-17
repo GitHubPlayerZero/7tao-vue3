@@ -8,6 +8,11 @@ import router from "./router";
 // Bootstrap
 import "bootstrap";
 
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 // vue-loading-overlay
 import { LoadingPlugin } from "vue-loading-overlay";
 import "vue-loading-overlay/dist/css/index.css";

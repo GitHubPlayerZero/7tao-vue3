@@ -5,3 +5,9 @@
  * @property {string} [backgroundColor] 背景遮罩的顏色，預設為 #fff。
  * @property {number} [opacity] 背景遮罩的透明度，範圍從 0 到 1，預設為 0.5。
  */
+
+/**
+ * @typedef {Object} AreaLoadingReturns
+ * @property {Function} open 開啟 loading。
+ * @property {Function} close 關閉 loading。
+ */

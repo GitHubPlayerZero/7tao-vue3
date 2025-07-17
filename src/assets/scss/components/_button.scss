@@ -31,12 +31,10 @@
 .btn-primary,
 .btn-outline-primary {
   // 滑鼠懸停時的樣式
-  @include style.only-pointer {
-    &:hover {
-      color: var(--bs-secondary);
-      background-color: var(--bs-btn-hover-bg);
-      border-color: var(--bs-btn-hover-border-color);
-    }
+  @include style.only-pointer-hover {
+    color: var(--bs-secondary);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
   }
 
   &:disabled {

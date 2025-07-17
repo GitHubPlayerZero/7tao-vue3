@@ -1,10 +1,18 @@
 /* style：其它樣式 */
 
-// TODO 再寫一個 only-pointer-hover，前綴預設為 &
-
 // 針對具有滑鼠指標的裝置執行樣式
 @mixin only-pointer {
   @media (pointer: fine) {
     @content;
+  }
+}
+
+// 針對具有滑鼠指標的裝置執行 hover 樣式
+// 預設為同一層選擇器的 hover，即會設定為 &:hover
+@mixin only-pointer-hover($prefix: "&") {
+  @include only-pointer {
+    #{$prefix}:hover {
+      @content;
+    }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-4 mt-md-8">
     <!-- Banner -->
-    <BannerSlide />
+    <Banner />
 
     <!-- 重點連結 -->
     <div class="row row-cols-3 row-cols-xl-6 row-gap-2 row-gap-md-6 mb-8 mb-md-12">
@@ -42,35 +42,39 @@
 </template>
 
 <script>
-// TODO 待檢查優化
 import { computed } from "vue";
-import { FullLoadingHelper, ImageUtils } from "@/helpers";
+import { mapActions } from "pinia";
+import { useLoadingStore } from "@/stores";
+import { ImageUtils } from "@/helpers";
 // eslint-disable-next-line no-unused-vars
 import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
 import { EventTagModel } from "@/services/data/event";
 import { EventListHistState } from "@/services/features";
 import { useEventTag } from "@/composables";
-import BannerSlide from "@/components/home/BannerSlide.vue";
+
+// components
+import Banner from "@/components/home/Banner.vue";
 import EventInfo from "@/components/home/EventInfo.vue";
 import Albums from "@/components/home/albums/Albums.vue";
 import FollowUs from "@/components/home/FollowUs.vue";
 
-// loading 工具
-const loading = new FullLoadingHelper();
-
+/**
+ * @typedef {object} HomeViewData
+ * @property {TagModel} tagModel 標籤資料模型。
+ * @property {EventTagModel} eventTagModel 活動資料模型。
+ * @property {Array<{title: string, img: string}>} links 主要連結功能按鈕。
+ */
 export default {
   /**
-   * @return {{tagModel: TagModel, eventTagModel: EventTagModel}}
+   * @return { HomeViewData }
    */
   data() {
-    console.log(`## [HomeView - data]`);
-
     return {
       tagModel: null, // 標籤資料模型
       eventTagModel: null, // 活動資料模型
 
-      // 連結按鈕
+      // 主要連結功能按鈕
       links: [
         { title: "演出", img: "cate01.svg" },
         { title: "聯誼", img: "cate02.svg" },
@@ -78,22 +82,38 @@ export default {
         { title: "美食", img: "cate04.svg" },
         { title: "戶外", img: "cate05.svg" },
       ],
-
-      albums: [], // albums
     };
   },
-  // data end
+
+  created() {
+    this.openLoading();
+
+    // 取得標籤、活動
+    useEventTag()
+      .then((res) => {
+        this.tagModel = res.tagModel;
+        this.eventTagModel = res.eventTagModel;
+      })
+      .finally(() => {
+        this.closeLoading();
+      });
+  },
 
   provide() {
     return {
       tagModel: computed(() => this.tagModel),
       eventTagModel: computed(() => this.eventTagModel),
       clickEventTag: this.goToEventList,
-      loading,
     };
   },
 
   methods: {
+    /** loading 功能 */
+    ...mapActions(useLoadingStore, {
+      openLoading: "open",
+      closeLoading: "close",
+    }),
+
     /**
      * 取得圖片完整 URL。
      * @param {string} fileName 檔案名稱。
@@ -124,39 +144,10 @@ export default {
   // methods end
 
   components: {
-    BannerSlide,
+    Banner,
     EventInfo,
     Albums,
     FollowUs,
-  },
-
-  beforeCreate() {
-    console.log(`## [HomeView - beforeCreate]`);
-    loading.open();
-
-    // 取得標籤、活動
-    useEventTag()
-      .then((res) => {
-        this.tagModel = res.tagModel;
-        console.log(`tagModel =====>`, this.tagModel);
-        this.eventTagModel = res.eventTagModel;
-        console.log(`eventTagModel ========>`, this.eventTagModel);
-      })
-      .finally(() => {
-        console.log(`[Home] close loading....`);
-        loading.close();
-      });
-  },
-
-  // TODO debug 測試
-  created() {
-    console.log(`## [HomeView - created]`);
-  },
-  beforeMount() {
-    console.log(`## [HomeView - beforeMount]`);
-  },
-  mounted() {
-    console.log(`## [HomeView - mounted]`);
   },
 };
 </script>

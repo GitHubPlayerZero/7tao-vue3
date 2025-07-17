@@ -88,24 +88,27 @@
 </template>
 
 <script>
-import { AreaLoadingHelper, TimerAlert, ConfirmAlert } from "@/helpers";
+import { TimerAlert, ConfirmAlert } from "@/helpers";
 import { SubscriptionService } from "@/services/data/subscription";
+import { useAreaLoading } from "@/composables";
 
+/**
+ * @typedef {object} FollowUsData
+ * @property {AreaLoadingReturns} loadingSubscription 訂閱表單區域 loading。
+ */
 /**
  * @typedef {object} SubscriptionForm
  * @property {string} email 使用者輸入的 Email
  */
 
- // TODO 或許寫一個 hook，讓其在 beforeUnmount 時自動清除
-/**
- * 訂閱表單區域 loading
- * @type {AreaLoadingHelper|null}
- */
-let loadingSubscription = null;
-
 export default {
+  /**
+   * @returns {FollowUsData}
+   */
   data() {
-    return {};
+    return {
+      loadingSubscription: null, // 訂閱表單區域 loading
+    };
   },
   methods: {
     /**
@@ -113,7 +116,7 @@ export default {
      * @param {SubscriptionForm} form VeeValidate 彙整的表單資料（會被自動傳入）。
      */
     subscribe(form) {
-      loadingSubscription.open();
+      this.loadingSubscription.open();
 
       SubscriptionService.subscribe(form)
         .then(() => {
@@ -124,18 +127,19 @@ export default {
           ConfirmAlert.alertErrorDetail("訂閱失敗", error.message);
         })
         .finally(() => {
-          loadingSubscription.close();
+          this.loadingSubscription.close();
         });
     },
   },
 
   mounted() {
-    loadingSubscription = new AreaLoadingHelper(this.$refs.formSubscription);
+    // 初始化訂閱表單的區域 loading
+    this.loadingSubscription = useAreaLoading(this.$refs.formSubscription);
   },
 
   beforeUnmount() {
-    // 清除物件參考，避免潛在記憶體洩漏
-    loadingSubscription = null;
+    // 清除物件，避免潛在記憶體洩漏
+    this.loadingSubscription = null;
   },
 };
 </script>
@@ -165,10 +169,8 @@ export default {
   }
 
   // 滑鼠懸停時的樣式
-  @include style.only-pointer {
-    &:hover {
-      text-decoration: underline;
-    }
+  @include style.only-pointer-hover {
+    text-decoration: underline;
   }
 }
 
