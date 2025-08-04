@@ -69,7 +69,6 @@ export default {
   },
 
   created() {
-    console.log(`## [TicketInfo] this ==>`, this);
     this.openLoading();
 
     // 取得票券資訊
@@ -95,8 +94,6 @@ export default {
      */
     // eslint-disable-next-line no-unused-vars
     purchase(ticket) {
-      // console.log(`ticket ===>`, ticket);
-      // console.log(`event ===>`, this.event);
       // TODO 購票功能
       ConfirmAlert.alertWarningDetail("施工中...", "購票功能尚未開放，敬請期待！");
     },

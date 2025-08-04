@@ -7,7 +7,7 @@
           <!-- 主標題 -->
           <h1 class="me-25px me-md-12">
             <RouterLink to="/" class="d-flex align-items-center">
-              <img src="@/assets/images/logo.png" alt="logo" class="logo" />
+              <img :src="`./images/logo.png`" alt="7tao" class="logo" />
               <span class="d-none d-xl-inline-block fs-32 ms-4 me-1">7TAO</span>
               <span class="d-none d-xl-inline-block fs-16 fw-bold">活動訂票網</span>
             </RouterLink>

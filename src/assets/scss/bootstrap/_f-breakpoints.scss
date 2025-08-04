@@ -1,3 +1,10 @@
-// @use "bootstrap/scss/mixins/breakpoints";
-// TODO for Sass compiler
-@forward "../../../../node_modules/bootstrap/scss/mixins/breakpoints.scss";
+// 轉出 bootstrap 的 breakpoints.scss 供其它檔案使用
+// 之後需要使用 breakpoints.scss 的檔案都透過此隻來使用
+// 目的：
+// 1. 讓其它檔案能夠以模組的方式使用 breakpoints 的變數、函式、mixins
+// 2. 方便管理 breakpoints 的樣式檔案路徑（有時會需要改成完整的 node_modules 路徑以供 Live Sass Compiler 使用）
+
+@forward "bootstrap/scss/mixins/breakpoints";
+
+// for Sass compiler
+// @forward "../../../../node_modules/bootstrap/scss/mixins/breakpoints.scss";

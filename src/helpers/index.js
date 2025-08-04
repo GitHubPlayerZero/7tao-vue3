@@ -5,6 +5,7 @@ import { TypeUtils } from "./typeUtils";
 import { DateStyles } from "./date/dateStyles";
 import { DateUtils } from "./date/dateUtils";
 import { DataUtils } from "./dataUtils";
+import { LineBreakUtils } from "./lineBreakUtils";
 import { HistoryStateHelper } from "./HistoryStateHelper";
 import { LoadingSettings } from "./loadingHelper";
 import { VeeValidateHelper } from "./veeValidateHelper";
@@ -25,6 +26,7 @@ export {
   DateStyles,
   DateUtils,
   DataUtils,
+  LineBreakUtils,
   HistoryStateHelper,
   LoadingSettings,
   VeeValidateHelper,
