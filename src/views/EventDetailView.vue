@@ -83,8 +83,7 @@
 // TODO 待檢查優化
 import { mapActions } from "pinia";
 import { useLoadingStore } from "@/stores";
-import { DateUtils } from "@/helpers";
-import { CommonService } from "@/services";
+import { DateUtils, LineBreakUtils } from "@/helpers";
 import { EventService, EventTagRecord } from "@/services/data/event";
 import { TagModel, TagService } from "@/services/data/tag";
 import TicketInfo from "@/components/eventDetail/TicketInfo.vue";
@@ -114,7 +113,7 @@ export default {
      * @returns {string[]} 依據換行符號切開的各個段落。
      */
     getDescParagraphs(desc) {
-      return CommonService.splitParagraphs(desc);
+      return LineBreakUtils.splitParagraphs(desc);
     },
   },
 

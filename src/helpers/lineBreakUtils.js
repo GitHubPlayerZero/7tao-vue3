@@ -1,13 +1,12 @@
 /**
- * 其它通用處理
+ * 換行處理工具。
  */
-export class CommonService {
+export class LineBreakUtils {
   /**
    * 換行符號。
+   * @type {string}
    */
-  static get lineBreakSymbol() {
-    return "\n";
-  }
+  static #lineBreakSymbol = "\n";
 
   /**
    * 將文章依據換行符號切割成段落。
@@ -15,6 +14,6 @@ export class CommonService {
    * @returns {string[]} 切割好的各段落，若無法切割則回傳空陣列。
    */
   static splitParagraphs(article) {
-    return article?.split(this.lineBreakSymbol) ?? [];
+    return article?.split(this.#lineBreakSymbol) ?? [];
   }
 }

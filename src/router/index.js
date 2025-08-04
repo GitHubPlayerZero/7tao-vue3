@@ -7,18 +7,11 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
 
   scrollBehavior(to, from, savedPosition) {
-    // TODO DELETE
-    // console.log(`[Router] to ==>`, to);
-    // console.log(`[Router] from ==>`, from);
-    // console.log(`[Router] savedPosition ==>`, savedPosition);
-    // console.log(`[savedPosition] top ==>`, savedPosition?.top);
-
     // 如果有 position 資訊則自動捲到位置
     if (savedPosition) {
       // 需等待畫面渲染完成，因此使用非同步延遲回傳
       return new Promise((resolve) => {
         setTimeout(() => {
-          // console.log(`============== 執行 scroll 動作 ==============`);
           resolve(savedPosition);
         }, SysConstants.scrollWaitingTime);
       });

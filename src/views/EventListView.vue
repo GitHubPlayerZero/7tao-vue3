@@ -131,8 +131,6 @@ export default {
      * @returns {EventTagRecord[]} 篩選後的活動資料集。
      */
     filteredEvents() {
-      // console.log(`[computed] filteredEvents Start ==>`, this.selectedTagIds, this.eventTagModel);
-
       // 有活動資料
       if (this.eventTagModel?.datas?.length > 0) {
         // 有選擇標籤，且並不是全選，則進行活動資料篩選
@@ -163,12 +161,10 @@ export default {
     /* selectedTagIds: {
       deep: true,
       handler(n) {
-        console.log(`[watch selectedTagIds] [before] ======>`, history.state);
         // 依據選取的標籤更新 history state
         EventListHistState.updateTagData(n);
         // 變更 history state 裡的頁碼由第 1 頁開始
         EventListHistState.updatePageData(1);
-        console.log(`[watch selectedTagIds] [after] ======>`, history.state);
       },
     }, */
 
@@ -177,15 +173,11 @@ export default {
      * @param {EventTagRecord[]} n 篩選後的活動資料集。
      */
     filteredEvents(n) {
-      // console.log(`[watch filteredEvents] new ==>`, n.length, n);
-
       // 由 history state 取回頁碼
       const pageNo = EventListHistState.getPageData();
-      // console.log(`[watch filteredEvents] pageNo ====> ${pageNo}`);
 
       const param = new PaginationParam(n, this.pageSize, pageNo);
       this.pagination = usePagination(param);
-      // console.log(`[watch filteredEvents] this.pagination =====>`, this.pagination);
     },
 
     /**
@@ -193,7 +185,6 @@ export default {
      * @param {number} n 頁碼。
      */
     "pagination.currentPage"(n) {
-      // console.log(`[watch pagination] =======>`, n);
       EventListHistState.updatePageData(n);
     },
 
@@ -211,8 +202,6 @@ export default {
   },
 
   created() {
-    // console.log(`[EventListView] created........`, this);
-    // console.log(`history.state ======>`, history.state);
     this.openLoading();
 
     // 取得標籤、活動
@@ -220,13 +209,6 @@ export default {
       .then((res) => {
         this.tagModel = res.tagModel;
         this.eventTagModel = res.eventTagModel;
-
-        // TODO DELETE
-        // console.log(`res ========>`, res);
-        // console.log(res.tagModel);
-        // console.log(res.eventTagModel);
-        // console.log(`this.tagModel =====>`, this.tagModel);
-        console.log(`this.eventTagModel =====>`, this.eventTagModel);
       })
       .finally(() => {
         this.closeLoading();
