@@ -1,2 +1,0 @@
-import{_ as s}from"./index-CT4rUPBh.js";import{I as n,K as t,U as o,T as a,P as r,J as c}from"./@vue-B8NOPngd.js";const i={props:{icon:{type:String,default:"icofont-star-alt-1"},title:{type:String,required:!0}}},l={class:"text-center mb-4"},_={class:"text-center fw-bold fs-24 lh-1d417 letter-spacing-5"};function d(f,p,e,m,u,g){return c(),n(r,null,[t("div",l,[t("i",{class:o(["fs-32",e.icon])},null,2)]),t("div",_,a(e.title),1)],64)}const y=s(i,[["render",d]]);export{y as I};
-//# sourceMappingURL=IconTitle-ChbKNtlN.js.map
