@@ -1,4 +1,5 @@
 import { EventApi } from "@/api";
+import { ErrorHelper } from "@/helpers";
 
 /**
  * 相簿資料相關邏輯
@@ -16,7 +17,7 @@ export class AlbumService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchAlbums] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }

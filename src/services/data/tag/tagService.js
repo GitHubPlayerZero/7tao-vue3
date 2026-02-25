@@ -1,6 +1,7 @@
 import { TagApi } from "@/api";
 // eslint-disable-next-line no-unused-vars
 import { TagRecord } from "./tagRecord";
+import { ErrorHelper } from "@/helpers";
 
 /**
  * Tag 資料相關邏輯
@@ -18,7 +19,7 @@ export class TagService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchTags] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }

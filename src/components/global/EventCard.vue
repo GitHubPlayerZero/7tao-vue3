@@ -1,42 +1,48 @@
 <template>
-  <!-- 活動日期 -->
-  <div class="event-date">{{ event.abbrDate }}</div>
+  <div>
+    <!-- 活動日期 -->
+    <div class="event-date">{{ event.abbrDate }}</div>
 
-  <!-- 活動圖片 -->
-  <img :src="event.img" :alt="event.title" class="event-image" loading="lazy" />
+    <!-- 活動圖片 -->
+    <img :src="event.img" :alt="event.title" class="event-image" loading="lazy" />
 
-  <!-- 活動標題 -->
-  <h3 class="event-title font-noto-serif-tc">{{ event.title }}</h3>
+    <!-- 活動標題 -->
+    <h3 class="event-title font-noto-serif-tc">{{ event.title }}</h3>
 
-  <!-- 活動內容 -->
-  <p class="event-desc font-noto-sans-tc">{{ event.desc }}</p>
+    <!-- 活動內容 -->
+    <p class="event-desc font-noto-sans-tc">{{ event.desc }}</p>
 
-  <!-- 結尾資訊 -->
-  <div class="event-footer">
-    <!-- 主分類標籤 -->
-    <a href="#" :class="eventTagClasses" @click.prevent="clickEventTag(event.mainTag.id)">
-      <i class="icofont-star-alt-1 fs-24 me-1"></i>
-      <span class="hover-effect">{{ event.mainTag.name }}</span>
-    </a>
-    <!-- 開賣 -->
-    <router-link
-      :to="{ path: `/events/${event.id}` }"
-      class="hover-show-before d-flex align-items-center font-noto-sans-tc"
-    >
-      <span class="hover-effect me-1">{{ event.isOnSale ? "開賣中" : "檢視活動" }}</span>
-      <i class="icofont-rounded-double-right"></i>
-    </router-link>
+    <!-- 結尾資訊 -->
+    <div class="event-footer">
+      <!-- 主分類標籤 -->
+      <a href="#" :class="eventTagClasses" @click.prevent="clickEventTag(event.mainTag.id)">
+        <i class="icofont-star-alt-1 fs-24 me-1"></i>
+        <span class="hover-effect">{{ event.mainTag.name }}</span>
+      </a>
+      <!-- 開賣 -->
+      <a
+        href="#"
+        class="hover-show-before d-flex align-items-center font-noto-sans-tc"
+        @click.prevent="eventDetailRouterTools.goToEventDetailPage(event)"
+      >
+        <span class="hover-effect me-1">{{ event.isOnSale ? "開賣中" : "檢視活動" }}</span>
+        <i class="icofont-rounded-double-right"></i>
+      </a>
+    </div>
   </div>
 </template>
 
 <script setup>
-// TODO 待檢查優化
 import { inject } from "vue";
 import { EventTagRecord } from "@/services/data/event";
+import { useEventDetailRouter } from "@/composables";
 
 defineProps({
   event: EventTagRecord,
 });
+
+// 活動詳細頁面路由工具
+const eventDetailRouterTools = useEventDetailRouter();
 
 /**
  * 處理活動卡標籤動作。

@@ -1,4 +1,5 @@
 import { SubscriptionApi } from "@/api";
+import { ErrorHelper } from "@/helpers";
 
 /**
  * 訂閱資料相關邏輯
@@ -16,7 +17,7 @@ export class SubscriptionService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchSubscriptions] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }
@@ -33,16 +34,28 @@ export class SubscriptionService {
       throw Error("Email 必須有值！");
     }
 
-    /** 先以 email 查詢訂閱資料，若已存在則直接回傳資料（避免重複存入相同的 email） */
-    let res = await SubscriptionApi.fetchSubscriptionByEmail(data.email);
+    let res = null;
 
-    // 資料已存在
-    if (res.data.length > 0) {
-      return res.data[0];
+    /** 先以 email 查詢訂閱資料，若已存在則直接回傳資料（避免重複存入相同的 email） */
+    try {
+      res = await SubscriptionApi.fetchSubscriptionByEmail(data.email);
+      
+      // 資料已存在
+      if (res.data.length > 0) {
+        return res.data[0];
+      }
+    } catch (error) {
+      console.error(`[subscribe] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
+      throw error;
     }
 
     /** 若沒有資料則新增之 */
-    res = await SubscriptionApi.postSubscription(data);
-    return res.data;
+    try {
+      res = await SubscriptionApi.postSubscription(data);
+      return res.data;
+    } catch (error) {
+      console.error(`[subscribe] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
+      throw error;
+    }
   }
 }

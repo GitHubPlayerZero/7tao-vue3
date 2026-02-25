@@ -3,12 +3,24 @@
 @use "../mixins/font";
 
 // 覆蓋 Bootstrap 設定
+.form-label {
+  @include font.noto-sans-tc;
+  color: black;
+}
+
+// 覆蓋 Bootstrap 設定
 .form-control,
 .form-select {
-  line-height: 1.448;
+  font-size: 20px;
+  line-height: 1.45;
   border: 2px solid var(--bs-primary);
   border-radius: 0;
-  padding: 0;
+  padding: 8px 16px;
+}
+
+// 覆蓋 Bootstrap 設定
+.form-check-input {
+  border-color: var(--bs-primary);
 }
 
 // 表單檢核錯誤訊息

@@ -2,6 +2,7 @@ import "@/assets/scss/all.scss";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import App from "./App.vue";
 import router from "./router";
 
@@ -22,8 +23,11 @@ import { Field, Form, ErrorMessage } from "vee-validate";
 import { VeeValidateHelper } from "./helpers";
 VeeValidateHelper.initEnv();
 
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate); // Pinia 持久化
+
 const app = createApp(App);
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 
 // vue-loading-overlay

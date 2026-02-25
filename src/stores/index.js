@@ -1,3 +1,4 @@
 import { useLoadingStore } from "./loadingStore";
+import { useUserStore } from "./userStore";
 
-export { useLoadingStore };
+export { useLoadingStore, useUserStore };

@@ -36,6 +36,17 @@ $font-family-sans-serif:
   "Segoe UI Symbol",
   "Noto Color Emoji" !default;
 
+// z-index
+$zindex-levels: (
+  n1: -1,
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  5: 5,
+  10: 10,
+) !default;
+
 // 顏色
 $primary: #030303 !default;
 $secondary: #fbff22 !default;
