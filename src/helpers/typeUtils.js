@@ -1,3 +1,5 @@
+import { CheckHelper } from "./checkHelper";
+
 /**
  * 型別處理工具
  */
@@ -123,7 +125,7 @@ export class TypeUtils {
     }
 
     // 字串 且 內容為有效數字
-    if (this.isString(val) && this.isValidNumber(Number(val))) {
+    if (this.isString(val) && CheckHelper.isValidNumber(val)) {
       return true;
     }
 
@@ -216,5 +218,14 @@ export class TypeUtils {
    */
   static isObjectWithKeys(val) {
     return this.isExactObject(val) && Object.keys(val).length > 0;
+  }
+
+  /**
+   * 判斷是否為 Function？
+   * @param {*} val 要判斷的值。
+   * @returns {boolean} 為 Function 回傳 true，否則回傳 false。
+   */
+  static isFunction(val) {
+    return typeof val === "function";
   }
 }

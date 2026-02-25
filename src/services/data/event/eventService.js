@@ -1,7 +1,7 @@
 import { EventApi } from "@/api";
 // eslint-disable-next-line no-unused-vars
 import { EventTagRecord } from "./eventTagRecord";
-import { TypeUtils } from "@/helpers";
+import { ErrorHelper, TypeUtils } from "@/helpers";
 
 /**
  * Event 資料相關邏輯
@@ -26,7 +26,7 @@ export class EventService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchEvents] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }
@@ -44,7 +44,7 @@ export class EventService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchEvent] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || {};
   }
@@ -61,7 +61,7 @@ export class EventService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchBanners] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }

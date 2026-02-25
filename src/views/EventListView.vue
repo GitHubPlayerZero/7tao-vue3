@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-4 mt-md-8">
+  <div class="container mt-4 mt-md-8 mb-12 mb-md-15">
     <h2 class="title mb-3 mb-md-8">
       <span class="title-english">EVENT</span>
       <span class="title-chinese">所有活動</span>
@@ -26,7 +26,7 @@
     </ul>
 
     <!-- 分頁 -->
-    <nav aria-label="Page navigation" class="mb-12 mb-md-15">
+    <nav aria-label="Page navigation">
       <ul class="pagination" v-if="pagination">
         <!-- 前一頁 -->
         <li class="page-item" :class="{ disabled: pagination.currentPage === 1 }">
@@ -57,7 +57,6 @@
 </template>
 
 <script>
-// TODO 待檢查優化
 import { mapActions } from "pinia";
 import { useLoadingStore } from "@/stores";
 // eslint-disable-next-line no-unused-vars

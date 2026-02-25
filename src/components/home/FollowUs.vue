@@ -176,6 +176,8 @@ export default {
 
 /* 訂閱 */
 .subscribe-input {
+  font-size: 16px;
+  line-height: 1.448;
   padding: 14px 20px;
 }
 </style>

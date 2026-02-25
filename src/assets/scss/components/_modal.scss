@@ -1,0 +1,18 @@
+/* modal：互動視窗元素 */
+
+// 覆蓋 Bootstrap 設定
+.modal-dialog {
+  width: 90%;
+}
+.modal-header {
+  padding: 8px 12px;
+}
+.modal-title {
+  font-weight: bold;
+}
+.modal-body {
+  padding: 8px 12px 32px;
+}
+.modal-footer {
+  padding: 12px;
+}

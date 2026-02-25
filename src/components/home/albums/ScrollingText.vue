@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// TODO 待檢查優化
 export default {
   props: {
     /** 是否反向捲動？（預設往左捲動） */

@@ -2,7 +2,7 @@
 * @package IcoFont 
 * @version 1.0.1 
 * @author   
-* @copyright 2024 
+* @copyright 2026 
 * @license - https://icofont.com/license/
 */
 
@@ -101,6 +101,21 @@ url("./fonts/icofont.woff") format("woff");
 .icofont-star-alt-1:before
 {
   content: "\effe";
+}
+
+.icofont-eye-blocked:before
+{
+  content: "\ef22";
+}
+
+.icofont-eye:before
+{
+  content: "\ef24";
+}
+
+.icofont-logout:before
+{
+  content: "\ef7c";
 }
 
 [class^="icofont-"].icofont-duotone,

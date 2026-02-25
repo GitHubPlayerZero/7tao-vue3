@@ -1,3 +1,4 @@
-import { EventListHistState } from "./eventList/eventListHistState";
+import { EventListHistState } from "./event/eventListHistState";
+import { EventDetailRouterTool } from "./event/eventDetailRouterTool";
 
-export { EventListHistState };
+export { EventListHistState, EventDetailRouterTool };

@@ -72,6 +72,7 @@ $utilities: (
         1d155: 1.155,
         1d25: 1.25,
         1d333: 1.333,
+        1d417: 1.417,
         1d433: 1.433,
         1d437: 1.437,
         1d438: 1.438,
@@ -121,6 +122,34 @@ $utilities: (
         justify: justify,
       ),
     ),
+  "min-dvh": (
+    class: min-dvh,
+    property: min-height,
+    values: (
+      100: 100dvh,
+    ),
+  ),
+  "min-dvw": (
+    class: min-dvw,
+    property: min-width,
+    values: (
+      100: 100dvw,
+    ),
+  ),
+  "max-dvh": (
+    class: max-dvh,
+    property: max-height,
+    values: (
+      100: 100dvh,
+    ),
+  ),
+  "max-dvw": (
+    class: max-dvw,
+    property: max-width,
+    values: (
+      100: 100dvw,
+    ),
+  ),
   "white-space": (
     property: white-space,
     values: (

@@ -80,7 +80,6 @@
 </template>
 
 <script>
-// TODO 待檢查優化
 import { mapActions } from "pinia";
 import { useLoadingStore } from "@/stores";
 import { DateUtils, LineBreakUtils } from "@/helpers";

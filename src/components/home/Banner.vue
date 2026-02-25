@@ -12,17 +12,18 @@
     class="mb-8 mb-md-12"
   >
     <SwiperSlide v-for="event in banners" :key="event.id">
-      <router-link
+      <a
+        href="#"
         class="banner-slide position-relative"
         :style="{ backgroundImage: `url(${event.img})` }"
-        :to="{ path: `/events/${event.id}` }"
+        @click.prevent="eventDetailRouterTools.goToEventDetailPage(event)"
       >
         <div class="banner-slide-date">{{ event.abbrDate }}</div>
         <div class="position-absolute bottom-0 w-100 mb-6">
           <p class="banner-slide-title">{{ event.title }}</p>
           <p class="banner-slide-desc d-none d-md-block">{{ event.bannerDesc }}</p>
         </div>
-      </router-link>
+      </a>
     </SwiperSlide>
   </Swiper>
 </template>
@@ -32,6 +33,7 @@ import { mapActions } from "pinia";
 import { useLoadingStore } from "@/stores";
 // eslint-disable-next-line no-unused-vars
 import { EventService, EventRecord, EventModel } from "@/services/data/event";
+import { useEventDetailRouter } from "@/composables";
 
 /* Swiper 相關 */
 // Import Swiper Vue.js components
@@ -43,6 +45,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
  * @typedef {object} BannerData
  * @property {Array} swiperModules Swiper 模組。
  * @property {EventRecord[]} banners Banner 活動資料。
+ * @property {EventDetailRouterTools} eventDetailRouterTools 活動詳細頁面路由工具。
  */
 export default {
   /**
@@ -51,7 +54,8 @@ export default {
   data() {
     return {
       swiperModules: [Navigation, Pagination, Autoplay], // Swiper 模組
-      banners: [],
+      banners: [], // Banner 活動資料
+      eventDetailRouterTools: useEventDetailRouter(), // 活動詳細頁面路由工具
     };
   },
 

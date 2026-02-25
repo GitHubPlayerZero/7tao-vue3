@@ -1,7 +1,7 @@
 import { SysConstants } from "./sysConstants";
 import { PathUtils } from "./pathUtils";
 
-const publicPath = import.meta.env.VITE_IMG_PUBLIC_PATH;
+const publicPath = SysConstants.imgPublicPath;
 const basePath = PathUtils.append(SysConstants.baseUrl, publicPath);
 
 /**

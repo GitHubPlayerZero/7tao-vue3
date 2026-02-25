@@ -1,4 +1,5 @@
 import { TicketApi } from "@/api";
+import { ErrorHelper } from "@/helpers";
 
 /**
  * Ticket 資料相關邏輯
@@ -16,7 +17,7 @@ export class TicketService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchTickets] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }
@@ -34,7 +35,7 @@ export class TicketService {
         result = res.data;
       })
       .catch((error) => {
-        console.error(error);
+        console.error(`[fetchEventTickets] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       });
     return result || [];
   }

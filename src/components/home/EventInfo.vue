@@ -45,13 +45,14 @@
         </p>
 
         <!-- 按鈕 -->
-        <router-link
-          :to="{ path: `/events/${onlineEvent.id}` }"
+        <a
+          href="#"
           class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4 py-xl-2 fs-md-20 lh-md-1d45"
+          @click.prevent="eventDetailRouterTools.goToEventDetailPage(onlineEvent)"
         >
           <span class="me-1">查看活動詳情</span>
           <i class="icofont-rounded-double-right"></i>
-        </router-link>
+        </a>
       </div>
       <!-- col end -->
     </div>
@@ -60,18 +61,18 @@
 </template>
 
 <script>
-// TODO 待檢查優化
 // eslint-disable-next-line no-unused-vars
 import { TagModel } from "@/services/data/tag";
 // eslint-disable-next-line no-unused-vars
 import { EventTagRecord, EventTagModel } from "@/services/data/event";
+import { useEventDetailRouter } from "@/composables";
 import EventCard from "@/components/global/EventCard.vue";
 
 export default {
   inject: ["tagModel", "eventTagModel"],
 
   /**
-   * @returns {{myTagModel: TagModel, myEventTagModel: EventTagModel, recentEvents: EventTagRecord[], onlineEvent: EventTagRecord}}
+   * @returns {{myTagModel: TagModel, myEventTagModel: EventTagModel, recentEvents: EventTagRecord[], onlineEvent: EventTagRecord, eventDetailRouterTools: EventDetailRouterTools}}
    */
   data() {
     return {
@@ -79,10 +80,9 @@ export default {
       myEventTagModel: this.eventTagModel,
       recentEvents: null, // 近期活動資料集
       onlineEvent: null, // 線上活動
+      eventDetailRouterTools: useEventDetailRouter(), // 活動詳細頁面路由工具
     };
   },
-
-  methods: {},
 
   components: {
     EventCard,
