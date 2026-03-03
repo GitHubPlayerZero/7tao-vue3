@@ -28,3 +28,10 @@
   font-size: 16px;
   @include font.noto-sans-tc;
 }
+
+.required::before {
+  content: "*";
+  color: red;
+  font-weight: bold;
+  margin-right: 4px;
+}

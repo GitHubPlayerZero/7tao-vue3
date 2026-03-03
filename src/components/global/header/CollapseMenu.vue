@@ -87,7 +87,7 @@ function logout() {
 <style lang="scss" scoped>
 .hover-color {
   &:hover {
-    color: #9c9e18;
+    color: var(--bs-hover);
   }
 }
 </style>

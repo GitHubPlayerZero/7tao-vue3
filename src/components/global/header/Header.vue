@@ -85,27 +85,16 @@
     </div>
     <!-- 折疊選單 end -->
   </div>
-
-  <!-- Modal -->
-  <RegisterModal ref="registerModal" />
-  <LoginModal ref="loginModal" />
 </template>
 
 <script setup>
-import { onMounted, provide, useTemplateRef } from "vue";
+import { onMounted, provide } from "vue";
 import { RouterLink } from "vue-router";
 import { useUserStore } from "@/stores";
-// import { TypeUtils } from "@/helpers";
 import CollapseMenu from "./CollapseMenu.vue";
-import RegisterModal from "@/components/auth/RegisterModal.vue";
-import LoginModal from "@/components/auth/LoginModal.vue";
 
 // Store - 使用者資料
 const user = useUserStore();
-
-// Modal 相關
-const refRegisterModal = useTemplateRef("registerModal"); // 參考 - 註冊視窗元件
-const refLoginModal = useTemplateRef("loginModal"); // 參考 - 登入視窗元件
 
 // 顯示折疊選單的 class 名稱
 const classShow = "show";
@@ -135,24 +124,8 @@ function closeMenu() {
   }
 }
 
-/**
- * 開啟註冊視窗。
- */
-function openRegisterModal() {
-  refRegisterModal.value.state.open();
-}
-
-/**
- * 開啟登入視窗。
- */
-function openLoginModal() {
-  refLoginModal.value.state.open();
-}
-
 // 提供給子元件使用
 provide("closeMenu", closeMenu);
-provide("openRegisterModal", openRegisterModal);
-provide("openLoginModal", openLoginModal);
 </script>
 
 <style lang="scss" scoped>

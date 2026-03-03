@@ -9,10 +9,15 @@
               <IconTitle title="會員登入" />
             </h2>
 
+            <p class="mb-5">
+              還沒有帳號嗎？
+              <a href="#" class="modal-link" @click.prevent="switchToRegister">立即註冊</a>
+            </p>
+
             <VeeForm ref="loginForm" v-slot="{ errors }" class="d-flex flex-column" @submit="login">
               <!-- 帳號 -->
               <div class="mb-4">
-                <label for="loginAccount" class="form-label">帳號</label>
+                <label for="loginAccount" class="form-label required">帳號</label>
                 <VeeField
                   type="text"
                   name="account"
@@ -27,7 +32,9 @@
 
               <!-- 密碼 -->
               <div class="mb-6 mb-md-8">
-                <label for="loginPassword" class="form-label">密碼（8 ~ 12 碼英數字）</label>
+                <label for="loginPassword" class="form-label required">
+                  密碼（8 ~ 12 碼英數字）
+                </label>
 
                 <div class="d-flex align-items-center">
                   <VeeField
@@ -73,7 +80,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, useTemplateRef } from "vue";
+import { inject, onMounted, ref, useTemplateRef } from "vue";
 import { useLoadingStore } from "@/stores";
 import { ErrorHelper, TimerAlert } from "@/helpers";
 import { AuthService } from "@/services";
@@ -81,6 +88,15 @@ import { UserService } from "@/services/data/user";
 import IconTitle from "@/components/global/IconTitle.vue";
 import PwdDisplaySwitch from "@/components/global/PwdDisplaySwitch.vue";
 import MyModal from "@/components/global/MyModal.vue";
+
+/**
+ * 開啟註冊視窗（由父元件注入）。
+ * 若父元件未注入則使用預設函式顯示錯誤訊息。
+ * @type {Function}
+ */
+const openRegisterModal = inject("openRegisterModal", () => {
+  console.error(`[openRegisterModal] 未注入！`);
+});
 
 const loading = useLoadingStore(); // Store - Loading
 const refLoginModal = useTemplateRef("loginModal"); // 參考 - MyModal 元件
@@ -92,9 +108,26 @@ const errorMsg = ref(""); // 錯誤訊息
 // 由於使用 VeeField 元件，無法直接使用 ref 取得元素，因此在掛載時使用 JS 做法取得元素
 const elAccount = ref(null);
 
+// 掛載時
 onMounted(() => {
   elAccount.value = document.querySelector("#loginAccount");
 });
+
+// TODO test
+function test() {
+  refLoginForm.value.setValues({
+    account: "test2@7tao.com",
+    password: "a12345678",
+  });
+}
+
+/**
+ * 切換到註冊功能。
+ */
+function switchToRegister() {
+  refLoginModal.value.state.close(); // 關閉 Modal
+  openRegisterModal(); // 開啟註冊視窗
+}
 
 /**
  * 將資料還原初始值。
@@ -103,14 +136,6 @@ function resetData() {
   refLoginForm.value.resetForm();
   isShowPassword.value = false;
   errorMsg.value = "";
-}
-
-// TODO test
-function test() {
-  refLoginForm.value.setValues({
-    account: "test2@7tao.com",
-    password: "a12345678",
-  });
 }
 
 /**
