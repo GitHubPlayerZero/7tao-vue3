@@ -56,6 +56,7 @@ $warning: #ffc107 !default;
 $danger: #dc3545 !default;
 // $light: #f8f9fa !default;
 // $dark: #212529 !default;
+$hover: #9c9e18 !default;
 
 // 主題色
 $theme-colors: (
@@ -67,7 +68,8 @@ $theme-colors: (
   "warning": $warning,
   "danger": $danger,
   // "light": $light,
-   //  "dark": $dark,
+  //  "dark": $dark,
+  "hover": $hover,
 ) !default;
 
 // 文字預設顏色

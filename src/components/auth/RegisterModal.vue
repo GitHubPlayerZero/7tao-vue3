@@ -9,6 +9,11 @@
               <IconTitle title="註冊" />
             </h2>
 
+            <p class="mb-5">
+              已經有帳號了嗎？
+              <a href="#" class="modal-link" @click.prevent="switchToLogin">登入</a>
+            </p>
+
             <VeeForm
               ref="registerForm"
               v-slot="{ errors }"
@@ -215,6 +220,19 @@ import PwdDisplaySwitch from "@/components/global/PwdDisplaySwitch.vue";
 import MyModal from "@/components/global/MyModal.vue";
 
 export default {
+  /**
+   * 從父元件注入的依賴。
+   * @property {Function} openLoginModal - 打開登入視窗的方法。
+   */
+  inject: {
+    openLoginModal: {
+      from: "openLoginModal",
+      default: () => {
+        console.error(`[openLoginModal] 未注入！`);
+      },
+    },
+  },
+
   data() {
     return {
       CheckHelper, // 驗證工具
@@ -235,22 +253,12 @@ export default {
     };
   },
 
-  // 掛載
+  // 掛載時
   mounted() {
     this.elEmail = document.querySelector("#registerEmail");
   },
 
   methods: {
-    /**
-     * 將資料還原初始值。
-     */
-    resetData() {
-      this.$refs.registerForm.resetForm();
-      this.isShowPassword = false;
-      this.isShowConfirmPassword = false;
-      this.error = "";
-    },
-
     // TODO test
     test() {
       this.$refs.registerForm.setValues({
@@ -265,6 +273,24 @@ export default {
         mobilePhone: "0912345678", // 手機
         gender: "", // 性別
       };
+    },
+
+    /**
+     * 切換到登入功能。
+     */
+    switchToLogin() {
+      this.$refs.registerModal.state.close(); // 關閉 Modal
+      this.openLoginModal(); // 開啟登入視窗
+    },
+
+    /**
+     * 將資料還原初始值。
+     */
+    resetData() {
+      this.$refs.registerForm.resetForm();
+      this.isShowPassword = false;
+      this.isShowConfirmPassword = false;
+      this.error = "";
     },
 
     /**
