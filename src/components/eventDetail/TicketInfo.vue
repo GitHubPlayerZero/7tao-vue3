@@ -1,9 +1,9 @@
 <template>
   <article>
     <!-- 標題 -->
-    <h2 class="title mb-2 mb-md-0">
-      <span class="title-english">TICKET</span>
-      <span class="title-chinese">購票資訊</span>
+    <h2 class="title-subject mb-2 mb-md-0">
+      <span class="title-subject-english">TICKET</span>
+      <span class="title-subject-chinese">購票資訊</span>
     </h2>
 
     <!-- 票種表格 -->
@@ -29,7 +29,7 @@
             <button
               type="button"
               class="px-3 px-md-6 py-2 btn btn-outline-primary font-noto-serif-tc"
-              @click.prevent="purchase(ticket)"
+              @click.prevent="order(ticket)"
             >
               <span class="d-none d-md-inline">立即</span>購票
             </button>
@@ -42,8 +42,7 @@
 
 <script>
 import { mapActions } from "pinia";
-import { useLoadingStore } from "@/stores";
-import { ConfirmAlert } from "@/helpers";
+import { useLoadingStore, useOrderStore } from "@/stores";
 import { EventTagRecord } from "@/services/data/event";
 // eslint-disable-next-line no-unused-vars
 import { TicketRecord, TicketModel, TicketService } from "@/services/data/ticket";
@@ -89,13 +88,22 @@ export default {
     }),
 
     /**
-     * 購買票券。
+     * 下單。
      * @param {TicketRecord} ticket 被點擊的票券資料。
      */
-    // eslint-disable-next-line no-unused-vars
-    purchase(ticket) {
-      // TODO 購票功能
-      ConfirmAlert.alertWarningDetail("施工中...", "購票功能尚未開放，敬請期待！");
+    order(ticket) {
+      const orderStore = useOrderStore();
+      orderStore.eventId = this.event.id;
+      orderStore.eventTitle = this.event.title;
+      orderStore.eventDate = this.event.date;
+      orderStore.ticketId = ticket.id;
+      orderStore.ticketType = ticket.type;
+      orderStore.ticketPrice = ticket.price;
+
+      // 到訂單確認頁面
+      this.$router.push({
+        name: "orderConfirmation",
+      });
     },
   },
 };

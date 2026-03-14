@@ -1,8 +1,8 @@
 <template>
   <div class="container mt-4 mt-md-8 mb-12 mb-md-15">
-    <h2 class="title mb-3 mb-md-8">
-      <span class="title-english">EVENT</span>
-      <span class="title-chinese">所有活動</span>
+    <h2 class="title-subject mb-3 mb-md-8">
+      <span class="title-subject-english">EVENT</span>
+      <span class="title-subject-chinese">所有活動</span>
     </h2>
 
     <!-- 標籤 -->

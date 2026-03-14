@@ -3,6 +3,7 @@
 @use "../mixins/font";
 @use "../mixins/rwd";
 
+/* 覆寫 Bootstrap 表格預設樣式 */
 .table {
   tr {
     // 內容垂直置中
@@ -32,5 +33,20 @@
   td {
     // 一般欄位字型
     @include font.noto-sans-tc;
+  }
+}
+
+/* 訂單表格 */
+.table-order {
+  th {
+    border-bottom-width: 1px;
+  }
+
+  td {
+    text-align: right;
+  }
+
+  tr:first-child {
+    border-top: 2px solid var(--bs-primary);
   }
 }

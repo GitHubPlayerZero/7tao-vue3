@@ -3,7 +3,7 @@
     <SimpleMsg message="頁面不存在！" />
     <br />
     <p class="mb-4 fs-18">{{ timer.countdown }} 秒後將自動跳轉回首頁...</p>
-    <button type="button" class="btn btn-primary py-2 px-5" @click="goHome">立即回首頁</button>
+    <button type="button" class="btn btn-primary w-auto py-2 px-5 mx-auto" @click="goHome">立即回首頁</button>
   </div>
 </template>
 

@@ -45,12 +45,4 @@ export class ConfirmAlert extends AlertModel {
   static async alertErrorDetail(title = "", detail = "") {
     await this.mixTitleDesc(this.errorModel, title, detail).fire();
   }
-
-  /**
-   * 顯示要求登入的訊息。
-   * 當接下來要進入的功能需要有登入的權限，在進入之前先做檢核，此可作為檢核不通過的提示。
-   */
-  static async alertRequiresLogin() {
-    await this.mixTitleDesc(this.errorModel, "請先登入", "此功能需要登入才能使用！").fire();
-  }
 }

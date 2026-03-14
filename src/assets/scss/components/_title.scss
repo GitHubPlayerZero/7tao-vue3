@@ -2,7 +2,8 @@
 
 @use "../mixins/rwd";
 
-.title {
+/* 主題標題 */
+.title-subject {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,14 +19,14 @@
   }
 }
 
-.title-english {
+.title-subject-english {
   font-size: 24px;
   @include rwd.pad-up {
     font-size: 64px;
   }
 }
 
-.title-chinese {
+.title-subject-chinese {
   font-weight: bold;
   @include rwd.pad-up {
     font-size: 32px;
