@@ -114,10 +114,8 @@
             </div>
 
             <!-- 按鈕 -->
-            <button
-              class="btn btn-primary py-4 py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 d-flex justify-content-center align-items-center w-100 mb-3"
-            >
-              <span class="me-1">修改基本資料</span>
+            <button class="btn btn-primary py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 mb-3">
+              <span class="btn-primary-text">修改基本資料</span>
               <i class="icofont-rounded-double-right"></i>
             </button>
           </VeeForm>
@@ -181,10 +179,8 @@
             </div>
 
             <!-- 按鈕 -->
-            <button
-              class="btn btn-primary py-4 py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 d-flex justify-content-center align-items-center w-100 mb-3"
-            >
-              <span class="me-1">修改密碼</span>
+            <button class="btn btn-primary py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 mb-3">
+              <span class="btn-primary-text">修改密碼</span>
               <i class="icofont-rounded-double-right"></i>
             </button>
           </VeeForm>
@@ -207,7 +203,7 @@ import { ErrorHelper, CheckHelper, ConfirmAlert, TimerAlert } from "@/helpers";
 import { AuthService, Redirector } from "@/services";
 import IconTitle from "@/components/global/IconTitle.vue";
 import PwdDisplaySwitch from "@/components/global/PwdDisplaySwitch.vue";
-import DeleteAccount from "@/components/modify/DeleteAccount.vue";
+import DeleteAccount from "@/components/auth/DeleteAccount.vue";
 
 export default {
   data() {

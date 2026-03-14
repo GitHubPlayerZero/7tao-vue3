@@ -4,7 +4,7 @@
 @use "../mixins/font";
 @use "../mixins/style";
 
-// 覆寫 Bootstrap 按鈕預設樣式
+/* 覆寫 Bootstrap 按鈕預設樣式 */
 .btn {
   @include font.noto-sans-tc;
   font-weight: bold;
@@ -13,18 +13,41 @@
   padding: 0;
 }
 
-// 清除 Bootstrap 主要按鈕 hover 狀態
+/* 清除 Bootstrap 主要按鈕 hover 狀態 */
 .btn-primary {
   &:hover {
     color: white;
     background-color: var(--bs-primary);
   }
 }
+
 .btn-outline-primary {
   &:hover {
     color: var(--bs-primary);
     background-color: transparent;
     border-color: var(--bs-primary);
+  }
+}
+
+/* 設定新的按鈕預設樣式 */
+.btn-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  line-height: 1.45;
+}
+.btn-primary-text {
+  margin-right: 4px;
+}
+
+.btn-outline-primary {
+  border: 1px solid var(--bs-primary);
+
+  @include rwd.pad-up {
+    border-width: 2px;
   }
 }
 
@@ -41,13 +64,5 @@
     color: #ebeae3;
     background-color: #9a9a9a;
     opacity: 1;
-  }
-}
-
-.btn-outline-primary {
-  border: 1px solid var(--bs-primary);
-
-  @include rwd.pad-up {
-    border-width: 2px;
   }
 }

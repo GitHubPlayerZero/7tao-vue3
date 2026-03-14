@@ -73,10 +73,8 @@
               <VeeErrorMessage name="email" class="invalid-feedback" />
             </div>
 
-            <button
-              class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4"
-            >
-              <span class="me-1">確認訂閱</span>
+            <button class="btn btn-primary py-xl-2 fs-md-20 lh-1d438 lh-md-1d45">
+              <span class="btn-primary-text">確認訂閱</span>
               <i class="icofont-rounded-double-right"></i>
             </button>
           </VeeForm>

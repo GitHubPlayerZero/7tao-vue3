@@ -55,9 +55,9 @@
 
               <!-- 登入按鈕 -->
               <button
-                class="btn btn-primary py-4 py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 d-flex justify-content-center align-items-center w-100"
+                class="btn btn-primary py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45"
               >
-                <span class="me-1">登入</span>
+                <span class="btn-primary-text">登入</span>
                 <i class="icofont-rounded-double-right"></i>
               </button>
             </VeeForm>

@@ -1,9 +1,9 @@
 <template>
   <!-- 近期活動 -->
   <article class="mb-8 mb-md-15">
-    <h2 class="title mb-6 mb-md-8">
-      <span class="title-english">RECENT</span>
-      <span class="title-chinese">近期活動</span>
+    <h2 class="title-subject mb-6 mb-md-8">
+      <span class="title-subject-english">RECENT</span>
+      <span class="title-subject-chinese">近期活動</span>
     </h2>
 
     <ul class="row row-gap-6 row-gap-md-12">
@@ -15,9 +15,9 @@
 
   <!-- 線上活動 -->
   <article v-if="onlineEvent" class="mb-8 mb-md-15">
-    <h2 class="title mb-6 mb-md-8">
-      <span class="title-english">ONLINE</span>
-      <span class="title-chinese">線上活動</span>
+    <h2 class="title-subject mb-6 mb-md-8">
+      <span class="title-subject-english">ONLINE</span>
+      <span class="title-subject-chinese">線上活動</span>
     </h2>
 
     <div class="row">
@@ -47,10 +47,10 @@
         <!-- 按鈕 -->
         <a
           href="#"
-          class="btn btn-primary d-flex justify-content-center align-items-center w-100 py-4 py-xl-2 fs-md-20 lh-md-1d45"
+          class="btn btn-primary py-xl-2 fs-md-20 lh-1d438 lh-md-1d45"
           @click.prevent="eventDetailRouterTools.goToEventDetailPage(onlineEvent)"
         >
-          <span class="me-1">查看活動詳情</span>
+          <span class="btn-primary-text">查看活動詳情</span>
           <i class="icofont-rounded-double-right"></i>
         </a>
       </div>

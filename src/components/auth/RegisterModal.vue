@@ -185,9 +185,9 @@
               <!-- 按鈕 -->
               <button
                 @click="checkBeforeSubmit"
-                class="btn btn-primary py-4 py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 d-flex justify-content-center align-items-center w-100 mb-3"
+                class="btn btn-primary py-md-2 fs-18 fs-md-20 lh-1d444 lh-md-1d45 mb-3"
               >
-                <span class="me-1">註冊</span>
+                <span class="btn-primary-text">註冊</span>
                 <i class="icofont-rounded-double-right"></i>
               </button>
             </VeeForm>
