@@ -1,0 +1,2 @@
+import{O as a}from"./orderHisRecord-BBTORm1s.js";class t extends a{static#e=["eventId","ticketId","userId","userName","email","mobilePhone","eventTitle","eventDate","ticketType","ticketPrice","isCancel","createdDate","updatedDate"];eventId;ticketId;userId;userName;email;mobilePhone;eventTitle;eventDate;ticketType;ticketPrice;isCancel=!1;createdDate;updatedDate;constructor(e){super(e),this._assignData(e,t.#e)}}export{t as O};
+//# sourceMappingURL=orderRecord-DgQn_xug.js.map
