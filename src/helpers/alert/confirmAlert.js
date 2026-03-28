@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+import { AlertComSetting } from "./alertComSetting";
 import { AlertModel } from "./alertModel";
 
 /**
@@ -44,5 +46,15 @@ export class ConfirmAlert extends AlertModel {
    */
   static async alertErrorDetail(title = "", detail = "") {
     await this.mixTitleDesc(this.errorModel, title, detail).fire();
+  }
+
+  /**
+   * 顯示權限錯誤的訊息。
+   */
+  static async alertPermissionError() {
+    const setting = AlertComSetting.error;
+    setting.title = "請先登入";
+    setting.text = "此功能需要登入才能使用！";
+    Swal.fire(setting.getParamSet());
   }
 }

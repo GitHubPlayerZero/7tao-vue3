@@ -1,6 +1,5 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { AuthService } from "@/services";
 import { UserService } from "@/services/data/user";
 
 /**
@@ -45,7 +44,7 @@ export const useUserStore = defineStore(
     async function get() {
       // 目前無資料，由 API 重新取得會員資料
       if (!userData) {
-        const data = await UserService.fetchSelf(AuthService.getToken(), id.value);
+        const data = await UserService.fetchSelf(id.value);
         set(data); // 設定使用者資料狀態
       }
 
@@ -59,7 +58,7 @@ export const useUserStore = defineStore(
      * @throws {Error} 若執行過程中發生失敗則會拋出錯誤。
      */
     async function modify(data) {
-      const updatedData = await UserService.modifySelf(AuthService.getToken(), id.value, data);
+      const updatedData = await UserService.modifySelf(id.value, data);
       set(updatedData); // 更新使用者資料狀態
       return updatedData;
     }

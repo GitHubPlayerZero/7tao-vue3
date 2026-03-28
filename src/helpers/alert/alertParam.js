@@ -1,3 +1,4 @@
+import { DataUtils } from "../dataUtils";
 import { TypeUtils } from "../typeUtils";
 
 /**
@@ -11,7 +12,7 @@ class ParamProcessor {
    * @returns {Object} 所有有效參數組成的 JSON 物件，會略過為 undefined 的參數，但會包含值為 null 的參數。
    */
   getParamSet() {
-    return JSON.parse(JSON.stringify(this));
+    return DataUtils.classToJson(this);
   }
 }
 

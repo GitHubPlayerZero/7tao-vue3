@@ -56,4 +56,12 @@ export class DateStyles {
   static get dateAbbrMonthYear() {
     return "[D] [AbbrM] [YYYY]";
   }
+
+  /**
+   * 日期（西元年月日）及時間（時分）。
+   * 格式化範例："2025/01/02 14:08"
+   */
+  static get yyyymmddhhmm() {
+    return "[YYYY]/[MM]/[DD] [HH]:[mm]";
+  }
 }

@@ -107,17 +107,15 @@ export class UserService {
   /**
    * 取得自己的使用者資料。
    * 對應於 {@link UserApi.fetchSelf} 的處理。
-   * @param {string} token 自己登入的 Token。
    * @param {number} id 自己資料的 ID。
    * @returns {Promise<UserData>} 自己的使用者資料。
-   * @throws {Error} 若未提供 token 或 id 參數，會拋出錯誤。
+   * @throws {Error} 若未提供 id 參數，會拋出錯誤。
    */
-  static async fetchSelf(token, id) {
-    if (!token) throw TypeError("必須提供 token 參數！");
+  static async fetchSelf(id) {
     if (!id) throw TypeError("必須提供 id 參數！");
 
     let result;
-    await UserApi.fetchSelf(token, id)
+    await UserApi.fetchSelf(id)
       .then((res) => {
         result = res.data;
       })
@@ -130,19 +128,17 @@ export class UserService {
   /**
    * 修改自己的使用者資料。
    * 對應於 {@link UserApi.patchSelf} 的處理。
-   * @param {string} token 自己登入的 Token。
    * @param {number} id 自己資料的 ID。
    * @param {UserData} userData 使用者資料。
    * @returns {Promise<UserData>} 更新後的使用者資料。
-   * @throws {Error} 若未提供 token、id、使用者資料，或資料有誤，或 Axios 執行異常，均會拋出錯誤。
+   * @throws {Error} 若未提供 id、使用者資料，或資料有誤，或 Axios 執行異常，均會拋出錯誤。
    */
-  static async modifySelf(token, id, userData) {
-    if (!token) throw TypeError("必須提供 token 參數！");
+  static async modifySelf(id, userData) {
     if (!id) throw TypeError("必須提供 id 參數！");
     if (!userData) throw TypeError("必須提供使用者資料！");
 
     try {
-      const response = await UserApi.patchSelf(token, id, userData);
+      const response = await UserApi.patchSelf(id, userData);
       return response.data;
     } catch (error) {
       console.error(`[modifySelf] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
@@ -153,16 +149,14 @@ export class UserService {
   /**
    * 刪除自己的使用者資料。
    * 對應於 {@link UserApi.deleteSelf} 的處理。
-   * @param {string} token 自己登入的 Token。
    * @param {number} id 自己資料的 ID。
    * @throws {Error} 若未提供 token、id，或 Axios 執行異常，均會拋出錯誤。
    */
-  static async deleteSelf(token, id) {
-    if (!token) throw TypeError("必須提供 token 參數！");
+  static async deleteSelf(id) {
     if (!id) throw TypeError("必須提供 id 參數！");
 
     try {
-      await UserApi.deleteSelf(token, id);
+      await UserApi.deleteSelf(id);
     } catch (error) {
       console.error(`[deleteSelf] Axios ERROR ==>`, ErrorHelper.getAxiosFullError(error));
       throw error;

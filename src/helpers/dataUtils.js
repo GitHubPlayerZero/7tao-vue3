@@ -10,4 +10,13 @@ export class DataUtils {
   static copy(source) {
     return JSON.parse(JSON.stringify(source));
   }
+
+  /**
+   * 將類別物件轉換為 JSON 物件。
+   * @param {Object} claz 類別物件。
+   * @returns {Object} 轉換後的 JSON 物件。
+   */
+  static classToJson(claz) {
+    return JSON.parse(JSON.stringify(claz));
+  }
 }

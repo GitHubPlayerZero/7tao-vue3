@@ -1,3 +1,4 @@
+import { TypeUtils } from "../typeUtils";
 import { DateStyles } from "./dateStyles";
 
 /**
@@ -23,6 +24,18 @@ export class DateUtils {
   }
 
   /**
+   * 是否為 timestamp（13 位數的毫秒級時間戳）？
+   * @param {*} val 要判斷的值。
+   * @returns {boolean} 為 timestamp 回傳 true，否則回傳 false。
+   */
+  static isTimeStamp(val) {
+    if (TypeUtils.isValidNumberFormat(val) && String(val).length === 13) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
    * 是否可以轉為日期？
    * @param {*} val 要判斷的值。
    * @returns {boolean} 可以轉為日期回傳 true，否則回傳 false。
@@ -41,6 +54,10 @@ export class DateUtils {
     // 本身即為日期
     if (this.isDate(val)) {
       return val;
+    }
+    // 時間戳
+    else if (this.isTimeStamp(val)) {
+      return new Date(Number(val));
     }
     // 可以轉為日期
     else if (this.canBeDate(val)) {
@@ -101,7 +118,9 @@ export class DateUtils {
       .replace("[DD]", this.#fill(date.getDate()))
       .replace("[M]", date.getMonth() + 1)
       .replace("[D]", date.getDate())
-      .replace("[AbbrM]", this.getMonthAbbrByDate(date));
+      .replace("[AbbrM]", this.getMonthAbbrByDate(date))
+      .replace("[HH]", this.#fill(date.getHours()))
+      .replace("[mm]", this.#fill(date.getMinutes()));
   }
 
   /**

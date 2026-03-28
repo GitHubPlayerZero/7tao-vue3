@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Swal from "sweetalert2";
 import { useLoadingStore } from "@/stores";
-import { SysConstants, DocTitleUtils, AlertComSetting } from "@/helpers";
+import { SysConstants, DocTitleUtils, ConfirmAlert } from "@/helpers";
 import { AuthService, Redirector } from "@/services";
 import { EventDetailRouterTool } from "@/services/features";
 import homeView from "../views/HomeView.vue";
@@ -88,44 +87,44 @@ const routes = [
     ],
   },
   // 測試
-  {
-    path: "/test",
-    name: "test",
-    component: () => import("@/views/test/TestView.vue"),
-    meta: { title: `測試` },
-    children: [
-      {
-        path: "bs",
-        name: "testBs",
-        component: () => import("@/views/test/TestBs.vue"),
-      },
-      {
-        path: "layout",
-        name: "testLayout",
-        component: () => import("@/views/test/TestLayout.vue"),
-      },
-      {
-        path: "js",
-        name: "testJs",
-        component: () => import("@/views/test/TestJs.vue"),
-      },
-      {
-        path: "user",
-        name: "testUser",
-        component: () => import("@/views/test/TestUser.vue"),
-      },
-      {
-        path: "cookie",
-        name: "testCookie",
-        component: () => import("@/views/test/TestCookie.vue"),
-      },
-      {
-        path: "errormsg",
-        name: "testErrorMsg",
-        component: () => import("@/views/test/TestErrorMsg.vue"),
-      },
-    ],
-  },
+  // {
+  //   path: "/test",
+  //   name: "test",
+  //   component: () => import("@/views/test/TestView.vue"),
+  //   meta: { title: `測試` },
+  //   children: [
+  //     {
+  //       path: "bs",
+  //       name: "testBs",
+  //       component: () => import("@/views/test/TestBs.vue"),
+  //     },
+  //     {
+  //       path: "layout",
+  //       name: "testLayout",
+  //       component: () => import("@/views/test/TestLayout.vue"),
+  //     },
+  //     {
+  //       path: "js",
+  //       name: "testJs",
+  //       component: () => import("@/views/test/TestJs.vue"),
+  //     },
+  //     {
+  //       path: "user",
+  //       name: "testUser",
+  //       component: () => import("@/views/test/TestUser.vue"),
+  //     },
+  //     {
+  //       path: "cookie",
+  //       name: "testCookie",
+  //       component: () => import("@/views/test/TestCookie.vue"),
+  //     },
+  //     {
+  //       path: "errormsg",
+  //       name: "testErrorMsg",
+  //       component: () => import("@/views/test/TestErrorMsg.vue"),
+  //     },
+  //   ],
+  // },
   // 404
   {
     path: "/:pathMatch(.*)*",
@@ -175,10 +174,7 @@ router.beforeEach((to, from, next) => {
     // 顯示錯誤訊息 並且 不予進入下一頁（強迫停留在當頁）
     // 應用於 正常點擊功能進入、直接鍵入不同 URL 的情況
     if (from.name && from.name !== to.name) {
-      const setting = AlertComSetting.error;
-      setting.title = "請先登入";
-      setting.text = "此功能需要登入才能使用！";
-      Swal.fire(setting.getParamSet());
+      ConfirmAlert.alertPermissionError();
 
       next(false);
     }

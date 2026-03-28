@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-3 flex-shrink-0 flex-grow-1">
+  <div class="container py-3">
     <p class="text-center font-noto-sans-tc fs-18">{{ props.message }}</p>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container py-4 text-center font-noto-sans-tc flex-shrink-0 flex-grow-1">
+  <div class="container py-4 text-center font-noto-sans-tc">
     <SimpleMsg message="頁面不存在！" />
     <br />
     <p class="mb-4 fs-18">{{ timer.countdown }} 秒後將自動跳轉回首頁...</p>
