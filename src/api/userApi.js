@@ -77,44 +77,29 @@ export class UserApi extends Api {
 
   /**
    * 取得自己的 User 資料。
-   * @param {string} token 欲取得資料的使用者 Token。
    * @param {number} id 欲取得資料的 ID。
    * @returns {Promise} 執行 axios 回傳的 Promise。
    */
-  static fetchSelf(token, id) {
-    return this._axios.get(`${this.authSelfUrl}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  static fetchSelf(id) {
+    return this._axios.get(`${this.authSelfUrl}/${id}`, Api.authConfig);
   }
 
   /**
    * 修改自己的 User 資料。
-   * @param {string} token 欲修改的使用者 Token。
    * @param {number} id 欲修改資料的 ID。
    * @param {EditableUserData} data 使用者資料。
    * @returns {Promise} 執行 axios 回傳的 Promise。
    */
-  static patchSelf(token, id, data) {
-    return this._axios.patch(`${this.authSelfUrl}/${id}`, data, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  static patchSelf(id, data) {
+    return this._axios.patch(`${this.authSelfUrl}/${id}`, data, Api.authConfig);
   }
 
   /**
    * 刪除自己的 User 資料。
-   * @param {string} token 欲刪除的使用者 Token。
    * @param {number} id 欲刪除的資料 ID。
    * @returns {Promise} 執行 axios 回傳的 Promise。
    */
-  static deleteSelf(token, id) {
-    return this._axios.delete(`${this.authSelfUrl}/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  static deleteSelf(id) {
+    return this._axios.delete(`${this.authSelfUrl}/${id}`, Api.authConfig);
   }
 }

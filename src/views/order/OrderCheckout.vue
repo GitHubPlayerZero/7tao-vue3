@@ -49,7 +49,7 @@
         </table>
 
         <!-- 按鈕區 -->
-        <button type="button" class="btn btn-primary fs-20 py-2 mb-4" @click="buy">
+        <button type="button" class="btn btn-primary fs-20 py-2 mb-4" @click="checkOut">
           <span class="btn-primary-text">結帳</span>
           <i class="icofont-rounded-double-right"></i>
         </button>
@@ -65,14 +65,15 @@
 <script>
 import { mapActions } from "pinia";
 import { useLoadingStore, useOrderStore, useUserStore } from "@/stores";
-import { ErrorHelper } from "@/helpers";
+import { ConfirmAlert, ErrorHelper } from "@/helpers";
+import { AuthService } from "@/services";
+import { OrderHisRecord, OrderRecord, OrderService } from "@/services/data/order";
 import OrderSteps from "@/components/order/OrderSteps.vue";
 import IconTitle from "@/components/global/IconTitle.vue";
 
 export default {
   data() {
     return {
-      order: {}, // 訂單資料
       user: {}, // 使用者資料
     };
   },
@@ -80,12 +81,10 @@ export default {
   created() {
     this.openLoading();
 
-    // 取得訂單資料
-    this.order = useOrderStore();
-
     // 取得使用者資料
     this.getUser()
       .then((data) => {
+        this.user.id = data.id;
         this.user.name = data.name;
         this.user.email = data.email;
         this.user.mobilePhone = data.mobilePhone;
@@ -102,8 +101,38 @@ export default {
 
   methods: {
     /** 結帳 */
-    buy() {
-      this.$router.push({ name: "orderResult" });
+    checkOut() {
+      // 不具備有效登入授權則阻止使用功能
+      if (!AuthService.checkValidPermission()) {
+        ConfirmAlert.alertPermissionError();
+        return;
+      }
+
+      this.openLoading();
+
+      const orderRecord = new OrderRecord(this.order);
+      orderRecord.userId = this.user.id;
+      orderRecord.userName = this.user.name;
+      orderRecord.email = this.user.email;
+      orderRecord.mobilePhone = this.user.mobilePhone;
+
+      OrderService.postSelfOrder(orderRecord)
+        .then((res) => {
+          // 將一般資訊加入狀態管理
+          this.setOrderId(res.id);
+          this.setCreatedDate(res.createdDate);
+
+          // 將重要資訊記錄至 history state
+          const orderHisRecord = new OrderHisRecord(res);
+          this.$router.push({ name: "orderResult", state: orderHisRecord.convertToHisState() });
+        })
+        .catch((error) => {
+          console.error(error);
+          ConfirmAlert.alertErrorDetail("結帳失敗", ErrorHelper.getErrorMsg(error));
+        })
+        .finally(() => {
+          this.closeLoading();
+        });
     },
 
     /** loading 功能 */
@@ -118,7 +147,14 @@ export default {
     }),
 
     /** 訂單相關功能 */
-    ...mapActions(useOrderStore, ["cancel"]),
+    ...mapActions(useOrderStore, ["cancel", "setOrderId", "setCreatedDate"]),
+  },
+
+  computed: {
+    // 訂單資料
+    order() {
+      return { ...useOrderStore() };
+    },
   },
 
   components: {

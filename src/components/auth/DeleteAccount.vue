@@ -59,7 +59,7 @@ export default {
       this.openLoading();
 
       // 刪除資料
-      UserService.deleteSelf(AuthService.getToken(), this.userId)
+      UserService.deleteSelf(this.userId)
         .then(() => {
           // 成功則進行登出
           AuthService.logout();

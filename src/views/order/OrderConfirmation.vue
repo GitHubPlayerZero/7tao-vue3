@@ -50,17 +50,6 @@ import { useOrderStore } from "@/stores";
 import OrderSteps from "@/components/order/OrderSteps.vue";
 
 export default {
-  data() {
-    return {
-      order: {}, // 訂單資料
-    };
-  },
-
-  created() {
-    // 取得訂單資料
-    this.order = useOrderStore();
-  },
-
   methods: {
     /** 確認購票 */
     buy() {
@@ -69,6 +58,13 @@ export default {
 
     /** 訂單相關功能 */
     ...mapActions(useOrderStore, ["cancel"]),
+  },
+
+  computed: {
+    // 訂單資料
+    order() {
+      return { ...useOrderStore() };
+    },
   },
 
   components: { OrderSteps },

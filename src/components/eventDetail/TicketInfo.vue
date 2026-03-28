@@ -44,6 +44,7 @@
 import { mapActions } from "pinia";
 import { useLoadingStore, useOrderStore } from "@/stores";
 import { EventTagRecord } from "@/services/data/event";
+import { OrderRecord } from "@/services/data/order";
 // eslint-disable-next-line no-unused-vars
 import { TicketRecord, TicketModel, TicketService } from "@/services/data/ticket";
 
@@ -81,30 +82,37 @@ export default {
   },
 
   methods: {
-    /** loading 功能 */
-    ...mapActions(useLoadingStore, {
-      openLoading: "open",
-      closeLoading: "close",
-    }),
-
     /**
      * 下單。
      * @param {TicketRecord} ticket 被點擊的票券資料。
      */
     order(ticket) {
-      const orderStore = useOrderStore();
-      orderStore.eventId = this.event.id;
-      orderStore.eventTitle = this.event.title;
-      orderStore.eventDate = this.event.date;
-      orderStore.ticketId = ticket.id;
-      orderStore.ticketType = ticket.type;
-      orderStore.ticketPrice = ticket.price;
+      // 設定訂單資料
+      const orderRecord = new OrderRecord();
+      orderRecord.eventId = this.event.id;
+      orderRecord.eventTitle = this.event.title;
+      orderRecord.eventDate = this.event.date;
+      orderRecord.ticketId = ticket.id;
+      orderRecord.ticketType = ticket.type;
+      orderRecord.ticketPrice = ticket.price;
+      this.setOrder(orderRecord);
 
       // 到訂單確認頁面
       this.$router.push({
         name: "orderConfirmation",
       });
     },
+
+    /** loading 功能 */
+    ...mapActions(useLoadingStore, {
+      openLoading: "open",
+      closeLoading: "close",
+    }),
+
+    /** 訂單功能 */
+    ...mapActions(useOrderStore, {
+      setOrder: "set",
+    }),
   },
 };
 </script>

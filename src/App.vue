@@ -3,7 +3,9 @@
   <Header />
 
   <!-- 主要內容區 -->
-  <RouterView />
+  <div class="flex-grow-1">
+    <RouterView />
+  </div>
 
   <!-- 全域 Footer -->
   <footer class="py-6 py-md-8 border-top border-3 border-primary">
