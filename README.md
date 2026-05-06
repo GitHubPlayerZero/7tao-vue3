@@ -24,14 +24,18 @@
 
 <br>
 
+---
+
 ## 📋 目錄
 
-- [功能特性](#✨-功能特性)
-- [技術棧](#🛠%EF%B8%8F-技術棧)
-- [API 服務](#🌐-API-服務)
-- [應用架構](#🏗%EF%B8%8F-應用架構)
-- [環境](#⚙%EF%B8%8F-環境)
-- [開發指南](#💻-開發指南)
+- [功能特性](#-功能特性)
+- [技術棧](#%EF%B8%8F-技術棧)
+- [API 服務](#-api-服務)
+- [應用架構](#%EF%B8%8F-應用架構)
+- [環境](#%EF%B8%8F-環境)
+- [開發指南](#-開發指南)
+
+<br>
 
 ---
 
@@ -66,6 +70,8 @@
 - ✅ 多步驟訂單確認流程
 - 📊 訂購結果回饋
 
+<br>
+
 ---
 
 ## 🛠️ 技術棧
@@ -92,6 +98,7 @@
 - **Vite**：現代化的構建工具，提供快速的開發體驗。
 
 📝 [Vue Router 筆記](https://www.notion.so/Vue-Router-25f4f8650a50806eb5fcdd51c381bc8b)
+
 <br>
 
 ### 狀態管理
@@ -103,6 +110,7 @@
   - 由於當前的訂單流程資料不需要一直留存，因此 `orderStore` 特別指定使用 Session storage。
 
 📝 [持久化配置筆記](https://www.notion.so/2ee4f8650a50803ab8fbdd609d1201b5)
+
 <br>
 
 ### UI 框架 & 基礎樣式
@@ -114,6 +122,7 @@
 - **icofont**：豐富的圖標庫。
 
 📝 [Bootstrap 互動視窗（Modal）筆記](https://www.notion.so/Modal-2fc4f8650a5080aa95dfca1860f12eb4) | [IcoFont 筆記](https://hackmd.io/-gIsepREQlWxb3gvkxAoLg)
+
 <br>
 
 ### UI 元件 / 互動套件
@@ -125,6 +134,7 @@
 - **Vue Loading Overlay**：全局／區域加載狀態。
 
 📝 [Swiper 筆記](https://hackmd.io/tb8o8VSxRsGKVj3Eg7ax5w) | [SweetAlert2 筆記](https://hackmd.io/AR2szIv-T_yry76faD6wTg) | [Vue Loading Overlay 筆記](https://hackmd.io/fRotG4TqR5C5aH3LwpbJAw)
+
 <br>
 
 ### 表單
@@ -133,6 +143,7 @@
 - **VeeValidate**：靈活的表單驗證方案。
 
 📝 [VeeValidate 筆記](https://www.notion.so/VeeValidate-3004f8650a5080eb91abe98d8fecddb3)
+
 <br>
 
 ### 代碼質量
@@ -141,6 +152,7 @@
 
 - **ESLint**：使用 `no-underscore-dangle` 規則模擬 protected 效果。
 - **Prettier**：結束必須要有分號、不強制轉換成單引號。
+
 <br>
 
 ### 其他工具
@@ -150,6 +162,8 @@
 - **Axios**：HTTP 客戶端，用於 API 請求。
 - **Nano ID**：輕量級 ID 生成器。
 
+<br>
+
 ---
 
 ## 🌐 API 服務
@@ -157,6 +171,7 @@
 ### 服務架構
 
 後端 API 採用 **JSON Server** 模擬實現，提供 RESTful 接口服務。
+
 <br>
 
 ### 服務部署
@@ -195,6 +210,8 @@
 |-----|---------|--------|
 | **開發環境** | http://localhost:3000/ | `.env.development` |
 | **產品環境** | 部署平台的服務地址 | `.env.production` |
+
+<br>
 
 ---
 
@@ -261,6 +278,7 @@ meta: { isRequiresLogin: true }
 ```
 
 路由守衛會檢查 Token 有效性，若 Token 無效或過期會拋出錯誤，路由守衛會重定向到首頁。
+
 <br>
 
 ### 目錄結構
@@ -276,7 +294,6 @@ meta: { isRequiresLogin: true }
 | 📁 `helpers/` | 工具函數，負責與框架無關的各種純邏輯工具。 |
 | 📁 `router/` | 路由配置。 |
 | 📁 `assets/` | 靜態資源，處理樣式、第三方資源等。 |
-
 
 <details>
 <summary><strong>點擊展開完整目錄</strong></summary>
@@ -400,6 +417,8 @@ meta: { isRequiresLogin: true }
 
 </details>
 
+<br>
+
 ---
 
 ## ⚙️ 環境
@@ -421,6 +440,7 @@ git clone https://github.com/GitHubPlayerZero/7tao-vue3.git
 cd 7tao-vue3
 npm install
 ```
+
 <br>
 
 ### 常用指令
@@ -430,6 +450,8 @@ npm install
 | `npm run dev` | 啟動開發伺服器，支持熱模組重載。 |
 | `npm run build` | 構建產品版本。 |
 | `npm run deploy` | 自動構建產品版本並部署到 GitHub Pages。 |
+
+<br>
 
 ---
 
@@ -457,6 +479,7 @@ npm install
   .form-group
   .btn-primary
   ```
+
 <br>
 
 #### camelCase
@@ -476,6 +499,7 @@ npm install
   function fetchUserData() {}
   const handleSubmit = () => {}
   ```
+
 <br>
 
 #### PascalCase
@@ -491,6 +515,7 @@ npm install
   class AuthService {}
   class DateUtils {}
   ```
+
 <br>
 
 #### UPPER_SNAKE_CASE
@@ -511,6 +536,7 @@ npm install
     QUESTION: "question",
   };
   ```
+
 <br>
 
 #### 特殊處理
@@ -537,6 +563,7 @@ npm install
   # SysConstants 對應變數名稱
   apiBaseUrl
   ```
+
 <br>
 
 #### 環境配置文件
@@ -578,12 +605,14 @@ const apiUrl = SysConstants.apiBaseUrl;
 // ❌ 避免：直接讀取環境變數
 const apiUrl = import.meta.env.VITE_API_BASE_URL;
 ```
+
 <br>
 
 #### ⚠️ 環境變數訪問安全性
 
 - **公開變數**：Vite 會自動將 `VITE_` 前綴的變數暴露到客戶端，因此**勿在環境變數中存放機敏資訊**（如 API 密鑰、密碼等）。
 - **機敏配置**：應由後端提供，或透過認證接口動態獲取。
+
 <br>
 
 ### 📌 狀態管理
@@ -598,6 +627,7 @@ const apiUrl = import.meta.env.VITE_API_BASE_URL;
   - `userStore`：用戶資訊（部份持久化至 Local Storage，避免機敏資訊洩露）。
   - `orderStore`：訂單流程資料（使用 Session Storage，頁面關閉自動清除）。
   - `loadingStore`：全局加載狀態（不持久化）。
+
 <br>
 
 #### 創建 Store
@@ -706,6 +736,7 @@ import { useCounterStore } from "@/stores";
 const counterStore = useCounterStore();
 </script>
 ```
+
 <br>
 
 ### 📌 VeeValidate 表單驗證
@@ -728,6 +759,7 @@ const counterStore = useCounterStore();
 - **`VeeForm`**：表單容器，用於包裝所有表單控件。
 - **`VeeField`**：表單輸入控件，支持 `type`、`name`、`rules` 等屬性。
 - **`VeeErrorMessage`**：錯誤訊息組件。
+
 <br>
 
 #### 基本用法
@@ -758,6 +790,7 @@ const counterStore = useCounterStore();
   <button type="submit">提交</button>
 </VeeForm>
 ```
+
 <br>
 
 #### 驗證規則
@@ -814,6 +847,7 @@ VeeValidateHelper.initEnv = () => {
   label="密碼"
 />
 ```
+
 <br>
 
 ### 📌 API 調用
@@ -828,6 +862,7 @@ VeeValidateHelper.initEnv = () => {
 | **Service 層** | 業務邏輯處理 | 聚合 API 調用、數據處理、錯誤統一管理。 |
 
 **核心原則：** 所有業務代碼（組件、Composable）只能透過 **Service 層** 調用 API，禁止直接調用 API 層。
+
 <br>
 
 #### 撰寫
@@ -915,6 +950,7 @@ export default {
 // ... 略
 </script>
 ```
+
 <br>
 
 #### 認證機制
@@ -962,6 +998,7 @@ export class UserApi extends Api {
   // ... 略
 }
 ```
+
 <br>
 
 ### 📌 Modal 視窗
@@ -1015,6 +1052,7 @@ function cancel() {
 }
 </script>
 ```
+
 <br>
 
 #### 插槽（Slots）
@@ -1060,6 +1098,7 @@ refTestModal.value.state.open();
 // 關閉彈窗
 refTestModal.value.state.close();
 ```
+
 <br>
 
 ### 📌 Alert 視窗
@@ -1198,6 +1237,7 @@ refTestModal.value.state.close();
   const forcedAlert = AlertModel.baseModel.mixin(AlertComSetting.forceFocus);
   AlertModel.mixTitle(forcedAlert, "重要提示").fire();
   ```
+
 <br>
 
 ### 📌 Loading
@@ -1234,6 +1274,7 @@ refTestModal.value.state.close();
 - 每次**開啟**時會**增加**計數；**關閉**時會**減少**計數。
 - 當 加載**尚未開啟** 且 **計數變為 1** 時，執行**開啟**加載。
 - 當 加載**已開啟** 且 **計數 <= 0** 時，執行**關閉**加載。
+
 <br>
 
 #### 鍵盤保護
@@ -1241,6 +1282,7 @@ refTestModal.value.state.close();
 加載期間會自動屏蔽鍵盤操作，防止用戶在加載過程中使用鍵盤進行互動。
 - **全局加載**：屏蔽整個 `#app` 區域的鍵盤操作。
 - **區域加載**：屏蔽指定 DOM 元素的鍵盤操作。
+
 <br>
 
 #### 使用範例
@@ -1300,6 +1342,7 @@ const loading = useAreaLoading(refArea.value, {
   opacity: 0.8,        // 背景遮罩透明度 (0-1)
 });
 ```
+
 <br>
 
 ### 📌 Cookie
@@ -1341,6 +1384,7 @@ const loading = useAreaLoading(refArea.value, {
 | `getCookie` | `name`（string） | string | 取得 Cookie 的值 |
 
 **注意：** Cookie 的保存與刪除以 **`name` + `domain` + `path`** 作為識別依據。
+
 <br>
 
 #### 環境配置
