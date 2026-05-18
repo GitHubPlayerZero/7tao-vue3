@@ -180,7 +180,7 @@
 
 | 部署平台 | 服務地址 | 部署方式 |
 |--------|--------|--------|
-| [Zeabur](https://zeabur.com/)（目前暫定） | https://7tao-data.zeabur.app/ | 自動化部署（連結 GitHub） |
+| [Render](https://render.com/) | https://seventao-data.onrender.com | 自動化部署（連結 GitHub） |
 
 <br>
 
