@@ -1,0 +1,2 @@
+let c=t=>crypto.getRandomValues(new Uint8Array(t)),g=(t,l,f)=>{let i=256-256%t.length;if(i===256){let u=t.length-1;return(e=l)=>{if(!e)return"";let r="";for(;;){let n=f(e),o=e;for(;o--;)if(r+=t[n[o]&u],r.length>=e)return r}}}let h=Math.ceil(1.6*256*l/i);return(u=l)=>{if(!u)return"";let e="";for(;;){let r=f(h),n=h;for(;n--;)if(r[n]<i&&(e+=t[r[n]%t.length],e.length>=u))return e}}},m=(t,l=21)=>g(t,l|0,c);export{m as c};
+//# sourceMappingURL=nanoid-Cx2bKhwL.js.map
