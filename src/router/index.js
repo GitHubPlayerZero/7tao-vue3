@@ -123,6 +123,16 @@ const routes = [
   //       name: "testErrorMsg",
   //       component: () => import("@/views/test/TestErrorMsg.vue"),
   //     },
+  //     {
+  //       path: "errormsg",
+  //       name: "testErrorMsg",
+  //       component: () => import("@/views/test/TestErrorMsg.vue"),
+  //     },
+  //     {
+  //       path: "swiper",
+  //       name: "testSwiper",
+  //       component: () => import("@/views/test/TestSwiper.vue"),
+  //     },
   //   ],
   // },
   // 404

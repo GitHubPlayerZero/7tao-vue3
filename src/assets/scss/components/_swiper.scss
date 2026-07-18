@@ -5,8 +5,9 @@
 // 覆寫導航按鈕的樣式
 .swiper-button-prev,
 .swiper-button-next {
+  box-sizing: content-box;
   font-weight: 900;
-  padding: 30px 20px;
+  padding: 10px 0;
 
   // 滑鼠懸停時的樣式
   @include style.only-pointer-hover {

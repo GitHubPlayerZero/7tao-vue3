@@ -9,6 +9,7 @@
       <RouterLink to="/test/user">使用者</RouterLink>｜
       <RouterLink to="/test/cookie">Cookie</RouterLink>｜
       <RouterLink to="/test/errormsg">錯誤訊息</RouterLink>｜
+      <RouterLink to="/test/swiper">Swiper</RouterLink>｜
     </nav>
 
     <hr />
